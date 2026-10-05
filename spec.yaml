@@ -1,0 +1,17 @@
+name: FORGE Q4
+units: mm
+body_length: 340
+body_width: 180
+body_height: 64
+upper_length: 110
+lower_length: 140
+link_width: 32
+link_thickness: 7
+bore_diameter: 10
+material: aluminium
+payload_kg: 1.0
+target_mass_kg: 7.0
+actuator_mass_kg: 0.18
+electronics_mass_kg: 0.65
+battery_mass_kg: 0.55
+joint_limit_deg: 65

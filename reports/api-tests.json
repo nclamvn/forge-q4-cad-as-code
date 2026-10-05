@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "variants": [
+    {
+      "name": "default",
+      "revision": "0cbe5809f2e8",
+      "mass_kg": 5.9014958405073585,
+      "mass_gate": true,
+      "step_bytes": 4268249,
+      "upper_volume_mm3": 29170.176606476485,
+      "upper_mass_kg": 0.0787594768374865
+    },
+    {
+      "name": "light",
+      "revision": "75b671de5492",
+      "mass_kg": 4.68861246013857,
+      "mass_gate": true,
+      "step_bytes": 4153473,
+      "upper_volume_mm3": 29170.176606476485,
+      "upper_mass_kg": 0.029461878372541248
+    },
+    {
+      "name": "steel",
+      "revision": "37ad077bd221",
+      "mass_kg": 9.31561240764429,
+      "mass_gate": false,
+      "step_bytes": 4268261,
+      "upper_volume_mm3": 29170.176606476485,
+      "upper_mass_kg": 0.2289858863608404
+    },
+    {
+      "name": "cad-edit",
+      "revision": "5d16baec17c0",
+      "mass_kg": 5.761574001694015,
+      "mass_gate": true,
+      "step_bytes": 4181376,
+      "upper_volume_mm3": 20081.85819633594,
+      "upper_mass_kg": 0.05422101713010704
+    }
+  ],
+  "fault_injection": {
+    "http_status": 422,
+    "error": "Vành vật liệu quanh lỗ chỉ còn 2.65 mm; cần ít nhất 6 mm theo quy tắc PoC. Tăng bề rộng tay hoặc giảm đường kính lỗ.",
+    "gate": "SPEC_VALIDATION"
+  }
+}

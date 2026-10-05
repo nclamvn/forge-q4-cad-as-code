@@ -1,0 +1,20 @@
+{
+  "file": "trailer.mp4",
+  "duration_seconds": 60,
+  "video_frames": 3600,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "fps": 60,
+  "codec": "H.264 High / AAC stereo 48 kHz",
+  "cuts": 40,
+  "music_bpm": 120,
+  "edit": "Hard cuts, fixed framing, no animated zoom, no dissolve",
+  "source": "Real demo screen recording plus 3 full-page renders from the exported PDF",
+  "size_mb": 7.45,
+  "sha256": "757cf41603cedb8667944e8e99fe9ac140d0f770900c568cf1562fc29fc8d3c4",
+  "full_decode": "Passed without errors",
+  "audio_summary": "Original synthesized soundtrack, 120 BPM; integrated loudness -18.0 LUFS, true peak -1.4 dBFS.",
+  "visual_review": "All 40 shots reviewed. Macro views use static 1:1 source-pixel crops."
+}

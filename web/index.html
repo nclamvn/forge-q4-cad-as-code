@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#000000"><title>FORGE Q4 — Monochrome edition</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"./vendor/three.webgpu.js","three/webgpu":"./vendor/three.webgpu.js","three/tsl":"./vendor/three.tsl.js"}}</script>
+</head>
+<body>
+<div id="boot" class="boot"><div class="boot-glyph">F<span>Q4</span></div><p id="boot-text">Đang dựng phòng thiết kế…</p><div class="boot-progress"><i></i></div></div>
+<header class="header">
+  <a class="brand" href="./" aria-label="FORGE Q4 trang chính"><svg viewBox="0 0 28 30" aria-hidden="true"><path d="M3 27V3h23M3 13h16M3 21h9"/></svg><strong>FORGE<span>Q4</span></strong></a>
+  <div class="header-context"><span class="live-dot"></span><span id="connection">Đang kết nối kernel</span><span class="divider"></span><span id="backend">GPU</span></div>
+  <div class="header-actions"><button id="cad-open" class="cad-launch" disabled>Thử thiết kế CAD</button><button id="tour" class="text-button">▷ Trình diễn</button><button id="open-source" class="text-button">Xem mã dựng</button><button id="export-step" class="solid-button">Xuất STEP <span>↗</span></button></div>
+</header>
+<main class="workspace">
+  <aside id="cad-rail" class="cad-rail" hidden aria-label="Danh mục cấu phần CAD">
+    <div class="cad-heading"><span>Hồ sơ kỹ thuật / Q4</span><button id="cad-close" aria-label="Đóng bàn CAD">×</button></div>
+    <h1>Cấu phần.<br>Bản vẽ.<br>Lắp ráp.</h1><p class="cad-intro">12 hình học CAD / 42 vị trí.<br>Mỗi bản vẽ gắn với khối và revision.</p>
+    <div id="cad-components" class="cad-components"></div>
+    <details id="cad-edit" class="cad-edit" open><summary>Tham số dẫn động</summary>
+      <form id="cad-form"><div id="cad-fields" class="cad-fields"></div><button id="cad-build" class="build-button" type="submit">Dựng lại CAD và bản vẽ <span>↵</span></button></form>
+      <p id="cad-status" class="cad-status" role="status"></p><div id="cad-examples" class="cad-examples"><button id="cad-example">Thử lỗ Ø14 / dày 5</button><button id="cad-invalid">Thử vành quá mỏng</button></div>
+    </details><button id="cad-recipe" class="cad-code">Xem compiler Python</button><p class="cad-boundary">Hồ sơ concept: thiết bị đại diện được ghi rõ. Chưa có dung sai, GD&T, CAM hoặc chứng nhận chế tạo.</p>
+  </aside>
+  <aside id="cad-panel" class="cad-panel" hidden aria-label="Thông số và dữ liệu cấu phần">
+    <div class="cad-panel-title"><h2 id="cad-part-title"></h2><span id="cad-part-code"></span></div>
+    <p id="cad-part-scope" class="cad-drawing-note"></p><div id="cad-properties" class="cad-properties"></div>
+    <h3 class="cad-subtitle">Kích thước chương trình</h3><div id="cad-design-dimensions" class="cad-properties"></div>
+    <h3 class="cad-subtitle">Quy trình dựng</h3><ol id="cad-part-recipe" class="cad-operation-list"></ol>
+    <h3 class="cad-subtitle">Vị trí trong robot</h3><div id="cad-instances" class="cad-instance-list"></div>
+    <h3 class="cad-subtitle">Ghi chú kỹ thuật</h3><div id="cad-notes" class="cad-notes"></div>
+    <div class="cad-compare-title"><h3>Trước / sau</h3><button id="cad-baseline">Đặt mốc hiện tại</button></div><table id="cad-compare"></table><p id="cad-delta"></p>
+    <div class="cad-export"><button id="cad-step" class="solid-button">STEP chi tiết</button><button id="cad-dxf" class="text-button">DXF hình chiếu</button><button id="cad-svg" class="text-button">SVG tờ A3</button></div>
+    <div class="cad-export"><button id="cad-proof" class="text-button">Kiểm chứng khối</button><button id="cad-assembly-step" class="text-button">STEP lắp ráp</button></div>
+    <p id="cad-sync"></p><p class="cad-rev">CAD revision <span id="cad-revision"></span></p>
+  </aside>
+  <section class="spec-rail" aria-label="Đặc tả thiết kế">
+    <div class="rail-intro"><div class="small-title">Robot bốn chân / Q4</div><h1>Định hình<br>Q4.</h1><p>Hình học tham số.<br>Kiểm chứng từng phiên bản.</p></div>
+    <div class="presets"><button data-preset="precision" class="active">Precision</button><button data-preset="light">Lightweight</button><button data-preset="reach">Long reach</button></div>
+    <form id="spec-form">
+      <div class="control-heading">Hình học <span>mm</span></div>
+      <label class="range-control" for="body_length"><span>Chiều dài thân <output id="value-body_length">340</output></span><input id="body_length" type="range" min="260" max="400" step="2" value="340"></label>
+      <label class="range-control" for="body_width"><span>Bề rộng thân <output id="value-body_width">180</output></span><input id="body_width" type="range" min="150" max="250" step="2" value="180"></label>
+      <label class="range-control" for="upper_length"><span>Chân trên <output id="value-upper_length">110</output></span><input id="upper_length" type="range" min="110" max="190" step="2" value="110"></label>
+      <label class="range-control" for="lower_length"><span>Chân dưới <output id="value-lower_length">140</output></span><input id="lower_length" type="range" min="110" max="210" step="2" value="140"></label>
+      <div class="material-heading">Vật liệu kết cấu</div>
+      <div class="material-picker" role="group" aria-label="Vật liệu"><button type="button" data-material="aluminium" class="active"><i class="aluminium"></i>Nhôm</button><button type="button" data-material="pa12"><i class="pa12"></i>PA12</button><button type="button" data-material="steel"><i class="steel"></i>Thép</button></div>
+      <label class="range-control payload" for="payload_kg"><span>Tải bổ sung <output id="value-payload_kg">1.0 kg</output></span><input id="payload_kg" type="range" min="0" max="4" step=".1" value="1"></label>
+      <button class="build-button" id="build" type="submit"><span>Dựng lại thiết kế</span><svg viewBox="0 0 20 20"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></button>
+      <p id="build-state" class="build-state">Thông số và mô hình đồng bộ.</p>
+    </form>
+    <details class="command-box"><summary>Nhập ý đồ thiết kế <span>＋</span></summary><p>Bộ diễn giải cục bộ, không gọi LLM.<br>Ví dụ: “thân 360 mm, chân dưới 180 mm, vật liệu PA12”.</p><div><input id="command" placeholder="Mô tả thay đổi…" aria-label="Lệnh thiết kế"><button id="apply-command" aria-label="Áp dụng lệnh">↵</button></div><span id="command-result"></span></details>
+    <div class="rail-footer"><span id="revision">revision —</span><button id="reset">Khôi phục</button></div>
+  </section>
+  <section class="stage" id="stage" aria-label="Robot 3D tương tác">
+    <div id="viewport"></div>
+    <section id="cad-document" class="cad-document" hidden aria-label="Bộ bản vẽ CAD">
+      <div class="cad-document-toolbar"><div class="cad-document-tabs"><button data-cad-pane="drawing" class="active">Bản vẽ A3</button><button data-cad-pane="solid">Khối 3D</button><button data-cad-pane="assembly">Tổng thể</button><button data-cad-pane="exploded">Phân rã</button><button data-cad-pane="bom">BOM 42 vị trí</button></div>
+      <div class="cad-document-actions"><button id="cad-zoom-out" aria-label="Thu nhỏ bản vẽ">−</button><span id="cad-zoom-value">100%</span><button id="cad-zoom-in" aria-label="Phóng to bản vẽ">＋</button><button id="cad-pdf">PDF 14 tờ</button><button id="cad-dossier">Bộ CAD</button></div></div>
+      <div id="cad-paper-scroll" class="cad-paper-scroll"><div id="cad-paper"></div></div>
+      <div class="cad-document-foot"><span id="cad-sheet-state"></span><span id="cad-sheet-counter"></span></div>
+    </section>
+    <div class="stage-title"><div class="machine-name">Q4<span> / 01</span></div><p id="stage-caption">Cấu trúc thật. Hình học có thể đo.</p></div>
+    <div class="stage-tools"><button id="dimensions" title="Kích thước (D)" aria-label="Hiện kích thước"><svg viewBox="0 0 24 24"><path d="m5 18 13-13 3 3L8 21zm5-11 2 2m2-6 2 2m-10 6 2 2"/></svg></button><button id="xray" title="Xuyên thấu (X)" aria-label="Xuyên thấu"><svg viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5zm-9 9 9 5 9-5M3 16l9 5 9-5"/></svg></button><button id="turntable" title="Tự xoay" aria-label="Tự xoay"><svg viewBox="0 0 24 24"><path d="M19 8a8 8 0 1 0 1 8M19 3v6h-6"/></svg></button><button id="fullscreen" title="Toàn màn hình" aria-label="Toàn màn hình"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5"/></svg></button></div>
+    <div class="view-buttons"><button id="section-view" title="Mặt cắt hiển thị (S)">Mặt cắt</button><button data-view="hero" class="active">Phối cảnh</button><button data-view="side">Bên hông</button><button data-view="front">Chính diện</button><button data-view="top">Từ trên</button></div>
+    <div class="tour-caption" id="tour-caption" hidden><span id="tour-number"></span><strong id="tour-title"></strong><p id="tour-description"></p><div id="tour-progress"></div></div>
+    <div class="stage-annotation" id="hero-label"><span class="annotation-dot"></span><div><strong>12 trục chuyển động</strong><small>4 cụm chân độc lập</small></div></div>
+    <div class="dimension-label" id="dim-length"></div><div class="dimension-label" id="dim-height"></div><div class="dimension-label" id="dim-width"></div>
+    <div class="part-tooltip" id="part-tooltip"></div>
+    <div class="stage-metrics"><div><span>Khối lượng tính</span><strong id="mass">—<small>kg</small></strong></div><div><span>Cao tổng thể</span><strong id="height">—<small>mm</small></strong></div><div><span>Chi tiết CAD</span><strong id="part-count">—</strong></div><button id="proof-trigger"><i></i><span id="proof-summary">Đang kiểm chứng</span><b>↗</b></button></div>
+    <div class="mode-dock"><button data-mode="studio" class="active"><svg viewBox="0 0 24 24"><path d="m12 3 9 5v9l-9 5-9-5V8zm-9 5 9 5 9-5m-9 5v9"/></svg><span>Studio</span></button><button data-mode="explode"><svg viewBox="0 0 24 24"><path d="m12 2 8 4-8 4-8-4zm-8 9 8 4 8-4m-16 6 8 4 8-4"/></svg><span>Tách cụm</span></button><button data-mode="motion"><svg viewBox="0 0 24 24"><path d="M4 12h3l3-7 4 14 3-7h3"/></svg><span>Chuyển động</span></button><button data-mode="engineering"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zm4 14 4-4 3 2 4-7"/></svg><span>Kiểm chứng</span></button></div>
+    <div class="mode-options" id="explode-options" hidden><label for="explosion">Độ tách cụm</label><input id="explosion" type="range" min="0" max="1" step=".01" value="1"><output id="explode-value">100%</output></div>
+    <div class="mode-options motion-options" id="motion-options" hidden><button id="play" aria-label="Tạm dừng">Ⅱ</button><label for="phase">Chu kỳ</label><input id="phase" type="range" min="0" max="6.283" step=".01" value="0"><span class="kinematic-note">Động học minh họa</span></div>
+    <div class="stage-foot"><span>Kéo để xoay · Cuộn để thu phóng · Chọn chi tiết</span><span id="fps">— fps</span></div>
+  </section>
+  <aside id="proof-panel" class="proof-panel" aria-label="Kiểm chứng độc lập" hidden>
+    <div class="panel-heading"><div><span>Đo được. Kiểm lại được.</span><h2>Bằng chứng thiết kế</h2></div><button id="close-proof" aria-label="Đóng kiểm chứng">×</button></div>
+    <div class="proof-revision"><span>Phiên bản</span><strong id="proof-revision">—</strong></div>
+    <div id="checks"></div>
+    <div class="proof-detail"><h3>Đối chiếu thể tích tay chân</h3><div id="volume-table"></div><p>Công thức hình học được tính riêng, không lấy kết quả từ kernel.</p></div>
+    <div class="proof-detail"><h3>STEP round-trip</h3><div id="roundtrip-detail"></div></div>
+    <button id="inject-fault" class="fault-button">Thử đặc tả lỗi</button><div id="fault-result" class="fault-result" role="status"></div>
+    <div class="honesty"><h3>Phạm vi kiểm chứng</h3><p>Đã kiểm hình học và trao đổi STEP. Chưa kiểm bền, mỏi, nhiệt, dung sai chế tạo hoặc khả năng đi thực tế.</p><p>Khối lượng actuator, pin và mật độ vật liệu là giả định PoC. Chuyển động là minh họa động học.</p></div>
+    <button id="export-proof" class="text-button">Tải báo cáo JSON ↗</button>
+  </aside>
+</main>
+<div id="source-modal" class="modal" hidden><div class="source-window"><div class="panel-heading"><div><span>Source of truth</span><h2 id="source-title">Đặc tả và mã dựng</h2></div><button id="close-source" aria-label="Đóng mã dựng">×</button></div><div class="source-tabs"><button data-source="yaml" class="active">Đặc tả YAML</button><button data-source="python">Python / build123d</button><button data-source="bom">BOM và giả định</button></div><pre id="source-content"></pre><button id="download-spec" class="solid-button">Tải đặc tả YAML</button></div></div>
+<div class="toast" id="toast" role="status"></div>
+<script type="module" src="app.js"></script>
+</body></html>

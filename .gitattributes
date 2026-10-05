@@ -1,0 +1,6 @@
+# Preserve generated CAD bytes; omit generated snapshots from code diffs.
+artifacts/** -text -diff linguist-generated=true
+web/default-model.json -text -diff linguist-generated=true
+web/vendor/** linguist-vendored=true
+docs/media/*.mp4 -text -diff
+docs/media/*.jpg -text -diff

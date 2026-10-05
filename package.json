@@ -1,0 +1,1 @@
+{"name":"forge-q4-cad-poc","private":true,"version":"1.0.0","scripts":{"package":"node tools/package.cjs"},"devDependencies":{"esbuild":"0.25.5"}}

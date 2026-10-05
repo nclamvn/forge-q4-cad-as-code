@@ -1,0 +1,152 @@
+{
+  "status": "passed",
+  "revision": "0cbe5809f2e8",
+  "unique_step_names": 42,
+  "a3_pdf_pages": 14,
+  "parts": [
+    {
+      "part": "frame",
+      "step_volume_error": 3.7614765018739415e-09,
+      "section_area_mm2": 1168.5177102769205,
+      "scale": 0.25,
+      "dxf_entities": {
+        "front": 310,
+        "top": 272,
+        "right": 240,
+        "iso": 317
+      }
+    },
+    {
+      "part": "cover",
+      "step_volume_error": 6.390089813276583e-14,
+      "section_area_mm2": 909.9,
+      "scale": 0.25,
+      "dxf_entities": {
+        "front": 116,
+        "top": 104,
+        "right": 124,
+        "iso": 164
+      }
+    },
+    {
+      "part": "upper",
+      "step_volume_error": 6.6099317593110375e-15,
+      "section_area_mm2": 4167.168086639497,
+      "scale": 0.5,
+      "dxf_entities": {
+        "front": 12,
+        "top": 20,
+        "right": 34,
+        "iso": 38
+      }
+    },
+    {
+      "part": "lower",
+      "step_volume_error": 4.175384515121314e-15,
+      "section_area_mm2": 4231.989344528477,
+      "scale": 0.25,
+      "dxf_entities": {
+        "front": 12,
+        "top": 20,
+        "right": 34,
+        "iso": 38
+      }
+    },
+    {
+      "part": "motor",
+      "step_volume_error": 1.7380776093314924e-14,
+      "section_area_mm2": 756.6199999999999,
+      "scale": 1,
+      "dxf_entities": {
+        "front": 62,
+        "top": 20,
+        "right": 82,
+        "iso": 86
+      }
+    },
+    {
+      "part": "foot",
+      "step_volume_error": 2.929224843702009e-14,
+      "section_area_mm2": 593.0973355292326,
+      "scale": 2,
+      "dxf_entities": {
+        "front": 48,
+        "top": 48,
+        "right": 44,
+        "iso": 72
+      }
+    },
+    {
+      "part": "sensor",
+      "step_volume_error": 1.3465301141766448e-15,
+      "section_area_mm2": 350.0,
+      "scale": 0.5,
+      "dxf_entities": {
+        "front": 32,
+        "top": 36,
+        "right": 20,
+        "iso": 46
+      }
+    },
+    {
+      "part": "lens",
+      "step_volume_error": 1.9938096074800377e-16,
+      "section_area_mm2": 66.0,
+      "scale": 4,
+      "dxf_entities": {
+        "front": 6,
+        "top": 2,
+        "right": 8,
+        "iso": 8
+      }
+    },
+    {
+      "part": "battery",
+      "step_volume_error": 2.249314176290655e-15,
+      "section_area_mm2": 6112.274333882308,
+      "scale": 0.5,
+      "dxf_entities": {
+        "front": 48,
+        "top": 48,
+        "right": 44,
+        "iso": 72
+      }
+    },
+    {
+      "part": "upper_fairing",
+      "step_volume_error": 5.657775674530259e-08,
+      "section_area_mm2": 1539.4040083299285,
+      "scale": 0.25,
+      "dxf_entities": {
+        "front": 1568,
+        "top": 58,
+        "right": 81,
+        "iso": 73
+      }
+    },
+    {
+      "part": "lower_fairing",
+      "step_volume_error": 1.2002429438402615e-06,
+      "section_area_mm2": 1004.8506367510602,
+      "scale": 0.25,
+      "dxf_entities": {
+        "front": 230,
+        "top": 70,
+        "right": 86,
+        "iso": 77
+      }
+    },
+    {
+      "part": "shoulder",
+      "step_volume_error": 3.0545074733347763e-13,
+      "section_area_mm2": 467.6522426040309,
+      "scale": 1,
+      "dxf_entities": {
+        "front": 20,
+        "top": 11,
+        "right": 22,
+        "iso": 22
+      }
+    }
+  ]
+}

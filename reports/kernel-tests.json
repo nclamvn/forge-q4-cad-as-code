@@ -1,0 +1,482 @@
+[
+  {
+    "revision": "0cbe5809f2e8",
+    "spec": {
+      "name": "FORGE Q4",
+      "units": "mm",
+      "body_length": 340,
+      "body_width": 180,
+      "body_height": 64,
+      "upper_length": 110,
+      "lower_length": 140,
+      "link_width": 32,
+      "link_thickness": 7,
+      "bore_diameter": 10,
+      "material": "aluminium",
+      "payload_kg": 1,
+      "target_mass_kg": 7,
+      "actuator_mass_kg": 0.18,
+      "electronics_mass_kg": 0.65,
+      "battery_mass_kg": 0.55,
+      "joint_limit_deg": 65
+    },
+    "metrics": {
+      "mass_kg": 5.9014958405073585,
+      "loaded_mass_kg": 6.9014958405073585,
+      "height_mm": 259.46961416563346,
+      "part_count": 42,
+      "unique_parts": 12,
+      "joint_count": 12,
+      "ligament_mm": 8.6
+    },
+    "proof": {
+      "checks": [
+        {
+          "id": "brep",
+          "name": "Khối CAD hợp lệ",
+          "passed": true,
+          "method": "OCCT / BREP",
+          "detail": "12 hình học duy nhất, 42 chi tiết lắp ráp"
+        },
+        {
+          "id": "analytic",
+          "name": "Thể tích khớp công thức",
+          "passed": true,
+          "method": "Công thức độc lập",
+          "detail": "Tay capsule: (wL + πr² − 2πr_lỗ²) × t"
+        },
+        {
+          "id": "roundtrip",
+          "name": "STEP đọc lại đúng",
+          "passed": true,
+          "method": "Xuất → nhập lại",
+          "detail": "So sánh tổng thể tích và số khối sau trao đổi CAD"
+        },
+        {
+          "id": "wall",
+          "name": "Vành lỗ đủ bề dày",
+          "passed": true,
+          "method": "Quy tắc PoC / 6 mm",
+          "detail": "Vành nhỏ nhất 8.60 mm; không thay tính bền"
+        },
+        {
+          "id": "clearance",
+          "name": "Hai tay chịu lực có khe hở",
+          "passed": true,
+          "method": "Khoảng cách BREP / 5 góc",
+          "detail": "Khe giữa hai tay chịu lực ≥ 3 mm; chưa quét vỏ và toàn bộ robot"
+        },
+        {
+          "id": "mass",
+          "name": "Trong ngân sách khối lượng",
+          "passed": true,
+          "method": "CAD + khối lượng gán",
+          "detail": "6.90 / 7.00 kg, đã gồm tải"
+        }
+      ],
+      "analytic": [
+        {
+          "part": "upper",
+          "formula_mm3": 29170.17660647648,
+          "cad_mm3": 29170.176606476485,
+          "relative_error": 1.2471569357190639e-16
+        },
+        {
+          "part": "lower",
+          "formula_mm3": 29623.925411699347,
+          "cad_mm3": 29623.925411699347,
+          "relative_error": 0.0
+        }
+      ],
+      "roundtrip": {
+        "volume_before_mm3": 2476134.940052942,
+        "volume_after_mm3": 2476135.1659041676,
+        "relative_error": 9.1211194516674e-08,
+        "solid_count": 42,
+        "valid": true
+      },
+      "clearance_samples": [
+        {
+          "joint_deg": -65,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": -32.5,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": 0,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": 32.5,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": 65,
+          "distance_mm": 3.0
+        }
+      ]
+    }
+  },
+  {
+    "revision": "97ea8c51b7ec",
+    "spec": {
+      "name": "FORGE Q4",
+      "units": "mm",
+      "body_length": 284,
+      "body_width": 168,
+      "body_height": 64,
+      "upper_length": 126,
+      "lower_length": 140,
+      "link_width": 32,
+      "link_thickness": 7,
+      "bore_diameter": 10,
+      "material": "pa12",
+      "payload_kg": 0.5,
+      "target_mass_kg": 7,
+      "actuator_mass_kg": 0.18,
+      "electronics_mass_kg": 0.65,
+      "battery_mass_kg": 0.55,
+      "joint_limit_deg": 65
+    },
+    "metrics": {
+      "mass_kg": 4.736219280640683,
+      "loaded_mass_kg": 5.236219280640683,
+      "height_mm": 272.491669472234,
+      "part_count": 42,
+      "unique_parts": 12,
+      "joint_count": 12,
+      "ligament_mm": 8.6
+    },
+    "proof": {
+      "checks": [
+        {
+          "id": "brep",
+          "name": "Khối CAD hợp lệ",
+          "passed": true,
+          "method": "OCCT / BREP",
+          "detail": "12 hình học duy nhất, 42 chi tiết lắp ráp"
+        },
+        {
+          "id": "analytic",
+          "name": "Thể tích khớp công thức",
+          "passed": true,
+          "method": "Công thức độc lập",
+          "detail": "Tay capsule: (wL + πr² − 2πr_lỗ²) × t"
+        },
+        {
+          "id": "roundtrip",
+          "name": "STEP đọc lại đúng",
+          "passed": true,
+          "method": "Xuất → nhập lại",
+          "detail": "So sánh tổng thể tích và số khối sau trao đổi CAD"
+        },
+        {
+          "id": "wall",
+          "name": "Vành lỗ đủ bề dày",
+          "passed": true,
+          "method": "Quy tắc PoC / 6 mm",
+          "detail": "Vành nhỏ nhất 8.60 mm; không thay tính bền"
+        },
+        {
+          "id": "clearance",
+          "name": "Hai tay chịu lực có khe hở",
+          "passed": true,
+          "method": "Khoảng cách BREP / 5 góc",
+          "detail": "Khe giữa hai tay chịu lực ≥ 3 mm; chưa quét vỏ và toàn bộ robot"
+        },
+        {
+          "id": "mass",
+          "name": "Trong ngân sách khối lượng",
+          "passed": true,
+          "method": "CAD + khối lượng gán",
+          "detail": "5.24 / 7.00 kg, đã gồm tải"
+        }
+      ],
+      "analytic": [
+        {
+          "part": "upper",
+          "formula_mm3": 32754.17660647648,
+          "cad_mm3": 32754.17660647648,
+          "relative_error": 0.0
+        },
+        {
+          "part": "lower",
+          "formula_mm3": 29623.925411699347,
+          "cad_mm3": 29623.925411699347,
+          "relative_error": 0.0
+        }
+      ],
+      "roundtrip": {
+        "volume_before_mm3": 2271703.7409886443,
+        "volume_after_mm3": 2271703.953134703,
+        "relative_error": 9.338632271930897e-08,
+        "solid_count": 42,
+        "valid": true
+      },
+      "clearance_samples": [
+        {
+          "joint_deg": -65,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": -32.5,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": 0,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": 32.5,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": 65,
+          "distance_mm": 3.0
+        }
+      ]
+    }
+  },
+  {
+    "revision": "2833b569619e",
+    "spec": {
+      "name": "FORGE Q4",
+      "units": "mm",
+      "body_length": 360,
+      "body_width": 208,
+      "body_height": 64,
+      "upper_length": 174,
+      "lower_length": 194,
+      "link_width": 32,
+      "link_thickness": 7,
+      "bore_diameter": 10,
+      "material": "aluminium",
+      "payload_kg": 1,
+      "target_mass_kg": 7,
+      "actuator_mass_kg": 0.18,
+      "electronics_mass_kg": 0.65,
+      "battery_mass_kg": 0.55,
+      "joint_limit_deg": 65
+    },
+    "metrics": {
+      "mass_kg": 6.53158866872221,
+      "loaded_mass_kg": 7.53158866872221,
+      "height_mm": 355.5072720518125,
+      "part_count": 42,
+      "unique_parts": 12,
+      "joint_count": 12,
+      "ligament_mm": 8.6
+    },
+    "proof": {
+      "checks": [
+        {
+          "id": "brep",
+          "name": "Khối CAD hợp lệ",
+          "passed": true,
+          "method": "OCCT / BREP",
+          "detail": "12 hình học duy nhất, 42 chi tiết lắp ráp"
+        },
+        {
+          "id": "analytic",
+          "name": "Thể tích khớp công thức",
+          "passed": true,
+          "method": "Công thức độc lập",
+          "detail": "Tay capsule: (wL + πr² − 2πr_lỗ²) × t"
+        },
+        {
+          "id": "roundtrip",
+          "name": "STEP đọc lại đúng",
+          "passed": true,
+          "method": "Xuất → nhập lại",
+          "detail": "So sánh tổng thể tích và số khối sau trao đổi CAD"
+        },
+        {
+          "id": "wall",
+          "name": "Vành lỗ đủ bề dày",
+          "passed": true,
+          "method": "Quy tắc PoC / 6 mm",
+          "detail": "Vành nhỏ nhất 8.60 mm; không thay tính bền"
+        },
+        {
+          "id": "clearance",
+          "name": "Hai tay chịu lực có khe hở",
+          "passed": true,
+          "method": "Khoảng cách BREP / 5 góc",
+          "detail": "Khe giữa hai tay chịu lực ≥ 3 mm; chưa quét vỏ và toàn bộ robot"
+        },
+        {
+          "id": "mass",
+          "name": "Trong ngân sách khối lượng",
+          "passed": false,
+          "method": "CAD + khối lượng gán",
+          "detail": "7.53 / 7.00 kg, đã gồm tải"
+        }
+      ],
+      "analytic": [
+        {
+          "part": "upper",
+          "formula_mm3": 43506.17660647648,
+          "cad_mm3": 43506.17660647649,
+          "relative_error": 1.672396469125789e-16
+        },
+        {
+          "part": "lower",
+          "formula_mm3": 39905.525411699346,
+          "cad_mm3": 39905.52541169936,
+          "relative_error": 3.6465915630071064e-16
+        }
+      ],
+      "roundtrip": {
+        "volume_before_mm3": 2972999.9861233407,
+        "volume_after_mm3": 2972998.379112005,
+        "relative_error": 5.405352651876017e-07,
+        "solid_count": 42,
+        "valid": true
+      },
+      "clearance_samples": [
+        {
+          "joint_deg": -65,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": -32.5,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": 0,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": 32.5,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": 65,
+          "distance_mm": 3.0
+        }
+      ]
+    }
+  },
+  {
+    "revision": "37ad077bd221",
+    "spec": {
+      "name": "FORGE Q4",
+      "units": "mm",
+      "body_length": 340,
+      "body_width": 180,
+      "body_height": 64,
+      "upper_length": 110,
+      "lower_length": 140,
+      "link_width": 32,
+      "link_thickness": 7,
+      "bore_diameter": 10,
+      "material": "steel",
+      "payload_kg": 1,
+      "target_mass_kg": 7,
+      "actuator_mass_kg": 0.18,
+      "electronics_mass_kg": 0.65,
+      "battery_mass_kg": 0.55,
+      "joint_limit_deg": 65
+    },
+    "metrics": {
+      "mass_kg": 9.31561240764429,
+      "loaded_mass_kg": 10.31561240764429,
+      "height_mm": 259.46961416563346,
+      "part_count": 42,
+      "unique_parts": 12,
+      "joint_count": 12,
+      "ligament_mm": 8.6
+    },
+    "proof": {
+      "checks": [
+        {
+          "id": "brep",
+          "name": "Khối CAD hợp lệ",
+          "passed": true,
+          "method": "OCCT / BREP",
+          "detail": "12 hình học duy nhất, 42 chi tiết lắp ráp"
+        },
+        {
+          "id": "analytic",
+          "name": "Thể tích khớp công thức",
+          "passed": true,
+          "method": "Công thức độc lập",
+          "detail": "Tay capsule: (wL + πr² − 2πr_lỗ²) × t"
+        },
+        {
+          "id": "roundtrip",
+          "name": "STEP đọc lại đúng",
+          "passed": true,
+          "method": "Xuất → nhập lại",
+          "detail": "So sánh tổng thể tích và số khối sau trao đổi CAD"
+        },
+        {
+          "id": "wall",
+          "name": "Vành lỗ đủ bề dày",
+          "passed": true,
+          "method": "Quy tắc PoC / 6 mm",
+          "detail": "Vành nhỏ nhất 8.60 mm; không thay tính bền"
+        },
+        {
+          "id": "clearance",
+          "name": "Hai tay chịu lực có khe hở",
+          "passed": true,
+          "method": "Khoảng cách BREP / 5 góc",
+          "detail": "Khe giữa hai tay chịu lực ≥ 3 mm; chưa quét vỏ và toàn bộ robot"
+        },
+        {
+          "id": "mass",
+          "name": "Trong ngân sách khối lượng",
+          "passed": false,
+          "method": "CAD + khối lượng gán",
+          "detail": "10.32 / 7.00 kg, đã gồm tải"
+        }
+      ],
+      "analytic": [
+        {
+          "part": "upper",
+          "formula_mm3": 29170.17660647648,
+          "cad_mm3": 29170.176606476485,
+          "relative_error": 1.2471569357190639e-16
+        },
+        {
+          "part": "lower",
+          "formula_mm3": 29623.925411699347,
+          "cad_mm3": 29623.925411699347,
+          "relative_error": 0.0
+        }
+      ],
+      "roundtrip": {
+        "volume_before_mm3": 2476134.940052942,
+        "volume_after_mm3": 2476135.1659041676,
+        "relative_error": 9.1211194516674e-08,
+        "solid_count": 42,
+        "valid": true
+      },
+      "clearance_samples": [
+        {
+          "joint_deg": -65,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": -32.5,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": 0,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": 32.5,
+          "distance_mm": 3.0
+        },
+        {
+          "joint_deg": 65,
+          "distance_mm": 3.0
+        }
+      ]
+    }
+  }
+]

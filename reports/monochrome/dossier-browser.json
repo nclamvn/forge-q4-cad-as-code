@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "edition": "monochrome-cad-dossier",
+  "revision": "0cbe5809f2e8",
+  "edited_revision": "5d16baec17c0",
+  "drawing_generator": "25ca84aeed24",
+  "all_12_component_sheets_selected": true,
+  "bom_row_opens_component": true,
+  "pdf_dxf_step_online_download_bytes_verified": true,
+  "html_preview_zip_step_download_bytes_verified": true,
+  "embedded_file_count": 26,
+  "embedded_assets_byte_exact": true,
+  "html_direct_file_downloads_browser_tested": false,
+  "parameter_edit": {
+    "bore_mm": [
+      10,
+      14
+    ],
+    "thickness_mm": [
+      7,
+      5
+    ],
+    "upper_mass_g": [
+      78.7594768374865,
+      54.22101713010704
+    ],
+    "sheet_count": 14
+  },
+  "invalid_spec": {
+    "blocked": true,
+    "last_valid_revision_retained": true,
+    "pdf_export_disabled": true
+  },
+  "portable_renderer": "WebGL2",
+  "live_renderer": "WebGPU",
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "drawing_width_100": 700,
+    "drawing_width_125": 875,
+    "horizontal_scroll": true
+  },
+  "console_errors": [],
+  "limitations": [
+    "Engineering concept, not manufacturing release",
+    "No internal actuator, cell/BMS or optical design",
+    "SVG/PDF display curves sampled; DXF retains projected CAD edges",
+    "HTML embedded assets verified byte-for-byte; browser downloads tested in localhost preview, not file://"
+  ]
+}

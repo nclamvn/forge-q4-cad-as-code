@@ -1,0 +1,32 @@
+# Local environments and caches
+.venv/
+node_modules/
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.env.*
+*.log
+
+# Keep the verified default CAD snapshot; other revisions are generated locally.
+/artifacts/*
+!/artifacts/0cbe5809f2e8/
+
+# Publish only curated screenshots / trailer under docs/media.
+/video/
+/archive/
+/reports/*
+!/reports/kernel-tests.json
+!/reports/api-tests.json
+!/reports/monochrome/
+/reports/monochrome/*
+!/reports/monochrome/dossier-tests.json
+!/reports/monochrome/dossier-browser.json
+
+# Reproducible downloads belong in GitHub Releases, not Git history.
+/FORGE-Q4.html
+/FORGE-Q4.step
+/FORGE-Q4-CAD-A3.pdf
+/FORGE-Q4-CAD-dossier.zip
+/FORGE-Q4-PoC.zip
+/MANIFEST.json
