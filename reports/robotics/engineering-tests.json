@@ -1,0 +1,96 @@
+{
+  "status": "passed",
+  "cad_revision": "dcbef445e4b5",
+  "experiment_id": "ae205bf2b6ac480fb5d5cbf7c029db9d",
+  "checks": [
+    {
+      "check": "Apply actual passed CAD; reject stale baseline, failed gate, changed candidate bytes and changed solver source",
+      "passed": true
+    },
+    {
+      "check": "Weak motor fails actual pose-height gate; failure evidence retained",
+      "passed": true,
+      "metrics": {
+        "minimum_height_ratio": 0.4502544845679144,
+        "max_tilt_deg": 0.025663987885227266,
+        "tracking_rms_rad": 0.685929317562723,
+        "max_penetration_mm": 2.0756440330422268,
+        "electrical_energy_wh": 0.020348592852602793,
+        "peak_motor_c": 25.00104935387864,
+        "displacement_xy_m": [
+          0.03380843320249436,
+          0.0006788914778926028
+        ],
+        "mean_forward_speed_m_s": 0.005634738867082393,
+        "mechanical_abs_work_j": 1.6579358115606802,
+        "peak_torque_nm": 0.24686017573592547,
+        "mean_loaded_slip_m_s": 7.915816348081491e-05,
+        "joint_limit_overtravel_rad": 0.02146481282545243,
+        "self_contact_frames": 0,
+        "fall_detected": false,
+        "operating_cutoff": false
+      },
+      "failed_gates": [
+        "height",
+        "tracking"
+      ]
+    },
+    {
+      "check": "Two different CAD revisions, same five scenarios, real timestamped traces, explicit estimates, all acceptance gates evaluated",
+      "passed": true,
+      "experiment_id": "ae205bf2b6ac480fb5d5cbf7c029db9d",
+      "baseline_mass_kg": 6.902491562844637,
+      "candidate_mass_kg": 6.838007488436493
+    },
+    {
+      "check": "Stale revision, unknown code, thin ligament, NaN, malformed profiles/goals and empty proposals rejected; provenance prompt digest",
+      "passed": true,
+      "rejected": [
+        [
+          "base_revision"
+        ],
+        [
+          "changes"
+        ],
+        [
+          "changes"
+        ],
+        [
+          "actuator_profile"
+        ],
+        [
+          "operations"
+        ],
+        [
+          "operations"
+        ],
+        [
+          "goals"
+        ],
+        [
+          "assumptions"
+        ],
+        [
+          "changes"
+        ],
+        [
+          "surprise"
+        ]
+      ]
+    }
+  ],
+  "source_sha256": {
+    "kernel.py": "54154b07dabe1992bbb6703a4e3b082f3dd75b4297fe1ecae32c61c5527b0125",
+    "technical.py": "dc056fca434d3440ea50fdcc9d5610b389b1b8e86555e39c400bdba4d0c9da1b",
+    "robotics/model.py": "58b2f494f288aa43f9e704981a0742c002e24a96572abdc1dbd3d49d4ab72c48",
+    "robotics/simulation.py": "8cd4a099796486c7e0614c06031f9d385b04558787d4d9d1f9b1e082ffb83550",
+    "robotics/operations.py": "842b3a1fbe518a7a253eecf1cd498ac120e20fb789ca2a55dad8d82c4f52c650",
+    "robotics/engineering.py": "f7df1aca8b2ade4397f1d941e46f485e683fbb3f08b85b33f847df0e0006368b",
+    "robotics/profile.yaml": "4f135ddda355f87e6ceea14957e7122f8e0822075f8e5be87d834b9acd3b32ec",
+    "web/motion-engine.js": "1c9dff8754e9bc334c592407892bdfcc3e4dedefe6a3388f55b0a2a5cf6c3349",
+    "tools/motion-reference.mjs": "7983444fb5a19601d1a79a1b04f2a5874f8a89f3e463e89857bcf689d28853e2",
+    "tests/engineering_test.py": "1c9b4d422b075259d656fabecdf36f3828c6da9bc33f6fab79620308c43a01d4"
+  },
+  "llm_runtime": false,
+  "hardware_verified": false
+}

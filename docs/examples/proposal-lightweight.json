@@ -1,0 +1,46 @@
+{
+  "format": "forge-design-proposal-v1",
+  "base_revision": "dcbef445e4b5",
+  "title": "Giảm khối lượng tay chân",
+  "rationale": "Giảm dày tay từ 7 xuống 6 mm; giữ kích thước và kiểm lại lực, hình học, STEP. Đây là đề xuất mẫu do người viết, chưa được nghiệm thu.",
+  "changes": {
+    "link_thickness": 6
+  },
+  "actuator_profile": {},
+  "operations": {
+    "enabled": true,
+    "ambient_c": 25.0,
+    "initial_motor_c": 25.0,
+    "thermal_capacity_j_k": 80.0,
+    "thermal_resistance_k_w": 3.0,
+    "derate_c": 70.0,
+    "cutoff_c": 90.0,
+    "output_torque_constant_nm_a": 0.8,
+    "equivalent_resistance_ohm": 0.15,
+    "no_load_speed_rad_s": 32.0,
+    "efficiency": 0.78,
+    "auxiliary_power_w": 12.0,
+    "battery_wh": 120.0,
+    "initial_soc": 0.9,
+    "battery_voltage_v": 24.0,
+    "battery_resistance_ohm": 0.12,
+    "minimum_soc": 0.1,
+    "failed_joint": -1,
+    "joint_health": 1.0
+  },
+  "goals": {
+    "max_loaded_mass_kg": 7.0,
+    "max_tilt_deg": 25.0,
+    "max_tracking_rms_rad": 0.35,
+    "max_penetration_mm": 5.0,
+    "minimum_height_ratio": 0.75
+  },
+  "assumptions": [
+    "Chưa có kiểm bền/mỏi cho tay chân mỏng hơn.",
+    "Thông số motor, pin và nhiệt là giả định."
+  ],
+  "required_follow_up": [
+    "FEM với tải và vật liệu có nguồn.",
+    "Đo motor và kiểm lắp ráp trước chế tạo."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "cad_revision": "dcbef445e4b5",
+  "source_sha256": {
+    "motion-engine.js": "1c9dff8754e9bc334c592407892bdfcc3e4dedefe6a3388f55b0a2a5cf6c3349",
+    "motion-panel.js": "8e5377888c301e1e80c2cf527c44d38c40d2cf6c98f01cbab6f7b06760b8c2a7",
+    "motion-visuals.js": "8977dda294c44b1f04ebf37ae183f7f7bdc05f52691f696497b149e0657dc9e4"
+  },
+  "motion_count": 15,
+  "sampled_frames": 27000,
+  "spec_variants": 5,
+  "default_ik_residual_bound_mm": 0.000001,
+  "default_pad_bottom_bound_mm": 0.99,
+  "all_variants_max_ik_residual_mm": 2.8313748239171493e-13,
+  "all_variants_min_pad_bottom_mm": 0.9999900005326183,
+  "default_cad_foot_vertex_min_y_mm": 0.9999502922521664,
+  "transition_pairs": 225,
+  "reference": "Original CAD instance placements and link lengths",
+  "export_check": {
+    "formats": [
+      "JSON",
+      "CSV"
+    ],
+    "sample_rate_hz": 60,
+    "frames": 145,
+    "csv_data_rows": 580,
+    "csv_columns": 15
+  },
+  "scope": "Kinematics only. These tests do not establish stability, forces, torque, actuator limits or whole-robot collision freedom."
+}

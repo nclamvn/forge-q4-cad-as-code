@@ -1,0 +1,167 @@
+{
+  "status": "passed",
+  "cad_revision": "0cbe5809f2e8",
+  "browser": "Codex in-app browser",
+  "renderers": [
+    "WebGPU live studio",
+    "WebGL2 standalone HTML snapshot"
+  ],
+  "checks": {
+    "motion_cases": [
+      {
+        "id": "stand",
+        "contacts": "4/4",
+        "fps": "120 fps",
+        "phase": "25%",
+        "residual": "< 0.01 mm",
+        "title": "Đứng quan sát"
+      },
+      {
+        "id": "walk",
+        "contacts": "3/4",
+        "fps": "120 fps",
+        "phase": "88%",
+        "residual": "< 0.01 mm",
+        "title": "Bước chậm"
+      },
+      {
+        "id": "trot",
+        "contacts": "2/4",
+        "fps": "119 fps",
+        "phase": "75%",
+        "residual": "< 0.01 mm",
+        "title": "Chạy chéo"
+      },
+      {
+        "id": "pace",
+        "contacts": "2/4",
+        "fps": "119 fps",
+        "phase": "80%",
+        "residual": "< 0.01 mm",
+        "title": "Bước cùng bên"
+      },
+      {
+        "id": "bound",
+        "contacts": "2/4",
+        "fps": "120 fps",
+        "phase": "65%",
+        "residual": "< 0.01 mm",
+        "title": "Chạy bật"
+      },
+      {
+        "id": "reverse",
+        "contacts": "3/4",
+        "fps": "119 fps",
+        "phase": "90%",
+        "residual": "< 0.01 mm",
+        "title": "Lùi bước"
+      },
+      {
+        "id": "sidestep",
+        "contacts": "2/4",
+        "fps": "119 fps",
+        "phase": "80%",
+        "residual": "< 0.01 mm",
+        "title": "Bước ngang"
+      },
+      {
+        "id": "turn",
+        "contacts": "2/4",
+        "fps": "119 fps",
+        "phase": "25%",
+        "residual": "< 0.01 mm",
+        "title": "Xoay tại chỗ"
+      },
+      {
+        "id": "crouch",
+        "contacts": "4/4",
+        "fps": "119 fps",
+        "phase": "50%",
+        "residual": "< 0.01 mm",
+        "title": "Hạ trọng tâm"
+      },
+      {
+        "id": "sit",
+        "contacts": "4/4",
+        "fps": "119 fps",
+        "phase": "50%",
+        "residual": "< 0.01 mm",
+        "title": "Ngồi nghỉ"
+      },
+      {
+        "id": "bow",
+        "contacts": "4/4",
+        "fps": "120 fps",
+        "phase": "50%",
+        "residual": "< 0.01 mm",
+        "title": "Cúi chào"
+      },
+      {
+        "id": "wave",
+        "contacts": "3/4",
+        "fps": "119 fps",
+        "phase": "45%",
+        "residual": "< 0.01 mm",
+        "title": "Vẫy chân"
+      },
+      {
+        "id": "balance",
+        "contacts": "4/4",
+        "fps": "119 fps",
+        "phase": "25%",
+        "residual": "< 0.01 mm",
+        "title": "Chuyển trọng tâm"
+      },
+      {
+        "id": "dance",
+        "contacts": "2/4",
+        "fps": "119 fps",
+        "phase": "35%",
+        "residual": "< 0.01 mm",
+        "title": "Nhịp phối hợp"
+      },
+      {
+        "id": "jump",
+        "contacts": "0/4",
+        "fps": "120 fps",
+        "phase": "53%",
+        "residual": "< 0.01 mm",
+        "title": "Bật nhún"
+      }
+    ],
+    "pause_and_phase_scrub": "passed",
+    "single_frame": "2.8274 -> 2.8492 radians for 4.8 s nominal cycle",
+    "home_pose": "12 offsets read zero; phase zero; 4 planted feet",
+    "speed_and_amplitude": "2x and 135% rendered; period updates",
+    "sequence": "Observed walk advance to bound automatically",
+    "skeleton_and_joint_inspector": "visible, no render warnings",
+    "cad_regression": "12 components and 14 A3 sheets opened after motion; exploded assembly restored",
+    "responsive": {
+      "mobile_390x844": "robot, compact HUD and timeline visible; no horizontal overflow; drawer relocated to rail",
+      "desktop_1280x720": "robot clear of timeline, HUD fits viewport",
+      "narrow_desktop_949x988": "all 15 poses captured before final bottom-timeline layout adjustment"
+    }
+  },
+  "exports": {
+    "json_button": "Clicked; UI confirms export. In-app browser download event did not return a file path.",
+    "csv_and_json_content": "Real export method executed and Blobs parsed by tests/motion_test.mjs; 145 frames, 580 CSV data rows, 15 columns for wave at 2x."
+  },
+  "console": {
+    "WebGPU_errors_and_warnings": [],
+    "WebGL2_errors_and_warnings": []
+  },
+  "scope": "Visual and kinematic checks; no physical dynamics, stability, whole-robot collisions, actuator calibration or hardware execution.",
+  "standalone_html_sha256": "3faece43857aa2eeb467b23003d60d00470d71e779491c4270202b3136cc3c05",
+  "source_sha256": {
+    "app.js": "10c11b77a5d3857133dbc7638ae6bd65f9041310d75b7f77471e5eb95d435923",
+    "index.html": "023158f993ae8b7e1142c539f33047801ecac54f9496cbc884168f1d83efdb45",
+    "style.css": "efad481efce5c58ef4a5f41898315b1228be22f271f845fdc3330a2b72c4a81f",
+    "motion-engine.js": "2a9a7683363b96fde9a2fa0deb28f12ace083f73d54aaf973b355f691fd115fe",
+    "motion-panel.js": "a7e6603b4180081e3eaa0ef8385d2b95fe5e536f04c7b49d0c2b5f5457c33f9e",
+    "motion-visuals.js": "8977dda294c44b1f04ebf37ae183f7f7bdc05f52691f696497b149e0657dc9e4"
+  },
+  "screenshots": [
+    "docs/media/motion-studio.png",
+    "docs/media/motion-jump.png"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "cad_revision": "dcbef445e4b5",
+  "checks": [
+    {
+      "check": "JSON exchange, provenance, same-origin and strict finite schema HTTP boundaries",
+      "passed": true
+    },
+    {
+      "check": "Bounded asynchronous job, concurrent run rejected, cancellation persists and cancelled candidate cannot be adopted",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "server.py": "9859629ea6cba378c1b5e0936edcda046b85586caca8f5d51b4e3278a16a9057",
+    "robotics/service.py": "6327219f5fff58c7328d9d469d764e700d792791b54dd6635290b0e39cc11a20",
+    "robotics/engineering.py": "f7df1aca8b2ade4397f1d941e46f485e683fbb3f08b85b33f847df0e0006368b",
+    "tests/engineering_api_test.py": "0d8edff15282da7f54e342cf8cbe714f704fe6cd6dd64cb88c0fd117b5582080"
+  },
+  "llm_runtime": false
+}

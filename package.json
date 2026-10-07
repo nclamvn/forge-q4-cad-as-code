@@ -1,1 +1,18 @@
-{"name":"forge-q4-cad-poc","private":true,"version":"1.0.0","scripts":{"package":"node tools/package.cjs"},"devDependencies":{"esbuild":"0.25.5"}}
+{
+  "name": "forge-q4-cad-poc",
+  "private": true,
+  "version": "1.1.0",
+  "scripts": {
+    "package": "node tools/package.cjs",
+    "test:motion": "node tests/motion_test.mjs",
+    "test:robotics": ".venv/bin/python tests/robotics_test.py",
+    "test:physics-api": ".venv/bin/python tests/physics_api_test.py",
+    "test:operations": ".venv/bin/python tests/operations_test.py",
+    "test:engineering": ".venv/bin/python tests/engineering_test.py",
+    "test:engineering-api": ".venv/bin/python tests/engineering_api_test.py"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.5"
+  },
+  "type": "module"
+}

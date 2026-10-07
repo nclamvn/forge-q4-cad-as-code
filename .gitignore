@@ -1,6 +1,8 @@
 # Local environments and caches
 .venv/
 node_modules/
+/robotics-output/
+/engineering-output/
 __pycache__/
 *.py[cod]
 .DS_Store
@@ -10,7 +12,7 @@ __pycache__/
 
 # Keep the verified default CAD snapshot; other revisions are generated locally.
 /artifacts/*
-!/artifacts/0cbe5809f2e8/
+!/artifacts/dcbef445e4b5/
 
 # Publish only curated screenshots / trailer under docs/media.
 /video/
@@ -22,6 +24,21 @@ __pycache__/
 /reports/monochrome/*
 !/reports/monochrome/dossier-tests.json
 !/reports/monochrome/dossier-browser.json
+!/reports/motion/
+/reports/motion/*
+!/reports/motion/kinematics.json
+!/reports/motion/browser-review.json
+!/reports/robotics/
+/reports/robotics/*
+!/reports/robotics/model-tests.json
+!/reports/robotics/qualification.json
+!/reports/robotics/api-tests.json
+!/reports/robotics/browser-review.json
+!/reports/robotics/operations-tests.json
+!/reports/robotics/engineering-tests.json
+!/reports/robotics/engineering-api-tests.json
+!/reports/robotics/engineering-example.json
+!/reports/robotics/engineering-browser.json
 
 # Reproducible downloads belong in GitHub Releases, not Git history.
 /FORGE-Q4.html
@@ -29,4 +46,5 @@ __pycache__/
 /FORGE-Q4-CAD-A3.pdf
 /FORGE-Q4-CAD-dossier.zip
 /FORGE-Q4-PoC.zip
+/FORGE-Q4-Robotics.zip
 /MANIFEST.json

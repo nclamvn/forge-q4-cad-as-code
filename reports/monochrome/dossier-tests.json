@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "revision": "0cbe5809f2e8",
+  "revision": "dcbef445e4b5",
   "unique_step_names": 42,
   "a3_pdf_pages": 14,
   "parts": [
@@ -66,8 +66,8 @@
     },
     {
       "part": "foot",
-      "step_volume_error": 2.929224843702009e-14,
-      "section_area_mm2": 593.0973355292326,
+      "step_volume_error": 1.3547544517869896e-14,
+      "section_area_mm2": 801.0973355292326,
       "scale": 2,
       "dxf_entities": {
         "front": 48,
@@ -126,14 +126,14 @@
     },
     {
       "part": "lower_fairing",
-      "step_volume_error": 1.2002429438402615e-06,
-      "section_area_mm2": 1004.8506367510602,
+      "step_volume_error": 9.258794580788976e-09,
+      "section_area_mm2": 784.4813081227095,
       "scale": 0.25,
       "dxf_entities": {
-        "front": 230,
-        "top": 70,
-        "right": 86,
-        "iso": 77
+        "front": 257,
+        "top": 47,
+        "right": 48,
+        "iso": 47
       }
     },
     {

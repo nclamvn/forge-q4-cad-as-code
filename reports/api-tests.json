@@ -3,37 +3,37 @@
   "variants": [
     {
       "name": "default",
-      "revision": "0cbe5809f2e8",
-      "mass_kg": 5.9014958405073585,
+      "revision": "dcbef445e4b5",
+      "mass_kg": 5.902491562844638,
       "mass_gate": true,
-      "step_bytes": 4268249,
+      "step_bytes": 3782105,
       "upper_volume_mm3": 29170.176606476485,
       "upper_mass_kg": 0.0787594768374865
     },
     {
       "name": "light",
-      "revision": "75b671de5492",
-      "mass_kg": 4.68861246013857,
+      "revision": "084acf8c6936",
+      "mass_kg": 4.689766687442048,
       "mass_gate": true,
-      "step_bytes": 4153473,
+      "step_bytes": 3724397,
       "upper_volume_mm3": 29170.176606476485,
       "upper_mass_kg": 0.029461878372541248
     },
     {
       "name": "steel",
-      "revision": "37ad077bd221",
-      "mass_kg": 9.31561240764429,
+      "revision": "5ad3cf35d8b4",
+      "mass_kg": 9.316608129981569,
       "mass_gate": false,
-      "step_bytes": 4268261,
+      "step_bytes": 3782117,
       "upper_volume_mm3": 29170.176606476485,
       "upper_mass_kg": 0.2289858863608404
     },
     {
       "name": "cad-edit",
-      "revision": "5d16baec17c0",
-      "mass_kg": 5.761574001694015,
+      "revision": "8f1211661d4a",
+      "mass_kg": 5.760077324027063,
       "mass_gate": true,
-      "step_bytes": 4181376,
+      "step_bytes": 3738128,
       "upper_volume_mm3": 20081.85819633594,
       "upper_mass_kg": 0.05422101713010704
     }

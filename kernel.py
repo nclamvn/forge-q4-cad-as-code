@@ -73,7 +73,9 @@ def leg_fairing(length,width,link,lower=False):
     scale=.92 if lower else 1.18
     sections=[Pos(0,0,18)*Ellipse(width*scale*.58,10),
               Pos(7 if lower else -7,0,-length*.40)*Ellipse(width*scale*.51,11),
-              Pos(0,0,-length-18)*Ellipse(width*scale*.43,7)]
+              # The lower casing must stop above the fixed foot pad. Extending
+              # it past the link endpoint made the casing hit the floor first.
+              Pos(0,0,-length+6 if lower else -length-18)*Ellipse(width*scale*.43,7)]
     raw=loft(sections,ruled=False)
     casing=raw-link
     for z in (0,-length):casing=casing-Pos(0,0,z)*Rot(90,0,0)*Cylinder(6,40)
@@ -112,7 +114,9 @@ def build(raw:dict, output_dir:Path|None=None, verify_roundtrip=True, include_do
     motor=chamfer(Cylinder(24,16).edges(),.7)+Pos(0,0,9)*Cylinder(21,2)+Pos(0,0,11)*Cylinder(7,2)
     for a in range(0,360,60):
         motor=motor-Pos(17*math.cos(math.radians(a)),17*math.sin(math.radians(a)),0)*Cylinder(1.7,40)
-    foot=fillet(Box(26,24,24).edges(),6)
+    # A 32 mm pad stands below the lower link's 27.2 mm end capsule, so ground
+    # contact belongs to rubber rather than the structural metal link.
+    foot=fillet(Box(26,24,32).edges(),6)
     sensor=fillet(Box(14,W*.66,25).edges().filter_by(Axis.X),7)
     visor_pocket=fillet(Box(55,W*.665,25.5).edges().filter_by(Axis.X),7)
     frame=frame-Pos(L*.47,0,2)*visor_pocket
@@ -155,7 +159,7 @@ def build(raw:dict, output_dir:Path|None=None, verify_roundtrip=True, include_do
                     "volume_mm3":shape.volume,"mass_kg":mass,"mass_basis":basis,
                     "valid":bool(shape.is_valid),"solids":len(shape.solids())}
     ul,ll=s["upper_length"],s["lower_length"]
-    angle=.62;body_z=(ul+ll)*math.cos(angle)+21
+    angle=.62;body_z=(ul+ll)*math.cos(angle)+25
     instances=[];assembly_parts=[]
     def add(key,id,pos,rot=(0,0,0),explode=(0,0,0)):
         obj=copy.deepcopy(definitions[key][0]);obj.label=id

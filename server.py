@@ -14,12 +14,21 @@ CACHE={}
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*a,**kw):super().__init__(*a,directory=str(ROOT/"web"),**kw)
     def end_headers(self):
-        self.send_header("Cache-Control","no-cache")
+        self.send_header("Cache-Control","no-store")
         self.send_header("X-Content-Type-Options","nosniff")
         super().end_headers()
+    def send_head(self):
+        # Local source edits must not reuse a partially cached ES module graph.
+        for header in ('If-Modified-Since','If-None-Match'):
+            if header in self.headers:del self.headers[header]
+        return super().send_head()
     def translate_path(self,path):
         clean=urlsplit(path).path
         if clean=='/FORGE-Q4.html':return str(ROOT/'FORGE-Q4.html')
+        if clean.startswith('/robotics-output/'):
+            candidate=(ROOT/clean.lstrip('/')).resolve()
+            if candidate.is_relative_to(ROOT/'robotics-output'):return str(candidate)
+            return str(ROOT/'web'/'not-found')
         if clean.startswith('/artifacts/'):
             candidate=(ROOT/clean.lstrip('/')).resolve()
             if candidate.is_relative_to(ROOT/'artifacts'):return str(candidate)
@@ -30,6 +39,12 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_header('Content-Type','application/json; charset=utf-8')
         self.send_header('Content-Length',str(len(out)));self.end_headers();self.wfile.write(out)
     def do_GET(self):
+        if self.path.startswith('/api/engineering/'):
+            from robotics.engineering import handle_get
+            if handle_get(self):return
+        if self.path.startswith(('/api/robotics/','/api/physics/')):
+            from robotics.service import handle_get
+            if handle_get(self):return
         if urlsplit(self.path).path=='/api/health':
             return self.json({'kernel':'build123d / Open Cascade','status':'ready','version':'0.13.0','llm_runtime':False})
         if urlsplit(self.path).path=='/api/source':
@@ -37,6 +52,12 @@ class Handler(SimpleHTTPRequestHandler):
             return self.json({'language':'python','source':data})
         return super().do_GET()
     def do_POST(self):
+        if self.path.startswith('/api/engineering/'):
+            from robotics.engineering import handle_post
+            if handle_post(self,CACHE,LOCK):return
+        if self.path.startswith(('/api/robotics/','/api/physics/')):
+            from robotics.service import handle_post
+            if handle_post(self,CACHE):return
         if self.path!='/api/build':return self.json({'error':'Không tìm thấy endpoint.'},404)
         try:
             size=int(self.headers.get('Content-Length','0'))

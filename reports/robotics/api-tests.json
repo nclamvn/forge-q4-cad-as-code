@@ -1,0 +1,73 @@
+{
+  "status": "passed",
+  "cad_revision": "dcbef445e4b5",
+  "model_revision": "a56c1f9f251b8e06",
+  "checks": [
+    {
+      "check": "Create/resume/step/pause/report and hashed ROS package download",
+      "passed": true,
+      "package_bytes": 699365,
+      "record_samples": 150
+    },
+    {
+      "check": "/api/physics/step input rejection",
+      "http_status": 422,
+      "error": "seconds must be between 0 and 0.1",
+      "passed": true
+    },
+    {
+      "check": "/api/physics/step input rejection",
+      "http_status": 422,
+      "error": "seconds must be between 0 and 0.1",
+      "passed": true
+    },
+    {
+      "check": "/api/physics/step input rejection",
+      "http_status": 422,
+      "error": "Invalid simulation session",
+      "passed": true
+    },
+    {
+      "check": "/api/physics/control input rejection",
+      "http_status": 422,
+      "error": "Unknown control action",
+      "passed": true
+    },
+    {
+      "check": "/api/physics/create input rejection",
+      "http_status": 422,
+      "error": "Unknown actuator profile field",
+      "passed": true
+    },
+    {
+      "check": "/api/physics/create input rejection",
+      "http_status": 422,
+      "error": "friction must be between 0.1 and 1.5",
+      "passed": true
+    },
+    {
+      "check": "/api/physics/step input rejection",
+      "http_status": 422,
+      "error": "Unknown request fields",
+      "passed": true
+    },
+    {
+      "check": "/api/physics/step input rejection",
+      "http_status": 403,
+      "error": "Physics API accepts only same-origin localhost requests",
+      "passed": true
+    },
+    {
+      "check": "/api/physics/step input rejection",
+      "http_status": 403,
+      "error": "Physics API accepts only same-origin localhost requests",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "server.py": "9859629ea6cba378c1b5e0936edcda046b85586caca8f5d51b4e3278a16a9057",
+    "robotics/service.py": "6327219f5fff58c7328d9d469d764e700d792791b54dd6635290b0e39cc11a20",
+    "tests/physics_api_test.py": "bbb3ebc445b8191a63780200e08ef00a5d5906c11302b3046c84237c7c32a5ae"
+  },
+  "hardware_verified": false
+}

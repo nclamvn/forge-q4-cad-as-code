@@ -1,0 +1,44 @@
+{
+  "status": "passed_with_limitations",
+  "reviewed_at": "2026-10-07T09:59:38.246146+00:00",
+  "cad_revision": "dcbef445e4b5",
+  "model_revision": "a56c1f9f251b8e06",
+  "handoff_url": "http://127.0.0.1:8767/?workspace=physics&motion=trot&backend=webgl",
+  "renderer_handoff": "WebGL2",
+  "observations": [
+    "Live MuJoCo floating-base simulation at 500 Hz; CAD-derived loaded mass displayed as 6.902 kg.",
+    "Final current model trot run reached 105.53 s; 2 loaded feet, 223 mm body height, 6.21 Nm peak torque; paused for handoff.",
+    "Pause freezes physics time; changing a motion or physical profile requires rebuilding before resume.",
+    "35 N lateral push changes real force and IMU readings; motor cutoff removes actuation while gravity continues.",
+    "12 actual joint angles, speeds, torques and soft joint limits are displayed; soft-limit overtravel is visibly flagged.",
+    "ROS ZIP, URDF, MJCF, inertia JSON, run JSON and telemetry CSV controls are present; ZIP and report HTTP responses were separately verified by API tests.",
+    "Mobile 390 x 844 view has no horizontal overflow and keeps the robot below the compact force HUD.",
+    "CAD foot pad design dimensions and generated recipe agree at 26 x 24 x 32 mm.",
+    "Standalone HTML retains CAD and kinematics; physics start is disabled with a Python/MuJoCo server explanation.",
+    "Tour switches from physical simulation to the kinematic presentation; Escape returns to Studio.",
+    "Final live WebGL2 view ran approximately 49 to 54 fps; no new warning/error console entries since final audit start."
+  ],
+  "limitations": [
+    "WebGPU live physics and mobile views worked earlier, but one late IAB WebGPU reload stalled during renderer initialization; the handoff explicitly selects WebGL2.",
+    "Browser download buttons were exercised and backend files verified, but the IAB saved-download path was not independently confirmed.",
+    "ROS 2 launch, RViz and physical hardware were not available and have not been validated.",
+    "Motor capacity, friction and several mass allocations remain engineering assumptions; contact uses convex meshes and there is no whole-body balance controller.",
+    "Existing historical console warnings from earlier trail-buffer code were excluded by timestamp; the final buffer implementation produced no fresh warnings."
+  ],
+  "screenshots": {
+    "current_workbench": "docs/media/physics-workbench.png",
+    "mobile": "docs/media/physics-mobile.png",
+    "cad_pad": "docs/media/physics-cad-pad.png",
+    "standalone": "docs/media/motion-current.png",
+    "earlier_cutoff_experiment": "docs/media/physics-cutoff.png"
+  },
+  "source_sha256": {
+    "web/app.js": "8f3973ff3b984ffe7b8d3afd3a5254b84e654185725bb71de4ecf012b364995a",
+    "web/physics-panel.js": "db6814ac93d4641a3d8f0caf2bf97a36e53e5b15831f15bee79a69d8faddaddb",
+    "web/physics-visuals.js": "9edbd2c7e859dce8c155c1e78770abffe65aa23e60e689f7fead4f7031fea6d3",
+    "web/motion-panel.js": "8e5377888c301e1e80c2cf527c44d38c40d2cf6c98f01cbab6f7b06760b8c2a7",
+    "web/motion-engine.js": "1c9dff8754e9bc334c592407892bdfcc3e4dedefe6a3388f55b0a2a5cf6c3349",
+    "web/style.css": "7ff195e4cf8479852eaff136f2fc0481537dab0318a09ec653fc89223b89acd8",
+    "web/index.html": "a326733d18411e967b33bec34ebd18eabb147eb9ae1d6ec92bd033fff3c4fcac"
+  }
+}

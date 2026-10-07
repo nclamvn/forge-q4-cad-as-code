@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#000000"><title>FORGE Q4 — Monochrome edition</title>
+<meta name="theme-color" content="#000000"><title>FORGE Q4 · Robot engineering</title>
 <link rel="stylesheet" href="style.css">
 <script type="importmap">{"imports":{"three":"./vendor/three.webgpu.js","three/webgpu":"./vendor/three.webgpu.js","three/tsl":"./vendor/three.tsl.js"}}</script>
 </head>
@@ -11,7 +11,7 @@
 <header class="header">
   <a class="brand" href="./" aria-label="FORGE Q4 trang chính"><svg viewBox="0 0 28 30" aria-hidden="true"><path d="M3 27V3h23M3 13h16M3 21h9"/></svg><strong>FORGE<span>Q4</span></strong></a>
   <div class="header-context"><span class="live-dot"></span><span id="connection">Đang kết nối kernel</span><span class="divider"></span><span id="backend">GPU</span></div>
-  <div class="header-actions"><button id="cad-open" class="cad-launch" disabled>Thử thiết kế CAD</button><button id="tour" class="text-button">▷ Trình diễn</button><button id="open-source" class="text-button">Xem mã dựng</button><button id="export-step" class="solid-button">Xuất STEP <span>↗</span></button></div>
+  <div class="header-actions"><button id="engineering-open" class="cad-launch">AI Engineering</button><button id="cad-open" class="cad-launch" disabled>Thử thiết kế CAD</button><button id="tour" class="text-button">▷ Trình diễn</button><button id="open-source" class="text-button">Xem mã dựng</button><button id="export-step" class="solid-button">Xuất STEP <span>↗</span></button></div>
 </header>
 <main class="workspace">
   <aside id="cad-rail" class="cad-rail" hidden aria-label="Danh mục cấu phần CAD">
@@ -34,6 +34,36 @@
     <div class="cad-export"><button id="cad-step" class="solid-button">STEP chi tiết</button><button id="cad-dxf" class="text-button">DXF hình chiếu</button><button id="cad-svg" class="text-button">SVG tờ A3</button></div>
     <div class="cad-export"><button id="cad-proof" class="text-button">Kiểm chứng khối</button><button id="cad-assembly-step" class="text-button">STEP lắp ráp</button></div>
     <p id="cad-sync"></p><p class="cad-rev">CAD revision <span id="cad-revision"></span></p>
+  </aside>
+  <aside id="motion-rail" class="motion-rail" hidden aria-label="Thư viện chuyển động robot">
+    <div class="motion-rail-heading"><span>Q4 / Motion studio</span><span>15 động tác</span></div>
+    <div class="engine-switch" role="group" aria-label="Chọn bộ giải"><button id="engine-kinematic" class="active">Động học</button><button id="engine-physics">Vật lý</button></div>
+    <h1>Chuyển động.<br>Trong tầm tay.</h1>
+    <p class="motion-intro">Bốn chân, mười hai khớp.<br>Một cấu trúc CAD, nhiều cách chuyển động.</p>
+    <section id="physics-controls" class="physics-controls" hidden aria-label="Điều khiển mô phỏng vật lý">
+      <p id="physics-capability" class="physics-capability">MuJoCo / thân tự do / trọng lực / tiếp xúc</p>
+      <div class="physics-fields"><label for="physics-terrain">Địa hình<select id="physics-terrain"><option value="flat">Nền phẳng</option><option value="ramp">Dốc 5°</option><option value="steps">Bậc 30 / 60 / 90 mm</option></select></label>
+        <label for="physics-friction">Hệ số ma sát<input id="physics-friction" type="number" min=".1" max="1.5" step=".1" value=".8"></label>
+        <label for="physics-torque">Mô-men tối đa (Nm)<input id="physics-torque" type="number" min=".1" max="30" step=".5" value="8"></label></div>
+      <details class="operations-settings"><summary>Motor, nhiệt và pin</summary>
+<label class="operations-enable"><input id="operations-enabled" type="checkbox"> Bật mô hình vận hành</label>
+<div class="physics-fields"><label for="operations-temperature">Nhiệt ban đầu (°C)<input id="operations-temperature" type="number" min="-10" max="95" value="25"></label><label for="operations-soc">Mức pin ban đầu<input id="operations-soc" type="number" min=".1" max="1" step=".05" value=".9"></label><label for="operations-fault">Motor suy giảm<select id="operations-fault"><option value="-1">Không có</option><option value="0">Dạng / trước trái</option><option value="1">Hông / trước trái</option><option value="2">Gối / trước trái</option><option value="3">Dạng / trước phải</option><option value="4">Hông / trước phải</option><option value="5">Gối / trước phải</option><option value="6">Dạng / sau trái</option><option value="7">Hông / sau trái</option><option value="8">Gối / sau trái</option><option value="9">Dạng / sau phải</option><option value="10">Hông / sau phải</option><option value="11">Gối / sau phải</option></select></label><label for="operations-health">Sức motor còn lại<input id="operations-health" type="number" min="0" max="1" step=".05" value=".35"></label></div>
+<p id="operations-assumptions">Pin 120 Wh / motor tương đương 32 rad/s. Nhiệt RC và điện năng là ước tính chưa hiệu chuẩn; motor chọn suy giảm còn 35%.</p></details>
+      <button id="physics-start" class="motion-sequence">Dựng và chạy vật lý</button><p id="physics-status" class="physics-status" role="status">Dựng mô hình từ CAD để bắt đầu.</p>
+      <div class="physics-actions"><button id="physics-pause" disabled>Tạm dừng</button><button id="physics-push" disabled>Đẩy ngang 35 N</button></div><button id="physics-estop" class="physics-cutoff" disabled>Ngắt motor trong mô phỏng</button>
+      <details class="physics-downloads" id="physics-downloads" hidden><summary>Mô hình và dữ liệu chạy</summary><div><button data-physics-export="package">Gói ROS 2 + MuJoCo</button><button data-physics-export="urdf">URDF</button><button data-physics-export="mjcf">MJCF</button><button data-physics-export="model">Khối lượng / quán tính</button><button data-physics-export="report">Báo cáo chạy JSON</button><button data-physics-export="csv">Telemetry CSV</button></div></details>
+    </section>
+    <div id="motion-library" class="motion-library"></div>
+    <div class="motion-settings">
+      <label for="motion-speed">Nhịp phát <output id="motion-speed-value">1.00×</output></label><input id="motion-speed" type="range" min=".25" max="2" step=".05" value="1">
+      <label for="motion-amplitude">Biên độ <output id="motion-amplitude-value">100%</output></label><input id="motion-amplitude" type="range" min=".25" max="1.35" step=".05" value="1">
+    </div>
+    <div class="motion-switches"><button id="motion-paths" aria-pressed="true">Quỹ đạo chân</button><button id="motion-skeleton" aria-pressed="false">Bộ khớp</button><button id="motion-joints" aria-pressed="true">Góc khớp</button></div>
+    <button id="motion-sequence" class="motion-sequence">Trình diễn 15 động tác</button>
+    <button id="motion-home" class="motion-home">Về tư thế CAD</button>
+    <div class="motion-export"><button id="motion-csv">Xuất chu kỳ CSV ↗</button><button id="motion-json">JSON ↗</button></div>
+    <div id="motion-mobile-joints"></div>
+    <p class="motion-boundary">Động học tại chỗ. Chưa mô phỏng lực, điều khiển hoặc kiểm va chạm toàn bộ.</p>
   </aside>
   <section class="spec-rail" aria-label="Đặc tả thiết kế">
     <div class="rail-intro"><div class="small-title">Robot bốn chân / Q4</div><h1>Định hình<br>Q4.</h1><p>Hình học tham số.<br>Kiểm chứng từng phiên bản.</p></div>
@@ -71,7 +101,19 @@
     <div class="stage-metrics"><div><span>Khối lượng tính</span><strong id="mass">—<small>kg</small></strong></div><div><span>Cao tổng thể</span><strong id="height">—<small>mm</small></strong></div><div><span>Chi tiết CAD</span><strong id="part-count">—</strong></div><button id="proof-trigger"><i></i><span id="proof-summary">Đang kiểm chứng</span><b>↗</b></button></div>
     <div class="mode-dock"><button data-mode="studio" class="active"><svg viewBox="0 0 24 24"><path d="m12 3 9 5v9l-9 5-9-5V8zm-9 5 9 5 9-5m-9 5v9"/></svg><span>Studio</span></button><button data-mode="explode"><svg viewBox="0 0 24 24"><path d="m12 2 8 4-8 4-8-4zm-8 9 8 4 8-4m-16 6 8 4 8-4"/></svg><span>Tách cụm</span></button><button data-mode="motion"><svg viewBox="0 0 24 24"><path d="M4 12h3l3-7 4 14 3-7h3"/></svg><span>Chuyển động</span></button><button data-mode="engineering"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zm4 14 4-4 3 2 4-7"/></svg><span>Kiểm chứng</span></button></div>
     <div class="mode-options" id="explode-options" hidden><label for="explosion">Độ tách cụm</label><input id="explosion" type="range" min="0" max="1" step=".01" value="1"><output id="explode-value">100%</output></div>
-    <div class="mode-options motion-options" id="motion-options" hidden><button id="play" aria-label="Tạm dừng">Ⅱ</button><label for="phase">Chu kỳ</label><input id="phase" type="range" min="0" max="6.283" step=".01" value="0"><span class="kinematic-note">Động học minh họa</span></div>
+    <div class="motion-hud" id="motion-hud" hidden>
+      <div class="motion-hud-heading"><strong id="motion-title">Chạy chéo</strong><span id="motion-period">1.15 s</span></div>
+      <p id="motion-description"></p><div id="motion-contacts" class="motion-contacts"></div>
+      <div class="motion-live"><span><span id="motion-contact-label">Pha đặt chân</span> <b id="motion-contact-count">4/4</b></span><span><span id="motion-height-label">Nâng / hạ thân</span> <b id="motion-height-value">0 mm</b></span><span><span id="motion-residual-label">Sai lệch IK</span> <b id="motion-residual">&lt; 0.01 mm</b></span></div>
+      <div id="physics-telemetry" class="physics-telemetry" hidden><div class="physics-clock"><span>Thời gian giải</span><strong id="physics-time">0.00 <small>s</small></strong></div><div><span>Nghiêng thân R / P</span><b id="physics-attitude">0 / 0°</b></div><div><span>Mô-men đỉnh</span><b id="physics-peak">0 Nm</b></div><div><span>Công cơ học |τ·ω|</span><b id="physics-work">0 J</b></div><div><span>Tiếp xúc giữa các cụm</span><b id="physics-collisions">0</b></div><div><span>Gia tốc IMU</span><b id="physics-imu">0 / 0 / 0</b></div><div id="operations-live" hidden><span>Nhiệt motor ước tính <b id="operations-heat">—</b></span><span>Pin / công suất ước tính <b id="operations-power">—</b></span><span>RMS bám lệnh <b id="operations-tracking">—</b></span><span>CoM / đa giác tĩnh <b id="operations-support">—</b></span><span>Trạng thái drive <b id="operations-drive">—</b></span></div><svg id="physics-force-chart" viewBox="0 0 180 45" aria-label="Lực nền theo thời gian"></svg></div>
+      <p id="motion-solver-state" class="motion-solver-state">Trong miền động học</p>
+      <details class="motion-joint-drawer"><summary>12 góc khớp <span>so với tư thế CAD</span></summary><div id="motion-joint-values"></div></details>
+    </div>
+    <div class="mode-options motion-options" id="motion-options" hidden>
+      <div class="motion-timeline-heading"><span>Lịch nâng / đặt chân</span><small>Nét sáng = pha đặt chân</small></div>
+      <div id="motion-footfall" class="motion-footfall"></div>
+      <div class="motion-transport"><button id="play" aria-label="Tạm dừng chuyển động">Ⅱ</button><button id="motion-step" aria-label="Tiến một frame">▹│</button><label class="sr-only" for="phase">Vị trí trong chu kỳ chuyển động</label><input id="phase" type="range" min="0" max="6.283185307179586" step=".0001" value="0"><output id="motion-phase-value">0%</output></div>
+    </div>
     <div class="stage-foot"><span>Kéo để xoay · Cuộn để thu phóng · Chọn chi tiết</span><span id="fps">— fps</span></div>
   </section>
   <aside id="proof-panel" class="proof-panel" aria-label="Kiểm chứng độc lập" hidden>
@@ -86,6 +128,17 @@
   </aside>
 </main>
 <div id="source-modal" class="modal" hidden><div class="source-window"><div class="panel-heading"><div><span>Source of truth</span><h2 id="source-title">Đặc tả và mã dựng</h2></div><button id="close-source" aria-label="Đóng mã dựng">×</button></div><div class="source-tabs"><button data-source="yaml" class="active">Đặc tả YAML</button><button data-source="python">Python / build123d</button><button data-source="bom">BOM và giả định</button></div><pre id="source-content"></pre><button id="download-spec" class="solid-button">Tải đặc tả YAML</button></div></div>
+<section id="engineering-panel" class="engineering-panel" hidden role="dialog" aria-modal="true" aria-labelledby="lab-title">
+<div class="lab-shell"><header class="lab-header"><div><span>FORGE / Q4 Engineering</span><h1 id="lab-title">Từ ý đồ.<br>Đến bằng chứng.</h1></div><div class="lab-header-note"><p>LLM đề xuất. Kernel dựng.<br>Vật lý kiểm. Anh quyết định.</p><button id="engineering-close" aria-label="Đóng AI Engineering">×</button></div></header>
+<div class="lab-layout"><div class="lab-main"><nav class="lab-tabs" aria-label="Bàn kỹ thuật"><button data-lab-tab="proposal" aria-selected="true">Ý đồ & đề xuất</button><button data-lab-tab="results" aria-selected="false">So sánh & thử nghiệm</button><button data-lab-tab="history" aria-selected="false">Lịch sử</button></nav>
+<section data-lab-pane="proposal"><p class="lab-intro">Biến câu hỏi thiết kế thành một thay đổi CAD có thể đo. Xuất context cho LLM đang dùng, rồi nhập JSON trả về.</p><label for="lab-intent">Mục tiêu kỹ thuật</label><textarea id="lab-intent" rows="3">Giảm khối lượng robot, giữ tải 1 kg và khả năng vận hành trên nền phẳng, dốc 5° và ma sát thấp. Không nới tiêu chí kiểm để che lỗi.</textarea><div class="lab-buttons"><button id="lab-context" class="lab-primary">Xuất prompt cho LLM</button><button id="lab-example">Đề xuất mẫu</button><label class="lab-file" for="lab-file">Nhập JSON<input id="lab-file" type="file" accept=".json,application/json"></label></div><label for="lab-proposal">Đề xuất JSON / có thể chỉnh trước khi kiểm</label><textarea id="lab-proposal" rows="16" spellcheck="false" aria-label="Đề xuất thiết kế JSON"></textarea><div class="lab-buttons"><button id="lab-export-proposal">Xuất đề xuất JSON</button><button id="lab-validate">Kiểm đầu vào & diff</button><button id="lab-run" class="lab-primary">Dựng hai CAD & chạy 10 lượt thử</button></div><div id="lab-diff"></div></section>
+<section data-lab-pane="results" hidden><div class="lab-run-state"><code id="lab-job-id">Chưa chạy</code><strong id="lab-job-state">Dựng CAD trước, rồi thử hai thiết kế trong cùng điều kiện.</strong><progress id="lab-progress" max="10" value="0"></progress></div><div id="lab-comparison" class="lab-comparison"></div><p id="lab-thresholds" class="lab-footnote"></p><div id="lab-gates" class="lab-gates"></div><div id="lab-trials"></div><div class="lab-buttons"><button id="lab-cancel" disabled>Hủy thử nghiệm</button><button id="lab-report" disabled>Tải bằng chứng JSON</button><button id="lab-feedback" disabled>Xuất feedback cho LLM</button><button id="lab-adopt" class="lab-primary" disabled>Áp dụng candidate đạt bộ thử</button><button id="lab-undo" disabled>Về baseline</button></div><p class="lab-footnote">Đạt bộ thử này chỉ là sàng lọc phần mềm trong điều kiện đã khai báo. Không xác nhận độ bền, chế tạo, khả năng tự hành hay an toàn phần cứng.</p></section>
+<section data-lab-pane="history" hidden><div id="lab-history"></div></section><p id="lab-status" class="lab-status" role="status"></p><p id="lab-offline" hidden>Chạy Start.command để dựng CAD và chạy thử. Bản HTML ngoại tuyến chỉ xem dữ liệu.</p></div>
+<aside class="lab-aside"><div><span>Baseline đang mở</span><strong id="lab-mass">—</strong><code id="lab-revision">—</code></div><h2>Bộ thử cố định</h2><ol><li>Đứng tải / 6 s</li><li>Chạy chéo / 8 s</li><li>Dốc 5° / 6 s</li><li>Ma sát 0.25 / 6 s</li><li>Đẩy ngang 35 N / 6 s</li></ol><p>Biên độ 0.6 / nhịp 0.6. Hai thiết kế dùng cùng vận hành giả định. Bám lệnh, cao độ, nghiêng, va chạm và giới hạn khớp được kiểm riêng.</p><details><summary>Đặc tả baseline</summary><pre id="lab-base-spec"></pre></details><h2>Phạm vi thay CAD</h2><p>Dựng lại mô hình tham số, STEP, 14 tờ bản vẽ, BOM và URDF từ cùng đặc tả. Thiết kế hình học tùy ý, FEM, GD&T và CAM chưa được hỗ trợ.</p><div class="lab-llm-note">Trao đổi JSON / chưa gọi API LLM.<br>Đề xuất mẫu được ghi rõ nguồn.<br>Không thực thi mã do LLM gửi.</div></aside></div></div></section>
 <div class="toast" id="toast" role="status"></div>
+<script>
+window.addEventListener('error',event=>{const el=document.getElementById('boot-text');if(el&&!document.getElementById('boot').classList.contains('gone'))el.textContent='Không tải được giao diện: '+(event.message||'Kiểm tra kết nối và nạp lại trang.');});
+window.addEventListener('unhandledrejection',event=>{const el=document.getElementById('boot-text');if(el&&!document.getElementById('boot').classList.contains('gone'))el.textContent='Không khởi tạo được: '+String(event.reason);});
+</script>
 <script type="module" src="app.js"></script>
 </body></html>

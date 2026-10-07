@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "cad_revision": "dcbef445e4b5",
+  "model_revision": "a56c1f9f251b8e06",
+  "engine_version": "3.15.0",
+  "source_sha256": {
+    "robotics/model.py": "58b2f494f288aa43f9e704981a0742c002e24a96572abdc1dbd3d49d4ab72c48",
+    "robotics/simulation.py": "8cd4a099796486c7e0614c06031f9d385b04558787d4d9d1f9b1e082ffb83550",
+    "robotics/profile.yaml": "4f135ddda355f87e6ceea14957e7122f8e0822075f8e5be87d834b9acd3b32ec",
+    "web/motion-engine.js": "1c9dff8754e9bc334c592407892bdfcc3e4dedefe6a3388f55b0a2a5cf6c3349",
+    "tools/motion-reference.mjs": "7983444fb5a19601d1a79a1b04f2a5874f8a89f3e463e89857bcf689d28853e2",
+    "tests/robotics_test.py": "59ed23a378aab7b9aa4984edc6324d9c2a9ae19e9dbe1c0ef9bef3b0d7ab007b"
+  },
+  "checks": [
+    {
+      "check": "Two independent compilers race to publish a fresh complete package; both verify all hashes",
+      "passed": true,
+      "model_revision": "085cf6e51a149693",
+      "kp_nm_rad": 65.91398420799669
+    },
+    {
+      "check": "CAD mass, COM, positive inertia, 42 home transforms, pad clearance and package hashes",
+      "passed": true,
+      "mass_kg": 6.902491562844637,
+      "minimum_home_clearance_mm": 0.9999999999999731
+    },
+    {
+      "check": "Pause, gravity versus zero gravity, motor cutoff and fail-loud inputs",
+      "passed": true,
+      "cutoff_base_height_m": 0.09187061897820713
+    },
+    {
+      "check": "60 s stand, contact load, force bounds, warnings and deterministic replay",
+      "passed": true,
+      "summary": {
+        "time_s": 60.0,
+        "contact_count": 4,
+        "peak_torque_nm": 1.860101747232621,
+        "max_tilt_deg": 0.06695818896933625,
+        "max_penetration_mm": 0.8744974770753324
+      },
+      "reaction_n": 67.88784855080183
+    },
+    {
+      "check": "Independent MuJoCo URDF parser versus MJCF at nonzero joints",
+      "passed": true,
+      "max_link_position_error_m": 3.6654620311216135e-13,
+      "ros_runtime_tested": false
+    }
+  ],
+  "ros_runtime_tested": false,
+  "hardware_verified": false
+}

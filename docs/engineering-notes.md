@@ -4,6 +4,10 @@ Phiên bản monochrome: thân vát bo góc thấp, mặt cảm biến đặt â
 
 PoC robot bốn chân: đặc tả tham số → Python/build123d → BREP Open Cascade → STEP → đọc lại STEP → mesh Three.js. Dựng khối CAD thật bằng Python; trình duyệt hiển thị chính mesh tessellate từ các khối ấy.
 
+## Nâng cấp phần mềm kỹ thuật
+
+Workspace mới nối CAD với MuJoCo và gói robot description. Phạm vi, thông số giả định, phép kiểm và hướng dẫn ROS được ghi tại [ROBOTICS.vi.md](ROBOTICS.vi.md). Các mô tả chuyển động minh họa bên dưới thuộc workspace động học; chỉ workspace vật lý mới có phản lực, mô-men và IMU từ solver.
+
 ## Mở ngay
 
 - **`FORGE-Q4.html`**: một file duy nhất, không CDN, không cần mạng. Xoay, tách cụm, mặt cắt, chuyển động minh họa, kích thước, xem mã/BOM/bằng chứng và tải STEP của snapshot đã kiểm chứng. Đổi tham số cần kernel chạy, vì vậy điều khiển dựng lại bị vô hiệu hóa ở bản này.

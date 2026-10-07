@@ -2,15 +2,24 @@ import * as THREE from 'three/webgpu';
 import {OrbitControls} from './vendor/OrbitControls.js';
 import {RoomEnvironment} from './vendor/RoomEnvironment.js';
 import {CADWorkbench} from './cad-workbench.js';
+import {MOTIONS,TAU,motionById,sampleMotion,blendMotion} from './motion-engine.js';
+import {MotionPanel} from './motion-panel.js';
+import {MotionVisuals} from './motion-visuals.js';
+import {PhysicsPanel} from './physics-panel.js';
+import {PhysicsVisuals} from './physics-visuals.js';
+import {EngineeringPanel} from './engineering-panel.js';
 
 const $=id=>document.getElementById(id);
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const params=new URLSearchParams(location.search);
 const state={mode:'studio',explosion:0,explodeTarget:0,xray:false,dimensions:false,
-  playing:!reduced,phase:0,turntable:false,dirty:false,building:false,online:false,selected:null,ready:false,section:false,tour:null};
+  playing:!reduced,phase:0,turntable:false,dirty:false,building:false,online:false,selected:null,ready:false,section:false,tour:null,
+  motion:{id:'trot',speed:1,amplitude:1,paths:true,skeleton:false,joints:true,sequence:false,sequenceElapsed:0,transition:null},physics:{enabled:false,frame:null,meta:null,dirty:false}};
 let model,spec,renderer,scene,camera,controls,robot,dimensionGroup,supportGroup,clipGroup,cadGroup,cadWorkbench;
 let meshes=[],geometryCache={},materials={},feet=[],lastTime=0,frames=0,fpsTime=0;
 let hover=null,pointerDown=null,cameraTween=null,sourceTab='yaml',kernelSource='';
+let motionPanel,motionVisuals,motionFrame;
+let physicsPanel,physicsVisuals,studioStage,lightingRig,engineeringPanel;
 const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
 const stage=$('stage');
 const CADtoThree=v=>new THREE.Vector3(v[0]*.001,v[2]*.001,-v[1]*.001);
@@ -47,6 +56,8 @@ async function boot(){
     const key=new THREE.DirectionalLight('#ffffff',3.4);key.position.set(-.6,1.2,.6);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.camera.left=-.75;key.shadow.camera.right=.75;key.shadow.camera.top=.7;key.shadow.camera.bottom=-.7;key.shadow.camera.near=.1;key.shadow.camera.far=3;key.shadow.bias=-.0003;key.shadow.normalBias=.001;scene.add(key);
     const rim=new THREE.DirectionalLight('#ffffff',3.2);rim.position.set(.7,.7,-.8);scene.add(rim);
     const fill=new THREE.DirectionalLight('#ffffff',.9);fill.position.set(1,.15,.5);scene.add(fill);
+    lightingRig=new THREE.Group();scene.add(lightingRig);lightingRig.add(key,rim,fill);
+    const lightTarget=new THREE.Object3D();lightingRig.add(lightTarget);for(const light of [key,rim,fill])light.target=lightTarget;
     createStage();robot=new THREE.Group();scene.add(robot);clipGroup=new THREE.ClippingGroup();robot.add(clipGroup);
     dimensionGroup=new THREE.Group();scene.add(dimensionGroup);supportGroup=new THREE.Group();scene.add(supportGroup);
     materials=createMaterials();cadGroup=new THREE.Group();cadGroup.visible=false;scene.add(cadGroup);
@@ -54,22 +65,35 @@ async function boot(){
       example:()=>{Object.assign(spec,{link_width:32,bore_diameter:14,link_thickness:5});updateUI();markDirty();},
       invalid:()=>{Object.assign(spec,{link_width:18,bore_diameter:10});updateUI();markDirty();},
       proof:()=>{setMode('engineering');},source:()=>showSource('python')});
+    motionVisuals=new MotionVisuals(scene);
+    motionPanel=new MotionPanel(state,{model:()=>model,select:selectMotion,paths:refreshMotionPaths,message:toast});
+    physicsVisuals=new PhysicsVisuals(scene);
+    physicsPanel=new PhysicsPanel(state,{model:()=>model,mode:()=>{if(state.mode!=='motion')setMode('motion');motionPanel.stopSequence();},kinematic:()=>{motionPanel.sync();resize();},
+      frame:()=>{},reset:(_,terrain)=>{physicsVisuals.reset(terrain);resize();}});
     assemble(model);updateUI();bindUI();resize();
+    engineeringPanel=new EngineeringPanel(state,{model:()=>model,pause:()=>physicsPanel.suspend(),install:installModel});
     if(params.has('record'))import('./capture-ui.js');
     new ResizeObserver(resize).observe(stage);
     renderer.setAnimationLoop(animate);
     if(!reduced){state.explosion=.45;state.explodeTarget=0;}
-    state.ready=true;window.forge={state,get model(){return model;},get renderer(){return renderer;},setMode,build:compile,inspect:()=>({ready:state.ready,backend:renderer.backend.isWebGPUBackend?'webgpu':'webgl2',revision:model.revision,metrics:model.metrics,checks:model.proof.checks,frames,mode:state.mode,explosion:state.explosion,meshCount:meshes.length})};
+    state.ready=true;window.forge={state,get model(){return model;},get renderer(){return renderer;},setMode,build:compile,
+      motion:{programs:MOTIONS,select:selectMotion,seek:phase=>{state.phase=phase;state.playing=false;state.motion.transition=null;motionPanel.sync();},sample:(id,phase,amplitude=1)=>sampleMotion(model.spec,id,phase,amplitude),export:type=>motionPanel.export(type),get frame(){return motionFrame;}},
+      inspect:()=>({ready:state.ready,backend:renderer.backend.isWebGPUBackend?'webgpu':'webgl2',revision:model.revision,metrics:model.metrics,checks:model.proof.checks,frames,mode:state.mode,explosion:state.explosion,meshCount:meshes.length,
+        motion:motionFrame?{program:state.motion.id,phase:motionFrame.phase,contacts:motionFrame.contactCount,maxErrorMm:motionFrame.maxErrorMm,minPadBottomMm:Math.min(...motionFrame.legs.map(l=>l.padBottomMm)),clamped:motionFrame.clamped}:null})};
     $('cad-open').disabled=false;if(params.get('workspace')==='cad')openCAD();
+    if(params.get('workspace')==='motion'){setMode('motion');if(params.has('motion'))selectMotion(params.get('motion'));}
+    if(params.get('workspace')==='physics'){state.motion.id=params.get('motion')||'stand';setMode('motion');physicsPanel.activate(true);setTimeout(()=>physicsPanel.start(),400);}
+    if(params.get('workspace')==='ai'){await engineeringPanel.open();if(params.has('experiment'))await engineeringPanel.load(params.get('experiment'));}
     setTimeout(()=>$('boot').classList.add('gone'),reduced?0:250);
   }catch(e){console.error(e);$('boot-text').textContent='Không khởi tạo được: '+e.message;}
 }
 
 function createStage(){
-  const floor=new THREE.Mesh(new THREE.PlaneGeometry(8,8),new THREE.MeshStandardMaterial({color:'#080808',roughness:.55,metalness:.18}));floor.rotation.x=-Math.PI/2;floor.position.y=-.028;floor.receiveShadow=true;scene.add(floor);
-  const plinth=new THREE.Mesh(new THREE.CylinderGeometry(.42,.423,.017,160),new THREE.MeshPhysicalMaterial({color:'#171717',metalness:.38,roughness:.40,clearcoat:.35}));plinth.position.y=-.0085;plinth.receiveShadow=true;scene.add(plinth);
-  addRing(.420,-.001,.0004,'#606060',scene,.25);
-  addRing(.389,.0002,.0002,'#555555',scene,.15);
+  studioStage=new THREE.Group();scene.add(studioStage);
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(8,8),new THREE.MeshStandardMaterial({color:'#080808',roughness:.55,metalness:.18}));floor.rotation.x=-Math.PI/2;floor.position.y=-.028;floor.receiveShadow=true;studioStage.add(floor);
+  const plinth=new THREE.Mesh(new THREE.CylinderGeometry(.42,.423,.017,160),new THREE.MeshPhysicalMaterial({color:'#171717',metalness:.38,roughness:.40,clearcoat:.35}));plinth.position.y=-.0085;plinth.receiveShadow=true;studioStage.add(plinth);
+  addRing(.420,-.001,.0004,'#606060',studioStage,.25);
+  addRing(.389,.0002,.0002,'#555555',studioStage,.15);
 }
 
 function createMaterials(){
@@ -109,6 +133,7 @@ function assemble(data){
     if(inst.part==='foot')feet.push(root);
     embellish(root,inst,part,data.spec);
   }
+  motionFrame=sampleMotion(data.spec,'stand',0);refreshMotionPaths();motionPanel?.chart();
   updateDimensions();updateProof();updateSupport();
 }
 
@@ -136,34 +161,50 @@ function embellish(root,inst,part,s){
 }
 
 function updateTransforms(){
-  robot.position.y=.105*state.explosion;
-  const s=model.spec,ul=s.upper_length*.001,ll=s.lower_length*.001,L=s.body_length*.001,W=s.body_width*.001;
-  const bodyZ=(ul+ll)*Math.cos(.62)+.021;
+  studioStage.visible=!(state.mode==='motion'&&state.physics.enabled);
+  if(state.mode==='motion'&&state.physics.enabled&&state.physics.frame){
+    const base=state.physics.frame.base_position_m;lightingRig.position.set(base[0],0,-base[1]);
+    robot.position.set(0,0,0);robot.quaternion.identity();
+    const lookup=new Map(state.physics.frame.instances.map(i=>[i.id,i]));
+    for(const item of meshes){const pose=lookup.get(item.instance.id);if(pose){item.root.position.fromArray(pose.position_m);item.root.quaternion.fromArray(pose.quaternion_xyzw);}}
+    robot.updateMatrixWorld(true);motionVisuals.group.visible=false;
+    physicsVisuals.update(state.physics.frame,true,state.motion.skeleton,state.motion.paths);return;
+  }
+  physicsVisuals.update(null,false,false);
+  lightingRig.position.set(0,0,0);
   const moving=state.mode==='motion'&&state.explosion<.01;
-  const bounce=moving?Math.sin(state.phase*2)*.004:0;
+  robot.position.set(0,.105*state.explosion,0);robot.quaternion.identity();
+  if(moving){
+    const next=sampleMotion(model.spec,state.motion.id,state.phase,state.motion.amplitude),transition=state.motion.transition;
+    motionFrame=transition?blendMotion(model.spec,transition.from,next,Math.min(1,transition.elapsed/.65)):next;
+    robot.position.fromArray(motionFrame.origin);robot.quaternion.fromArray(motionFrame.quaternion);
+  }
   for(const item of meshes){
     let p=item.base.clone(),q=item.quaternion.clone();const id=item.instance.id;
-    if(/^(front|rear)_/.test(id)){
-      const front=id.startsWith('front'),left=id.includes('_left_'),sx=front?1:-1,sy=left?1:-1;
-      const diagonal=(front===left)?0:Math.PI;
-      const wave=moving?Math.sin(state.phase+diagonal):0;
-      const lift=moving?Math.max(0,Math.cos(state.phase+diagonal))*.22:0;
-      const theta=-sx*.62+wave*.16,knee=sx*1.24-sx*lift;
-      const hipX=sx*L*.34,hipY=bodyZ-.008+bounce,hipZ=-sy*(W/2+.028);
-      const kx=hipX+ul*Math.sin(theta),ky=hipY-ul*Math.cos(theta);
-      const fx=kx+ll*Math.sin(theta+knee),fy=ky-ll*Math.cos(theta+knee);
-      if(id.endsWith('_roll')||id.endsWith('_shoulder'))p.set(hipX,hipY,-sy*(W/2+.002));
-      if(id.endsWith('_hip'))p.set(hipX,hipY,hipZ-sy*.008);
-      if(id.endsWith('_upper')||id.endsWith('_upper_fairing'))p.set(hipX,hipY,hipZ);
-      if(id.endsWith('_knee'))p.set(kx,ky,hipZ-sy*.008);
-      if(id.endsWith('_lower')||id.endsWith('_lower_fairing'))p.set(kx,ky,hipZ-sy*(s.link_thickness+3)*.001);
-      if(id.endsWith('_foot'))p.set(fx,fy,hipZ-sy*(s.link_thickness+3)*.001);
-      if(id.endsWith('_upper')||id.endsWith('_upper_fairing'))q.setFromAxisAngle(new THREE.Vector3(0,0,1),theta);
-      if(id.endsWith('_lower')||id.endsWith('_lower_fairing'))q.setFromAxisAngle(new THREE.Vector3(0,0,1),theta+knee);
-    }else p.y+=bounce;
+    if(moving&&/^(front|rear)_/.test(id)){
+      const leg=motionFrame.legs.find(l=>id.startsWith(l.id+'_')),part=item.instance.part;
+      if(id.endsWith('_roll')||part==='shoulder'){p.fromArray(leg.anchor);q.premultiply(new THREE.Quaternion().fromArray(leg.rollQ));}
+      else if(id.endsWith('_hip')){p.fromArray(leg.hipMotor);q.premultiply(new THREE.Quaternion().fromArray(leg.upperQ));}
+      else if(id.endsWith('_knee')){p.fromArray(leg.kneeMotor);q.premultiply(new THREE.Quaternion().fromArray(leg.lowerQ));}
+      else if(part==='upper'||part==='upper_fairing'){p.fromArray(leg.upper);q.fromArray(leg.upperQ);}
+      else if(part==='lower'||part==='lower_fairing'){p.fromArray(leg.lower);q.fromArray(leg.lowerQ);}
+      else if(part==='foot'){p.fromArray(leg.foot);q.fromArray(leg.footQ);}
+    }
     item.root.position.copy(p).addScaledVector(item.explode,state.explosion);item.root.quaternion.copy(q);
   }
   robot.updateMatrixWorld(true);
+  motionVisuals?.update(motionFrame,state.motion,moving);
+}
+
+function refreshMotionPaths(){if(model&&motionVisuals)motionVisuals.rebuild(model.spec,state.motion);}
+function selectMotion(id){
+  if(!MOTIONS.some(m=>m.id===id))return;
+  const from=motionFrame||sampleMotion(model.spec,'stand',0);
+  state.motion.id=id;state.phase=0;state.motion.transition=reduced?null:{from,elapsed:0};
+  if(state.mode!=='motion')setMode('motion');
+  $('stage-caption').textContent=motionById(id).description;
+  motionPanel.sync();motionPanel.chart();refreshMotionPaths();
+  if(state.physics.enabled)physicsPanel.invalidate();
 }
 
 function updateDimensions(){
@@ -212,6 +253,7 @@ function selectCADPart(key){if(!state.ready&&state.mode!=='cad')return;refreshCA
 function setCADPane(pane){if(cadGroup)cadGroup.visible=state.mode==='cad'&&pane==='solid';}
 function openCAD(){
   stopTour();setXray(false);setSection(false);setDimensions(false);toggleProof(false);state.mode='cad';state.explosion=0;state.explodeTarget=0;state.turntable=false;
+  document.querySelector('.workspace').classList.remove('motion-active');motionVisuals.group.visible=false;$('motion-rail').hidden=true;$('motion-hud').hidden=true;$('motion-options').hidden=true;
   stage.dataset.mode='cad';robot.visible=false;supportGroup.visible=false;cadGroup.visible=true;refreshCADPart();cadWorkbench.enter(model,spec,state.online,state.dirty);
   $('stage-caption').textContent='Khối CAD thật. Kéo để xoay.';
   stage.querySelector('.stage-foot > span').textContent='Kéo để xoay · Cuộn để thu phóng';
@@ -220,38 +262,54 @@ function openCAD(){
 }
 function editCAD(key,value){spec[key]=value;updateUI();markDirty();}
 function setMode(mode){
+  if(mode!=='motion'&&physicsPanel)physicsPanel.suspend();
   if(state.mode==='cad'){controls.minDistance=.45;cadWorkbench.exit();cadGroup.visible=false;robot.visible=true;document.querySelector('.machine-name').innerHTML='Q4<span> / 01</span>';stage.querySelector('.stage-foot > span').textContent='Kéo để xoay · Cuộn để thu phóng · Chọn chi tiết';}
   stage.dataset.mode=mode;
   state.mode=mode;document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));
+  document.querySelector('.workspace').classList.toggle('motion-active',mode==='motion');$('motion-rail').hidden=mode!=='motion';$('motion-hud').hidden=mode!=='motion';
+  if(mode==='motion'){state.explosion=0;setDimensions(false);motionPanel.sync();}
+  else state.motion.sequence=false;
   state.explodeTarget=mode==='explode'?Number($('explosion').value):0;
   $('explode-options').hidden=mode!=='explode';$('motion-options').hidden=mode!=='motion';
-  const caption={studio:'Cấu trúc thật. Hình học có thể đo.',explode:`${model.metrics.part_count} chi tiết CAD. Một cấu trúc có thể đọc.`,motion:'Chuyển động khớp minh họa, chưa phải mô phỏng vật lý.',engineering:'Kiểm khối, công thức và STEP độc lập.'};
+  const caption={studio:'Cấu trúc thật. Hình học có thể đo.',explode:`${model.metrics.part_count} chi tiết CAD. Một cấu trúc có thể đọc.`,motion:motionById(state.motion.id).description,engineering:'Kiểm khối, công thức và STEP độc lập.'};
   $('stage-caption').textContent=caption[mode];$('hero-label').hidden=mode!=='studio';
   if(mode==='engineering'){state.explosion=0;toggleProof(true);setDimensions(true);updateSupport();}
   else{supportGroup.visible=false;toggleProof(false);if(mode==='explode')setDimensions(false);}
-  if(mode==='explode')moveCamera('explode');else moveCamera('hero');
+  if(mode==='explode')moveCamera('explode');else moveCamera(mode==='motion'?'motion':'hero');
 }
-function toggleProof(open=$('proof-panel').hidden){$('proof-panel').hidden=!open;stage.classList.toggle('proof-open',open);if(stage.clientWidth>700&&open)camera.setViewOffset(stage.clientWidth,stage.clientHeight,145,0,stage.clientWidth,stage.clientHeight);else camera.clearViewOffset();camera.updateProjectionMatrix();}
+function toggleProof(open=$('proof-panel').hidden){$('proof-panel').hidden=!open;stage.classList.toggle('proof-open',open);if(stage.clientWidth>700&&open)camera.setViewOffset(stage.clientWidth,stage.clientHeight,145,0,stage.clientWidth,stage.clientHeight);else if(state.mode==='motion'&&state.physics.enabled&&innerWidth>820)camera.setViewOffset(stage.clientWidth,stage.clientHeight,80,0,stage.clientWidth,stage.clientHeight);else camera.clearViewOffset();camera.updateProjectionMatrix();}
 function setDimensions(on){state.dimensions=on;dimensionGroup.visible=on;$('dimensions').classList.toggle('active',on);}
 function setXray(on){state.xray=on;$('xray').classList.toggle('active',on);for(const item of meshes){const mat=item.mesh.material;mat.transparent=on;mat.opacity=on?(item.instance.part==='cover'?.14:.36):1;mat.depthWrite=!on;mat.needsUpdate=true;}clipGroup.traverse(o=>{if(o.isMesh&&!o.userData.instance)o.visible=!on;});}
 function setSection(on){state.section=on;clipGroup.clippingPlanes=on?[new THREE.Plane(new THREE.Vector3(0,0,-1),0)]:[];clipGroup.clipShadows=true;$('section-view').classList.toggle('active',on);if(on)toast('Mặt cắt chỉ dùng để xem; STEP vẫn là khối nguyên vẹn.');}
 function moveCamera(view){
-  const map={hero:[.66,.38,.74],explode:[1.05,.68,1.23],side:[0,.32,.96],front:[.96,.30,0],top:[.0001,1.02,.001]};
-  const p=map[view];if(!p)return;cameraTween={from:camera.position.clone(),to:new THREE.Vector3(...p),start:performance.now(),duration:reduced?1:800};
+  const map={motion:[.87,.46,.98],hero:[.66,.38,.74],explode:[1.05,.68,1.23],side:[0,.32,.96],front:[.96,.30,0],top:[.0001,1.02,.001]};
+  const p=map[view];if(!p)return;const target=new THREE.Vector3(...p),base=state.physics.frame?.base_position_m;
+  if(state.mode==='motion'&&state.physics.enabled&&base)target.add(new THREE.Vector3(base[0],0,-base[1]));
+  cameraTween={from:camera.position.clone(),to:target,start:performance.now(),duration:reduced?1:800};
   document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
 }
-function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.zoom=Math.min(1,Math.max(.55,camera.aspect/1.1));toggleProof(!$('proof-panel').hidden);camera.updateProjectionMatrix();}
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;const drawer=document.querySelector('.motion-joint-drawer'),parent=innerWidth<=820?$('motion-mobile-joints'):$('motion-hud');if(drawer&&drawer.parentElement!==parent)parent.appendChild(drawer);renderer.setSize(w,h);camera.aspect=w/h;camera.zoom=Math.min(1,Math.max(.55,camera.aspect/1.1))*(state.mode==='motion'&&state.physics.enabled&&innerWidth>820?.82:1);toggleProof(!$('proof-panel').hidden);camera.updateProjectionMatrix();}
 
 function animate(time){
+  if(!$('engineering-panel').hidden){lastTime=time;fpsTime=time;frames=0;return;}
   const elapsed=(time-lastTime)/1000||.016,dt=Math.min(elapsed,.05);lastTime=time;
-  if(state.mode==='motion'&&state.playing){state.phase=(state.phase+dt*1.4)%(2*Math.PI);$('phase').value=state.phase;}
+  if(state.mode==='motion'&&!state.physics.enabled){
+    if(state.motion.transition&&!state.motion.transition.paused){state.motion.transition.elapsed+=dt;if(state.motion.transition.elapsed>=.65)state.motion.transition=null;}
+    if(state.playing){
+      state.phase=(state.phase+dt*state.motion.speed/motionById(state.motion.id).duration*TAU)%TAU;
+      if(state.motion.sequence){state.motion.sequenceElapsed+=dt;if(state.motion.sequenceElapsed>=5){state.motion.sequenceElapsed=0;selectMotion(MOTIONS[(MOTIONS.findIndex(m=>m.id===state.motion.id)+1)%MOTIONS.length].id);}}
+    }
+  }
   state.explosion+= (state.explodeTarget-state.explosion)*(reduced?1:1-Math.exp(-Math.min(elapsed,.5)*5));
   if(Math.abs(state.explodeTarget-state.explosion)<.0002)state.explosion=state.explodeTarget;
   if(cameraTween){const t=Math.min(1,(time-cameraTween.start)/cameraTween.duration),smooth=t*t*(3-2*t);camera.position.lerpVectors(cameraTween.from,cameraTween.to,smooth);if(t===1)cameraTween=null;}
-  controls.target.y+=( (state.mode==='explode'?.22:.13)-controls.target.y)*(1-Math.exp(-dt*5));
+  const physical=state.mode==='motion'&&state.physics.enabled&&state.physics.frame;
+  if(physical){const p=state.physics.frame.base_position_m,dx=(p[0]-controls.target.x)*(1-Math.exp(-dt*5)),dz=(-p[1]-controls.target.z)*(1-Math.exp(-dt*5));controls.target.x+=dx;controls.target.z+=dz;if(!cameraTween){camera.position.x+=dx;camera.position.z+=dz;}}
+  else{controls.target.x*=Math.exp(-dt*5);controls.target.z*=Math.exp(-dt*5);}
+  controls.target.y+=( (state.mode==='explode'?.22:state.mode==='motion'?.04:.13)-controls.target.y)*(1-Math.exp(-dt*5));
   controls.autoRotate=state.turntable&&!reduced;controls.autoRotateSpeed=.8;controls.update();updateTransforms();
   const s=model.spec;projectLabel('dim-length',new THREE.Vector3(0,.02,.23));projectLabel('dim-height',new THREE.Vector3(-.25,model.metrics.height_mm*.0005,0));projectLabel('dim-width',new THREE.Vector3(.255,.025,0));
-  updateTour(time);renderer.render(scene,camera);frames++;if(time-fpsTime>1000){$('fps').textContent=Math.round(frames*1000/(time-fpsTime))+' fps';frames=0;fpsTime=time;}
+  updateTour(time);physicsPanel.tick(time);if(motionFrame)motionPanel.update(motionFrame,time);renderer.render(scene,camera);frames++;if(time-fpsTime>1000){$('fps').textContent=Math.round(frames*1000/(time-fpsTime))+' fps';frames=0;fpsTime=time;}
 }
 
 function updateUI(){
@@ -279,12 +337,21 @@ async function compile(){
   state.building=true;if(state.mode==='cad')cadWorkbench.busy();$('build').disabled=true;$('build').querySelector('span').textContent='Đang dựng và kiểm…';$('build-state').textContent='Python → BREP → công thức → STEP round-trip';$('build-state').classList.remove('dirty');
   try{
     const resp=await fetch('/api/build',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(spec)});const data=await resp.json();if(!resp.ok)throw new Error(data.error);
-    model=data;spec={...data.spec};state.explosion=0;assemble(data);updateUI();setXray(state.xray);if(state.mode==='engineering')updateSupport();if(cadWorkbench.current)cadWorkbench.result(data,spec,null,state.online);if(state.mode==='cad')refreshCADPart();
+    await installModel(data);
     toast(`Đã dựng ${data.metrics.part_count} chi tiết · ${fmt(data.duration_ms/1000,2)} giây · revision ${data.revision.slice(0,8)}`);
   }catch(e){if(cadWorkbench.current)cadWorkbench.result(null,spec,e.message,state.online);$('build-state').textContent=e.message;$('build-state').classList.add('dirty');toast(e.message);}
   finally{state.building=false;$('build').disabled=false;$('build').querySelector('span').textContent='Dựng lại thiết kế';}
 }
 
+async function installModel(data,accepted=null){
+  if(physicsPanel.session){await physicsPanel.control('pause');state.physics.frame=null;physicsPanel.frame=null;physicsPanel.invalidate();}
+  model=data;spec={...data.spec};state.dirty=false;state.explosion=0;assemble(data);updateUI();setXray(state.xray);
+  if(state.mode==='engineering')updateSupport();if(cadWorkbench.current)cadWorkbench.result(data,spec,null,state.online);if(state.mode==='cad')refreshCADPart();
+  $('build-state').textContent='CAD '+data.revision+' đã dựng và kiểm.';$('build-state').classList.remove('dirty');
+  physicsPanel.acceptedProfile=accepted?.actuator_profile||null;physicsPanel.acceptedOperations=accepted?.operations||null;
+  if(accepted?.actuator_profile?.torque_limit_nm)$('physics-torque').value=accepted.actuator_profile.torque_limit_nm;
+  if(accepted?.operations){$('operations-enabled').checked=true;$('operations-temperature').value=accepted.operations.initial_motor_c;$('operations-soc').value=accepted.operations.initial_soc;$('operations-fault').value=accepted.operations.failed_joint;$('operations-health').value=accepted.operations.joint_health;}
+}
 async function showSource(tab=sourceTab){
   sourceTab=tab;$('source-modal').hidden=false;document.querySelectorAll('[data-source]').forEach(b=>b.classList.toggle('active',b.dataset.source===tab));
   if(tab==='yaml')$('source-content').textContent=Object.entries(spec).map(([k,v])=>`${k}: ${v}`).join('\n');
@@ -318,8 +385,6 @@ function bindUI(){
   $('fullscreen').addEventListener('click',()=>document.fullscreenElement?document.exitFullscreen():(params.has('record')?document.documentElement:stage).requestFullscreen());
   $('proof-trigger').addEventListener('click',()=>toggleProof($('proof-panel').hidden));$('close-proof').addEventListener('click',()=>toggleProof(false));
   $('explosion').addEventListener('input',e=>{state.explodeTarget=Number(e.target.value);$('explode-value').textContent=Math.round(state.explodeTarget*100)+'%';});
-  $('phase').addEventListener('input',e=>{state.playing=false;state.phase=Number(e.target.value);$('play').textContent='▶';});
-  $('play').addEventListener('click',()=>{state.playing=!state.playing;$('play').textContent=state.playing?'Ⅱ':'▶';});
   $('open-source').addEventListener('click',()=>showSource());$('close-source').addEventListener('click',()=>$('source-modal').hidden=true);$('source-modal').addEventListener('click',e=>{if(e.target===$('source-modal'))$('source-modal').hidden=true;});
   document.querySelectorAll('[data-source]').forEach(b=>b.addEventListener('click',()=>showSource(b.dataset.source)));
   $('download-spec').addEventListener('click',()=>download('forge-q4.yaml',Object.entries(spec).map(([k,v])=>`${k}: ${v}`).join('\n'),'text/yaml'));
@@ -349,10 +414,12 @@ const tourShots=[
   {title:'Từ thông số đến hình khối.',desc:'Đặc tả dẫn động 42 chi tiết CAD. Mô hình trên sân khấu được lấy trực tiếp từ BREP.',mode:'studio',view:'hero'},
   {title:'Đọc được từng cơ cấu.',desc:'Tách cấu trúc để thấy thân, pin, actuator và các tay chân. Chọn một chi tiết để xem số đo.',mode:'explode',view:'explode'},
   {title:'Nhìn vào bên trong.',desc:'Mặt cắt hiển thị làm lộ khoang pin và kết cấu rỗng. File STEP giữ nguyên hình khối.',mode:'studio',view:'side',section:true},
-  {title:'Khớp trở thành chuyển động.',desc:'Bốn cụm chân được dẫn động bằng một chu kỳ. Đây là động học minh họa, chưa phải đi thực tế.',mode:'motion',view:'hero'},
+  {title:'Bốn chân. Nhiều nhịp.',desc:'Cặp chân chéo luân phiên. Quỹ đạo và góc khớp được giải từ chiều dài CAD.',mode:'motion',view:'hero',motion:'trot'},
+  {title:'Một hệ khớp, nhiều động tác.',desc:'Vẫy chân với thân chuyển nhẹ sang phía các chân còn lại.',mode:'motion',view:'front',motion:'wave'},
+  {title:'Từ tư thế đến chu kỳ.',desc:'Thu chân, bật nhún và hạ xuống. Minh họa động học, chưa mô phỏng lực.',mode:'motion',view:'side',motion:'jump'},
   {title:'Hình đẹp cần bằng chứng.',desc:'Khối hợp lệ, công thức độc lập, STEP đọc lại và khe hở hình học. Thử đặc tả lỗi để thấy gate chặn.',mode:'engineering',view:'hero'},
 ];
-function startTour(){state.tour={start:performance.now(),shot:-1};$('tour').textContent='□ Dừng trình diễn';$('tour-caption').hidden=false;}
+function startTour(){if(state.physics.enabled)physicsPanel.activate(false);state.tour={start:performance.now(),shot:-1};$('tour').textContent='□ Dừng trình diễn';$('tour-caption').hidden=false;}
 function stopTour(){state.tour=null;$('tour').textContent='▷ Trình diễn';$('tour-caption').hidden=true;setSection(false);setMode('studio');setDimensions(false);}
-function updateTour(time){if(!state.tour)return;const elapsed=time-state.tour.start,shot=Math.floor(elapsed/6500);if(shot>=tourShots.length){stopTour();return;}if(shot!==state.tour.shot){const s=tourShots[shot];state.tour.shot=shot;setXray(false);setSection(false);setDimensions(false);setMode(s.mode);moveCamera(s.view);if(s.section)setSection(true);$('tour-number').textContent=`${shot+1} / ${tourShots.length}`;$('tour-title').textContent=s.title;$('tour-description').textContent=s.desc;}$('tour-progress').style.width=((elapsed%6500)/6500*100)+'%';}
+function updateTour(time){if(!state.tour)return;const elapsed=time-state.tour.start,shot=Math.floor(elapsed/6500);if(shot>=tourShots.length){stopTour();return;}if(shot!==state.tour.shot){const s=tourShots[shot];state.tour.shot=shot;setXray(false);setSection(false);setDimensions(false);setMode(s.mode);moveCamera(s.view);if(s.motion){state.playing=true;selectMotion(s.motion);}if(s.section)setSection(true);$('tour-number').textContent=`${shot+1} / ${tourShots.length}`;$('tour-title').textContent=s.title;$('tour-description').textContent=s.desc;}$('tour-progress').style.width=((elapsed%6500)/6500*100)+'%';}
 boot();

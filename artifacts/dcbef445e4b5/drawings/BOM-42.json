@@ -1,0 +1,1455 @@
+{
+  "revision": "dcbef445e4b5",
+  "parts": {
+    "frame": {
+      "name": "Khung chịu lực",
+      "role": "shell",
+      "count": 1,
+      "com_mm": [
+        -5.037022810386497,
+        -0.0001573921679940601,
+        -15.902442480820943
+      ],
+      "volume_mm3": 278825.84615241084,
+      "mass_kg": 0.7528297846115093,
+      "mass_basis": "V × mật độ giả định",
+      "valid": true,
+      "solids": 1,
+      "part_number": "Q4-101",
+      "group": "Kết cấu",
+      "bbox_mm": [
+        338.32136774324454,
+        180.0000002,
+        64.00000020000002
+      ],
+      "surface_mm2": 198824.49730983056,
+      "faces": 81,
+      "edges": 238,
+      "vertices": 150,
+      "parameter_keys": [
+        "body_length",
+        "body_width",
+        "body_height"
+      ],
+      "recipe": [
+        "Loft 3 tiết diện bo góc",
+        "Trừ khoang rỗng, thành 3 mm",
+        "Khoét lỗ vai Ø12 và hốc visor"
+      ],
+      "notes": [
+        "Vỏ đúc/gia công là phương án tham khảo",
+        "Chưa có draft angle, dung sai hoặc tính bền"
+      ],
+      "dimensions": [
+        [
+          "Thành danh nghĩa",
+          3
+        ],
+        [
+          "Lỗ vai Ø",
+          12
+        ],
+        [
+          "Vị trí vai X ±",
+          115.60000000000001
+        ]
+      ],
+      "step_url": "/artifacts/dcbef445e4b5/drawings/Q4-101.step"
+    },
+    "cover": {
+      "name": "Nắp thân",
+      "role": "carbon",
+      "count": 1,
+      "com_mm": [
+        0.9519442873226297,
+        1.529737670322806e-15,
+        -0.00826723258703659
+      ],
+      "volume_mm3": 148933.00152962963,
+      "mass_kg": 0.40211910413,
+      "mass_basis": "V × mật độ giả định",
+      "valid": true,
+      "solids": 1,
+      "part_number": "Q4-102",
+      "group": "Kết cấu",
+      "bbox_mm": [
+        323.00000020000004,
+        165.6000002,
+        3.0000002000000006
+      ],
+      "surface_mm2": 104123.64869035594,
+      "faces": 46,
+      "edges": 132,
+      "vertices": 88,
+      "parameter_keys": [
+        "body_length",
+        "body_width"
+      ],
+      "recipe": [
+        "Loft nắp 3 mm",
+        "4 lỗ Ø4.2 tại x ±0.4L, y ±0.34W",
+        "6 khe 3 × 0.22W xuyên nắp"
+      ],
+      "notes": [
+        "Cần xác nhận khoảng lắp nắp với khung",
+        "Finish graphite chỉ là hiển thị"
+      ],
+      "dimensions": [
+        [
+          "Độ dày",
+          3
+        ],
+        [
+          "Lỗ lắp 4 × Ø",
+          4.2
+        ],
+        [
+          "Rộng khe",
+          3
+        ]
+      ],
+      "step_url": "/artifacts/dcbef445e4b5/drawings/Q4-102.step"
+    },
+    "upper": {
+      "name": "Tay chân trên",
+      "role": "metal",
+      "count": 4,
+      "com_mm": [
+        7.015257763419733e-17,
+        0.0,
+        -55.0
+      ],
+      "volume_mm3": 29170.176606476485,
+      "mass_kg": 0.0787594768374865,
+      "mass_basis": "V × mật độ giả định",
+      "valid": true,
+      "solids": 1,
+      "part_number": "Q4-201",
+      "group": "Cơ cấu chân",
+      "bbox_mm": [
+        32.0,
+        7.0,
+        142.0
+      ],
+      "surface_mm2": 11017.875899185678,
+      "faces": 8,
+      "edges": 18,
+      "vertices": 12,
+      "parameter_keys": [
+        "upper_length",
+        "link_width",
+        "link_thickness",
+        "bore_diameter"
+      ],
+      "recipe": [
+        "Sketch capsule: hai cung và hai cạnh",
+        "Trừ 2 biên dạng lỗ đồng tâm",
+        "Extrude theo độ dày; lắp 4 bản"
+      ],
+      "notes": [
+        "Vành nhỏ nhất kiểm theo tay dưới",
+        "Chưa định nghĩa fit lỗ hoặc tải khớp"
+      ],
+      "dimensions": [
+        [
+          "Tâm–tâm",
+          110
+        ],
+        [
+          "Bề rộng",
+          32
+        ],
+        [
+          "2 lỗ Ø",
+          10
+        ],
+        [
+          "Độ dày",
+          7
+        ]
+      ],
+      "step_url": "/artifacts/dcbef445e4b5/drawings/Q4-201.step"
+    },
+    "lower": {
+      "name": "Tay chân dưới",
+      "role": "metal",
+      "count": 4,
+      "com_mm": [
+        4.605203509324979e-16,
+        -4.440892098500626e-16,
+        -70.0
+      ],
+      "volume_mm3": 29623.925411699347,
+      "mass_kg": 0.07998459861158824,
+      "mass_basis": "V × mật độ giả định",
+      "valid": true,
+      "solids": 1,
+      "part_number": "Q4-202",
+      "group": "Cơ cấu chân",
+      "bbox_mm": [
+        27.2,
+        7.0,
+        167.2
+      ],
+      "surface_mm2": 11461.960901803024,
+      "faces": 8,
+      "edges": 18,
+      "vertices": 12,
+      "parameter_keys": [
+        "lower_length",
+        "link_width",
+        "link_thickness",
+        "bore_diameter"
+      ],
+      "recipe": [
+        "Capsule rộng 0.85 × link_width",
+        "Trừ 2 lỗ xuyên tại hai tâm",
+        "Extrude; lệch mặt tay trên 3 mm"
+      ],
+      "notes": [
+        "Khe 3 mm kiểm tại 5 góc mẫu",
+        "Chưa quét va chạm toàn bộ vỏ"
+      ],
+      "dimensions": [
+        [
+          "Tâm–tâm",
+          140
+        ],
+        [
+          "Bề rộng = 0.85w",
+          27.2
+        ],
+        [
+          "2 lỗ Ø",
+          10
+        ],
+        [
+          "Độ dày",
+          7
+        ]
+      ],
+      "step_url": "/artifacts/dcbef445e4b5/drawings/Q4-202.step"
+    },
+    "motor": {
+      "name": "Actuator đại diện",
+      "role": "motor",
+      "count": 12,
+      "com_mm": [
+        -2.209296285510047e-15,
+        1.3127730288058167e-15,
+        0.8826937512790822
+      ],
+      "volume_mm3": 30977.95291527077,
+      "mass_kg": 0.18,
+      "mass_basis": "Khối lượng gán; chưa có datasheet",
+      "valid": true,
+      "solids": 1,
+      "part_number": "Q4-301",
+      "group": "Thiết bị đại diện",
+      "bbox_mm": [
+        48.0,
+        48.0,
+        20.0
+      ],
+      "surface_mm2": 7303.415077589032,
+      "faces": 15,
+      "edges": 31,
+      "vertices": 20,
+      "parameter_keys": [],
+      "recipe": [
+        "Trụ Ø48 × 16, chamfer 0.7",
+        "Bích Ø42 × 2, trục Ø14 × 2",
+        "6 lỗ Ø3.4 trên PCD Ø34"
+      ],
+      "notes": [
+        "Actuator đại diện, chưa chọn sản phẩm",
+        "Không mô hình rotor, stator, ổ bi hoặc gearbox"
+      ],
+      "dimensions": [
+        [
+          "Thân Ø / dày",
+          48
+        ],
+        [
+          "Dày thân",
+          16
+        ],
+        [
+          "Trục Ø",
+          14
+        ],
+        [
+          "Bích Ø",
+          42
+        ],
+        [
+          "6 lỗ Ø / PCD34",
+          3.4
+        ],
+        [
+          "Chamfer",
+          0.7
+        ]
+      ],
+      "step_url": "/artifacts/dcbef445e4b5/drawings/Q4-301.step"
+    },
+    "foot": {
+      "name": "Đệm bàn chân",
+      "role": "rubber",
+      "count": 4,
+      "com_mm": [
+        -2.309240542818732e-16,
+        3.592151955495806e-16,
+        -3.592151955495806e-16
+      ],
+      "volume_mm3": 17723.25611857856,
+      "mass_kg": 0.019495581730436414,
+      "mass_basis": "V × mật độ cao su giả định",
+      "valid": true,
+      "solids": 1,
+      "part_number": "Q4-401",
+      "group": "Tiếp xúc",
+      "bbox_mm": [
+        26.0,
+        24.0,
+        32.0
+      ],
+      "surface_mm2": 3562.548486898495,
+      "faces": 26,
+      "edges": 48,
+      "vertices": 24,
+      "parameter_keys": [],
+      "recipe": [
+        "Box 26 × 24 × 32 mm",
+        "Fillet toàn bộ cạnh R6",
+        "Lắp 4 đệm bàn chân"
+      ],
+      "notes": [
+        "Mật độ cao su 1100 kg/m³ giả định",
+        "Chưa thử ma sát, lão hóa hoặc tải"
+      ],
+      "dimensions": [
+        [
+          "X × Y × Z",
+          "26 × 24 × 32"
+        ],
+        [
+          "Bo cạnh R",
+          6
+        ]
+      ],
+      "step_url": "/artifacts/dcbef445e4b5/drawings/Q4-401.step"
+    },
+    "sensor": {
+      "name": "Giá cảm biến",
+      "role": "dark",
+      "count": 1,
+      "com_mm": [
+        0.0,
+        1.2202801680962224e-16,
+        -6.492198764780252e-16
+      ],
+      "volume_mm3": 37824.407165544086,
+      "mass_kg": 0.03820265123719953,
+      "mass_basis": "V × mật độ polymer giả định",
+      "valid": true,
+      "solids": 1,
+      "part_number": "Q4-501",
+      "group": "Thiết bị đại diện",
+      "bbox_mm": [
+        14.000000000000004,
+        118.80000000000001,
+        25.0
+      ],
+      "surface_mm2": 10317.21402964464,
+      "faces": 12,
+      "edges": 30,
+      "vertices": 20,
+      "parameter_keys": [
+        "body_width"
+      ],
+      "recipe": [
+        "Box 14 × 0.66W × 25 mm",
+        "Bo cạnh dọc X với R7",
+        "2 lỗ Ø12 tại y ±0.20W"
+      ],
+      "notes": [
+        "Giá cảm biến CAD, camera là đại diện",
+        "Chưa có PCB, đầu nối hoặc optical stack"
+      ],
+      "dimensions": [
+        [
+          "X × Y × Z",
+          "14 × 118.80 × 25"
+        ],
+        [
+          "2 hốc Ø",
+          12
+        ],
+        [
+          "Vị trí tâm Y ±",
+          36.0
+        ]
+      ],
+      "step_url": "/artifacts/dcbef445e4b5/drawings/Q4-501.step"
+    },
+    "lens": {
+      "name": "Ống kính đại diện",
+      "role": "glass",
+      "count": 2,
+      "com_mm": [
+        -4.984524018700094e-16,
+        3.9248931261101326e-16,
+        -9.969048037400189e-17
+      ],
+      "volume_mm3": 570.1990666265474,
+      "mass_kg": 0.012,
+      "mass_basis": "Khối lượng giả định",
+      "valid": true,
+      "solids": 1,
+      "part_number": "Q4-502",
+      "group": "Thiết bị đại diện",
+      "bbox_mm": [
+        11.0,
+        11.0,
+        6.0
+      ],
+      "surface_mm2": 397.4114706791088,
+      "faces": 3,
+      "edges": 3,
+      "vertices": 2,
+      "parameter_keys": [],
+      "recipe": [
+        "Trụ Ø11 × 6 mm",
+        "Đặt 2 bản trong giá cảm biến",
+        "Khối lượng gán 12 g / bản"
+      ],
+      "notes": [
+        "Không là thiết kế quang học",
+        "Chưa có focal length, FOV hoặc datasheet"
+      ],
+      "dimensions": [
+        [
+          "Trụ Ø",
+          11
+        ],
+        [
+          "Chiều dài",
+          6
+        ]
+      ],
+      "step_url": "/artifacts/dcbef445e4b5/drawings/Q4-502.step"
+    },
+    "battery": {
+      "name": "Pin đại diện",
+      "role": "battery",
+      "count": 1,
+      "com_mm": [
+        -1.2100105278706424e-15,
+        -6.024948686492825e-16,
+        -5.422453817843543e-16
+      ],
+      "volume_mm3": 724582.8629706213,
+      "mass_kg": 0.55,
+      "mass_basis": "Khối lượng gán; chưa có datasheet",
+      "valid": true,
+      "solids": 1,
+      "part_number": "Q4-601",
+      "group": "Thiết bị đại diện",
+      "bbox_mm": [
+        170.0,
+        118.80000000000001,
+        36.0
+      ],
+      "surface_mm2": 59502.541092257314,
+      "faces": 26,
+      "edges": 48,
+      "vertices": 24,
+      "parameter_keys": [
+        "body_length",
+        "body_width"
+      ],
+      "recipe": [
+        "Box 0.50L × 0.66W × 36 mm",
+        "Fillet R3",
+        "Đặt trong khoang thân"
+      ],
+      "notes": [
+        "Khối lượng pin gán, chưa có datasheet",
+        "Chưa mô hình cell, BMS, dây và tản nhiệt"
+      ],
+      "dimensions": [
+        [
+          "L × W × H",
+          "170.0 × 118.8 × 36"
+        ],
+        [
+          "Fillet R",
+          3
+        ]
+      ],
+      "step_url": "/artifacts/dcbef445e4b5/drawings/Q4-601.step"
+    },
+    "upper_fairing": {
+      "name": "Vỏ chân trên",
+      "role": "shell",
+      "count": 4,
+      "com_mm": [
+        -6.808836832267335,
+        -8.368894140029771e-09,
+        -45.38530017281662
+      ],
+      "volume_mm3": 57604.79422215739,
+      "mass_kg": 0.058180842164378965,
+      "mass_basis": "V × mật độ vỏ polymer giả định",
+      "valid": true,
+      "solids": 1,
+      "part_number": "Q4-203",
+      "group": "Vỏ chân",
+      "bbox_mm": [
+        48.17937340387805,
+        22.138742427018368,
+        146.0000002
+      ],
+      "surface_mm2": 22986.904180521648,
+      "faces": 13,
+      "edges": 33,
+      "vertices": 22,
+      "parameter_keys": [
+        "upper_length",
+        "link_width",
+        "link_thickness"
+      ],
+      "recipe": [
+        "Loft 3 ellipse với độ lệch -7 mm",
+        "Trừ thể tích tay chịu lực",
+        "Khoét hai vùng khớp Ø12"
+      ],
+      "notes": [
+        "Mật độ polymer 1010 kg/m³ là giả định",
+        "Chưa thiết kế gân, chốt hoặc khuôn"
+      ],
+      "dimensions": [
+        [
+          "Chiều dài tâm",
+          110
+        ],
+        [
+          "Lệch tiết diện X",
+          -7
+        ],
+        [
+          "Lỗ vùng khớp Ø",
+          12
+        ]
+      ],
+      "step_url": "/artifacts/dcbef445e4b5/drawings/Q4-203.step"
+    },
+    "lower_fairing": {
+      "name": "Vỏ chân dưới",
+      "role": "carbon",
+      "count": 4,
+      "com_mm": [
+        6.047879385712282,
+        -2.197913259259397e-06,
+        -48.0974784246895
+      ],
+      "volume_mm3": 39187.84908256697,
+      "mass_kg": 0.03957972757339265,
+      "mass_basis": "V × mật độ vỏ polymer giả định",
+      "valid": true,
+      "solids": 1,
+      "part_number": "Q4-204",
+      "group": "Vỏ chân",
+      "bbox_mm": [
+        34.35561158139316,
+        22.380642810591567,
+        152.0000002
+      ],
+      "surface_mm2": 17338.724562895524,
+      "faces": 10,
+      "edges": 24,
+      "vertices": 16,
+      "parameter_keys": [
+        "lower_length",
+        "link_width",
+        "link_thickness"
+      ],
+      "recipe": [
+        "Loft 3 ellipse; lệch +7 mm",
+        "Trừ tay dưới; scale vỏ 0.92",
+        "Khoét hai vùng khớp Ø12"
+      ],
+      "notes": [
+        "Chưa kiểm độ dày vỏ tại mọi điểm",
+        "Chưa có phân khuôn và dung sai"
+      ],
+      "dimensions": [
+        [
+          "Chiều dài tâm",
+          140
+        ],
+        [
+          "Lệch tiết diện X",
+          7
+        ],
+        [
+          "Scale vỏ",
+          0.92
+        ],
+        [
+          "Lỗ vùng khớp Ø",
+          12
+        ]
+      ],
+      "step_url": "/artifacts/dcbef445e4b5/drawings/Q4-204.step"
+    },
+    "shoulder": {
+      "name": "Vỏ vai",
+      "role": "shell",
+      "count": 4,
+      "com_mm": [
+        -1.3838248554337723e-05,
+        0.00038719982886775407,
+        -10.83343700727822
+      ],
+      "volume_mm3": 54786.90970217752,
+      "mass_kg": 0.0553347787991993,
+      "mass_basis": "V × mật độ vỏ polymer giả định",
+      "valid": true,
+      "solids": 1,
+      "part_number": "Q4-205",
+      "group": "Vỏ chân",
+      "bbox_mm": [
+        64.65701552353704,
+        72.17204944461795,
+        40.0000002
+      ],
+      "surface_mm2": 15992.971912485958,
+      "faces": 5,
+      "edges": 12,
+      "vertices": 8,
+      "parameter_keys": [],
+      "recipe": [
+        "Loft ellipse tại z -33/-13/+7 mm",
+        "Trừ lòng trụ Ø49 xuyên 80 mm",
+        "Đặt 4 bản tại vị trí vai"
+      ],
+      "notes": [
+        "Vỏ polymer theo mật độ giả định",
+        "Chưa có giao diện vít giữ vỏ"
+      ],
+      "dimensions": [
+        [
+          "Lòng Ø",
+          49
+        ],
+        [
+          "Z ba tiết diện",
+          "-33 / -13 / 7"
+        ]
+      ],
+      "step_url": "/artifacts/dcbef445e4b5/drawings/Q4-205.step"
+    }
+  },
+  "instances": [
+    {
+      "part": "frame",
+      "id": "chassis",
+      "position_mm": [
+        0,
+        0,
+        228.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        0
+      ],
+      "explode_mm": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "part": "cover",
+      "id": "top_cover",
+      "position_mm": [
+        0,
+        0,
+        261.96961416563346
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        0
+      ],
+      "explode_mm": [
+        0,
+        0,
+        115
+      ]
+    },
+    {
+      "part": "battery",
+      "id": "battery",
+      "position_mm": [
+        -27.2,
+        0,
+        231.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        0
+      ],
+      "explode_mm": [
+        -60,
+        0,
+        75
+      ]
+    },
+    {
+      "part": "sensor",
+      "id": "sensor_front",
+      "position_mm": [
+        159.79999999999998,
+        0,
+        230.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        0
+      ],
+      "explode_mm": [
+        90,
+        0,
+        0
+      ]
+    },
+    {
+      "part": "lens",
+      "id": "camera_0",
+      "position_mm": [
+        167.79999999999998,
+        -36.0,
+        230.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        90,
+        0
+      ],
+      "explode_mm": [
+        135,
+        0,
+        0
+      ]
+    },
+    {
+      "part": "lens",
+      "id": "camera_1",
+      "position_mm": [
+        167.79999999999998,
+        36.0,
+        230.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        90,
+        0
+      ],
+      "explode_mm": [
+        135,
+        0,
+        0
+      ]
+    },
+    {
+      "part": "motor",
+      "id": "rear_right_roll",
+      "position_mm": [
+        -115.60000000000001,
+        -92.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        -90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        0,
+        -75,
+        0
+      ]
+    },
+    {
+      "part": "shoulder",
+      "id": "rear_right_shoulder",
+      "position_mm": [
+        -115.60000000000001,
+        -92.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        -90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        0,
+        -85,
+        15
+      ]
+    },
+    {
+      "part": "motor",
+      "id": "rear_right_hip",
+      "position_mm": [
+        -115.60000000000001,
+        -126.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        -90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        -12,
+        -110,
+        0
+      ]
+    },
+    {
+      "part": "upper",
+      "id": "rear_right_upper",
+      "position_mm": [
+        -115.60000000000001,
+        -118.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        -35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        0,
+        -120,
+        -25
+      ]
+    },
+    {
+      "part": "upper_fairing",
+      "id": "rear_right_upper_fairing",
+      "position_mm": [
+        -115.60000000000001,
+        -118.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        -35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        0,
+        -150,
+        -10
+      ]
+    },
+    {
+      "part": "motor",
+      "id": "rear_right_knee",
+      "position_mm": [
+        -51.68613234089645,
+        -126.0,
+        130.94298393275471
+      ],
+      "rotation_deg": [
+        -90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        -20,
+        -160,
+        -30
+      ]
+    },
+    {
+      "part": "lower",
+      "id": "rear_right_lower",
+      "position_mm": [
+        -51.68613234089645,
+        -128.0,
+        130.94298393275471
+      ],
+      "rotation_deg": [
+        0,
+        35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        -35,
+        -175,
+        -65
+      ]
+    },
+    {
+      "part": "lower_fairing",
+      "id": "rear_right_lower_fairing",
+      "position_mm": [
+        -51.68613234089645,
+        -128.0,
+        130.94298393275471
+      ],
+      "rotation_deg": [
+        0,
+        35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        -35,
+        -205,
+        -45
+      ]
+    },
+    {
+      "part": "foot",
+      "id": "rear_right_foot",
+      "position_mm": [
+        -133.03105481611917,
+        -128.0,
+        16.99999999999997
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        0
+      ],
+      "explode_mm": [
+        -45,
+        -195,
+        -70
+      ]
+    },
+    {
+      "part": "motor",
+      "id": "rear_left_roll",
+      "position_mm": [
+        -115.60000000000001,
+        92.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        0,
+        75,
+        0
+      ]
+    },
+    {
+      "part": "shoulder",
+      "id": "rear_left_shoulder",
+      "position_mm": [
+        -115.60000000000001,
+        92.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        0,
+        85,
+        15
+      ]
+    },
+    {
+      "part": "motor",
+      "id": "rear_left_hip",
+      "position_mm": [
+        -115.60000000000001,
+        126.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        -12,
+        110,
+        0
+      ]
+    },
+    {
+      "part": "upper",
+      "id": "rear_left_upper",
+      "position_mm": [
+        -115.60000000000001,
+        118.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        -35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        0,
+        120,
+        -25
+      ]
+    },
+    {
+      "part": "upper_fairing",
+      "id": "rear_left_upper_fairing",
+      "position_mm": [
+        -115.60000000000001,
+        118.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        -35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        0,
+        150,
+        -10
+      ]
+    },
+    {
+      "part": "motor",
+      "id": "rear_left_knee",
+      "position_mm": [
+        -51.68613234089645,
+        126.0,
+        130.94298393275471
+      ],
+      "rotation_deg": [
+        90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        -20,
+        160,
+        -30
+      ]
+    },
+    {
+      "part": "lower",
+      "id": "rear_left_lower",
+      "position_mm": [
+        -51.68613234089645,
+        128.0,
+        130.94298393275471
+      ],
+      "rotation_deg": [
+        0,
+        35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        -35,
+        175,
+        -65
+      ]
+    },
+    {
+      "part": "lower_fairing",
+      "id": "rear_left_lower_fairing",
+      "position_mm": [
+        -51.68613234089645,
+        128.0,
+        130.94298393275471
+      ],
+      "rotation_deg": [
+        0,
+        35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        -35,
+        205,
+        -45
+      ]
+    },
+    {
+      "part": "foot",
+      "id": "rear_left_foot",
+      "position_mm": [
+        -133.03105481611917,
+        128.0,
+        16.99999999999997
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        0
+      ],
+      "explode_mm": [
+        -45,
+        195,
+        -70
+      ]
+    },
+    {
+      "part": "motor",
+      "id": "front_right_roll",
+      "position_mm": [
+        115.60000000000001,
+        -92.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        -90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        0,
+        -75,
+        0
+      ]
+    },
+    {
+      "part": "shoulder",
+      "id": "front_right_shoulder",
+      "position_mm": [
+        115.60000000000001,
+        -92.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        -90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        0,
+        -85,
+        15
+      ]
+    },
+    {
+      "part": "motor",
+      "id": "front_right_hip",
+      "position_mm": [
+        115.60000000000001,
+        -126.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        -90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        12,
+        -110,
+        0
+      ]
+    },
+    {
+      "part": "upper",
+      "id": "front_right_upper",
+      "position_mm": [
+        115.60000000000001,
+        -118.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        0,
+        -120,
+        -25
+      ]
+    },
+    {
+      "part": "upper_fairing",
+      "id": "front_right_upper_fairing",
+      "position_mm": [
+        115.60000000000001,
+        -118.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        0,
+        -150,
+        -10
+      ]
+    },
+    {
+      "part": "motor",
+      "id": "front_right_knee",
+      "position_mm": [
+        51.68613234089645,
+        -126.0,
+        130.94298393275471
+      ],
+      "rotation_deg": [
+        -90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        20,
+        -160,
+        -30
+      ]
+    },
+    {
+      "part": "lower",
+      "id": "front_right_lower",
+      "position_mm": [
+        51.68613234089645,
+        -128.0,
+        130.94298393275471
+      ],
+      "rotation_deg": [
+        0,
+        -35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        35,
+        -175,
+        -65
+      ]
+    },
+    {
+      "part": "lower_fairing",
+      "id": "front_right_lower_fairing",
+      "position_mm": [
+        51.68613234089645,
+        -128.0,
+        130.94298393275471
+      ],
+      "rotation_deg": [
+        0,
+        -35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        35,
+        -205,
+        -45
+      ]
+    },
+    {
+      "part": "foot",
+      "id": "front_right_foot",
+      "position_mm": [
+        133.03105481611917,
+        -128.0,
+        16.99999999999997
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        0
+      ],
+      "explode_mm": [
+        45,
+        -195,
+        -70
+      ]
+    },
+    {
+      "part": "motor",
+      "id": "front_left_roll",
+      "position_mm": [
+        115.60000000000001,
+        92.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        0,
+        75,
+        0
+      ]
+    },
+    {
+      "part": "shoulder",
+      "id": "front_left_shoulder",
+      "position_mm": [
+        115.60000000000001,
+        92.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        0,
+        85,
+        15
+      ]
+    },
+    {
+      "part": "motor",
+      "id": "front_left_hip",
+      "position_mm": [
+        115.60000000000001,
+        126.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        12,
+        110,
+        0
+      ]
+    },
+    {
+      "part": "upper",
+      "id": "front_left_upper",
+      "position_mm": [
+        115.60000000000001,
+        118.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        0,
+        120,
+        -25
+      ]
+    },
+    {
+      "part": "upper_fairing",
+      "id": "front_left_upper_fairing",
+      "position_mm": [
+        115.60000000000001,
+        118.0,
+        220.46961416563346
+      ],
+      "rotation_deg": [
+        0,
+        35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        0,
+        150,
+        -10
+      ]
+    },
+    {
+      "part": "motor",
+      "id": "front_left_knee",
+      "position_mm": [
+        51.68613234089645,
+        126.0,
+        130.94298393275471
+      ],
+      "rotation_deg": [
+        90,
+        0,
+        0
+      ],
+      "explode_mm": [
+        20,
+        160,
+        -30
+      ]
+    },
+    {
+      "part": "lower",
+      "id": "front_left_lower",
+      "position_mm": [
+        51.68613234089645,
+        128.0,
+        130.94298393275471
+      ],
+      "rotation_deg": [
+        0,
+        -35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        35,
+        175,
+        -65
+      ]
+    },
+    {
+      "part": "lower_fairing",
+      "id": "front_left_lower_fairing",
+      "position_mm": [
+        51.68613234089645,
+        128.0,
+        130.94298393275471
+      ],
+      "rotation_deg": [
+        0,
+        -35.52338329811104,
+        0
+      ],
+      "explode_mm": [
+        35,
+        205,
+        -45
+      ]
+    },
+    {
+      "part": "foot",
+      "id": "front_left_foot",
+      "position_mm": [
+        133.03105481611917,
+        128.0,
+        16.99999999999997
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        0
+      ],
+      "explode_mm": [
+        45,
+        195,
+        -70
+      ]
+    }
+  ]
+}

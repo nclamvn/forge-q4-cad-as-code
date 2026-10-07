@@ -11,12 +11,18 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE_FILES = (
     '.gitignore', '.gitattributes', 'README.md', 'DESIGN.md', 'Start.command', 'kernel.py',
     'technical.py', 'server.py', 'launch.py', 'spec.yaml', 'requirements.txt',
-    'requirements-test.txt', 'package.json', 'package-lock.json',
+    'requirements-test.txt', 'requirements-simulation.txt', 'package.json', 'package-lock.json',
 )
 REPORT_FILES = (
     'reports/kernel-tests.json', 'reports/api-tests.json',
     'reports/monochrome/dossier-tests.json',
     'reports/monochrome/dossier-browser.json',
+    'reports/motion/kinematics.json', 'reports/motion/browser-review.json',
+    'reports/robotics/model-tests.json', 'reports/robotics/qualification.json',
+    'reports/robotics/api-tests.json', 'reports/robotics/browser-review.json',
+    'reports/robotics/operations-tests.json', 'reports/robotics/engineering-tests.json',
+    'reports/robotics/engineering-api-tests.json', 'reports/robotics/engineering-example.json',
+    'reports/robotics/engineering-browser.json',
 )
 
 
@@ -54,9 +60,43 @@ def package():
         raise ValueError('Run API tests for this snapshot before release')
     if dossier.get('status') != 'passed' or dossier['revision'] != revision:
         raise ValueError('Run dossier tests for this snapshot before release')
+    motion = json.loads((ROOT / 'reports/motion/kinematics.json').read_text())
+    if motion.get('status') != 'passed' or motion.get('cad_revision') != revision:
+        raise ValueError('Run motion tests for this snapshot before release')
+    for name, sha in motion['source_sha256'].items():
+        if hashlib.sha256((ROOT / 'web' / name).read_bytes()).hexdigest() != sha:
+            raise ValueError('Motion source changed; rerun npm run test:motion')
+    robotics=json.loads((ROOT/'reports/robotics/model-tests.json').read_text())
+    physics_api=json.loads((ROOT/'reports/robotics/api-tests.json').read_text())
+    qualification=json.loads((ROOT/'reports/robotics/qualification.json').read_text())
+    for report in (robotics,physics_api):
+        if report.get('status')!='passed' or report.get('cad_revision')!=revision:
+            raise ValueError('Run robotics and physics API tests for this snapshot')
+        for name,sha in report['source_sha256'].items():
+            if hashlib.sha256((ROOT/name).read_bytes()).hexdigest()!=sha:
+                raise ValueError('Robotics source changed: '+name)
+    for name in ['operations-tests','engineering-tests','engineering-api-tests']:
+        report=json.loads((ROOT/f'reports/robotics/{name}.json').read_text())
+        if report.get('status')!='passed' or report.get('cad_revision')!=revision:
+            raise ValueError('Run engineering / operations checks for the current snapshot')
+        for path,sha in report['source_sha256'].items():
+            if hashlib.sha256((ROOT/path).read_bytes()).hexdigest()!=sha:
+                raise ValueError('Engineering / operating source changed: '+path)
+    if qualification['model_revision']!=robotics['model_revision']:
+        raise ValueError('Qualification model does not match the tested model')
+    if physics_api['model_revision']!=robotics['model_revision']:
+        raise ValueError('Physics API and numerical tests use different models')
+    robot_zip=ROOT/'FORGE-Q4-Robotics.zip'
+    with zipfile.ZipFile(robot_zip) as archive:
+        robot_manifest=json.loads(archive.read('forge_q4_description/MANIFEST.json'))
+        if robot_manifest['model_revision']!=robotics['model_revision']:
+            raise ValueError('Rebuild the default robotics download')
+        for name,sha in robot_manifest['files'].items():
+            if hashlib.sha256(archive.read('forge_q4_description/'+name)).hexdigest()!=sha:
+                raise ValueError('Robotics download hash mismatch: '+name)
 
-    paths = {ROOT / name for name in (*SOURCE_FILES, *REPORT_FILES, *downloads, 'FORGE-Q4.html')}
-    for folder in ('web', 'tools', 'tests', 'docs', f'artifacts/{revision}'):
+    paths = {ROOT / name for name in (*SOURCE_FILES, *REPORT_FILES, *downloads, 'FORGE-Q4.html', 'FORGE-Q4-Robotics.zip')}
+    for folder in ('web', 'tools', 'tests', 'docs', 'robotics', f'artifacts/{revision}'):
         paths.update((ROOT / folder).rglob('*'))
     files = sorted(p for p in paths if p.is_file() and not p.is_symlink()
                    and '__pycache__' not in p.parts and p.suffix not in ('.pyc', '.pyo')
@@ -67,6 +107,7 @@ def package():
     manifest = {
         'edition': 'public-cad-as-code',
         'cad_revision': revision,
+        'robot_model_revision':robotics['model_revision'],
         'drawing_generator': model['documentation']['generator_hash'],
         'files': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files},
     }

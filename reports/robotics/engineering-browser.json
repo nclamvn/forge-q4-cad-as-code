@@ -1,0 +1,42 @@
+{
+  "status": "passed_with_limitations",
+  "reviewed_at": "2026-10-07T10:22:08.303583+00:00",
+  "cad_revision": "dcbef445e4b5",
+  "model_revision": "a56c1f9f251b8e06",
+  "experiment_id": "ae205bf2b6ac480fb5d5cbf7c029db9d",
+  "candidate_revision": "ce45351f06ae",
+  "handoff_url": "http://127.0.0.1:8767/?workspace=ai&backend=webgl&experiment=ae205bf2b6ac480fb5d5cbf7c029db9d",
+  "checks": [
+    "JSON example validated; CAD diff displayed link_thickness 7 to 6.",
+    "Started real asynchronous job from browser; completed 10 trials in five matched conditions, both CAD revisions and threshold/assumption text visible.",
+    "Candidate applied to current CAD: revision ce45351f06ae, loaded mass 6.838 kg. Undo restored dcbef445e4b5 and 6.902 kg.",
+    "Comparison shows measured tracking, torque, body height, slip and separately labelled estimated energy/temperature; no live LLM attribution.",
+    "Operating model enabled in live physics; at 98.67 simulation seconds, 227 mm height, four contacts, 25.3 C estimated motor temperature and 13.8 W estimated power.",
+    "Initial temperature 95 C causes a real zero-torque thermal cutoff; robot drops to 93 mm and drive remains off after cooling below 90 C.",
+    "Mobile JSON editing and diff work at 390 px with scrollWidth equal to clientWidth. Operating HUD was subsequently reduced to three primary indicators to preserve robot space.",
+    "Standalone HTML explicitly disables context generation, candidate compilation and experiments; Start.command requirement visible.",
+    "Final clean WebGL2 browser tab loads persisted experiment by URL, boot overlay hidden, report completed, no warning/error logs.",
+    "Final UI kept open as a deliverable; temporary mobile viewport reset; temporary standalone and old graphics tab closed."
+  ],
+  "limitations": [
+    "No API LLM call, ROS 2 runtime, physical robot or electrical/thermal calibration was tested.",
+    "After many graphics reloads, the IAB mobile physics view slowed to 3–6 fps and CDP control timed out; a fresh desktop tab recovered. Sustained mobile real-time performance is not qualified.",
+    "Final reduced mobile operating HUD was read through accessibility but final robot screenshot/control recapture timed out; the prior mobile image is not released.",
+    "Browser-side saved-download file paths were not verified; backend JSON exchange, actual package HTTP bytes and hash integrity were checked independently.",
+    "Screenshots record concrete experiments with explicit assumptions, not hardware operation or general gait qualification."
+  ],
+  "screenshots": {
+    "comparison": "docs/media/ai-engineering-comparison.png",
+    "mobile_json_diff": "docs/media/ai-engineering-mobile.png",
+    "operations": "docs/media/operations-workbench.png",
+    "thermal_cutoff": "docs/media/operations-thermal-cutoff.png"
+  },
+  "source_sha256": {
+    "web/app.js": "0ef3a6b0e75ffb771a2ca4caef62197b387e04bc719db1883eab5e95d04ae787",
+    "web/index.html": "d5ea68bb733b384f1a7fa98e6ba4791a9d45785ba99a06bc56c5e94560c9a5e2",
+    "web/style.css": "036918d5449f6c36e8fb6f446030250f28370fe6a74d87b5ea4cd420534cf23b",
+    "web/engineering-panel.js": "eb4ada1e7fa8db8a40a7b0256cadea01ed8f6cd3c283bd8dd5c01e36d49a9675",
+    "web/physics-panel.js": "99294f258255bc3079922d0cdf5e441dcb3093dc4077e342bf55346a6eae74b8",
+    "web/physics-visuals.js": "9edbd2c7e859dce8c155c1e78770abffe65aa23e60e689f7fead4f7031fea6d3"
+  }
+}

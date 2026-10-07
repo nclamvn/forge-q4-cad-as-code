@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "cad_revision": "dcbef445e4b5",
+  "model_revision": "a56c1f9f251b8e06",
+  "checks": [
+    {
+      "check": "Actual MuJoCo force cutoff drops body; estimates integrate solved actuation; pause freezes; disabled plant unchanged",
+      "passed": true,
+      "normal_height_m": 0.22825043394204106,
+      "hot_height_m": 0.0948574104042261,
+      "hot_max_torque_nm": 1e-09
+    },
+    {
+      "check": "Independent I\u00b2R, thermal RC, positive mechanical power and battery energy integrals",
+      "passed": true,
+      "expected_power_w": 54.01923076923077
+    },
+    {
+      "check": "Speed envelope, thermal derating, single-joint health, latched thermal/battery cutoff",
+      "passed": true
+    },
+    {
+      "check": "Signed support projection independent square oracle; degenerate cases; strict finite inputs",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "robotics/operations.py": "842b3a1fbe518a7a253eecf1cd498ac120e20fb789ca2a55dad8d82c4f52c650",
+    "robotics/simulation.py": "8cd4a099796486c7e0614c06031f9d385b04558787d4d9d1f9b1e082ffb83550",
+    "tests/operations_test.py": "f5ebe0ddfb6c1dfa1747598963f9809022ee25c680fd1efe51f419e1ed11f8d8"
+  },
+  "calibrated": false,
+  "hardware_verified": false
+}
