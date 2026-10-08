@@ -1,0 +1,4086 @@
+{
+  "format": "forge-feature-reference-scenarios-v1",
+  "provenance": "engineer-authored software fixtures, NOT external LLM trials",
+  "cases": [
+    {
+      "group": "new_structure",
+      "name": "flat plate",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "flat plate",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          }
+        ],
+        "result": "mounting_plate"
+      }
+    },
+    {
+      "group": "new_structure",
+      "name": "rounded plate",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "rounded plate",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "edge_finish",
+            "op": "fillet",
+            "source": "mounting_plate",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": "Z",
+              "at": null
+            },
+            "radius": 3
+          }
+        ],
+        "result": "edge_finish"
+      }
+    },
+    {
+      "group": "new_structure",
+      "name": "side cradle",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "side cradle",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "edge_finish",
+            "op": "fillet",
+            "source": "mounting_plate",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": "Z",
+              "at": null
+            },
+            "radius": 3
+          },
+          {
+            "id": "rib_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              "thickness"
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "rib_width",
+              "height": "rib_length"
+            }
+          },
+          {
+            "id": "rib",
+            "op": "extrude",
+            "sketch": "rib_profile",
+            "amount": "rib_height"
+          },
+          {
+            "id": "rib_finish",
+            "op": "chamfer",
+            "source": "rib",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": null,
+              "at": {
+                "axis": "Z",
+                "value": "thickness+rib_height"
+              }
+            },
+            "length": 0.5
+          },
+          {
+            "id": "side_ribs",
+            "op": "pattern",
+            "source": "rib_finish",
+            "translations": [
+              [
+                "-width/2+3.5",
+                0,
+                0
+              ],
+              [
+                "width/2-3.5",
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "cradle",
+            "op": "boolean",
+            "base": "edge_finish",
+            "tool": "side_ribs",
+            "mode": "add"
+          }
+        ],
+        "result": "cradle"
+      }
+    },
+    {
+      "group": "new_structure",
+      "name": "one back wall",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "one back wall",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "wall_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              32,
+              4
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": 90,
+              "height": 3
+            }
+          },
+          {
+            "id": "wall",
+            "op": "extrude",
+            "sketch": "wall_profile",
+            "amount": 12
+          },
+          {
+            "id": "wall_union",
+            "op": "boolean",
+            "base": "mounting_plate",
+            "tool": "wall",
+            "mode": "add"
+          }
+        ],
+        "result": "wall_union"
+      }
+    },
+    {
+      "group": "new_structure",
+      "name": "XZ sketch extrusion",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "XZ sketch extrusion",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "wall_profile",
+            "op": "sketch",
+            "plane": "XZ",
+            "origin": [
+              0,
+              33.5,
+              11
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": 90,
+              "height": 14
+            }
+          },
+          {
+            "id": "wall",
+            "op": "extrude",
+            "sketch": "wall_profile",
+            "amount": 3
+          },
+          {
+            "id": "wall_union",
+            "op": "boolean",
+            "base": "mounting_plate",
+            "tool": "wall",
+            "mode": "add"
+          }
+        ],
+        "result": "wall_union"
+      }
+    },
+    {
+      "group": "new_structure",
+      "name": "one side wall",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "one side wall",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "wall_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              -42,
+              0,
+              4
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": 3,
+              "height": 28
+            }
+          },
+          {
+            "id": "wall",
+            "op": "extrude",
+            "sketch": "wall_profile",
+            "amount": 12
+          },
+          {
+            "id": "wall_union",
+            "op": "boolean",
+            "base": "mounting_plate",
+            "tool": "wall",
+            "mode": "add"
+          }
+        ],
+        "result": "wall_union"
+      }
+    },
+    {
+      "group": "new_structure",
+      "name": "circular inspection window",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "circular inspection window",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "window_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 12
+            }
+          },
+          {
+            "id": "window_tool",
+            "op": "extrude",
+            "sketch": "window_profile",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "window_cut",
+            "op": "boolean",
+            "base": "mounting_plate",
+            "tool": "window_tool",
+            "mode": "cut"
+          }
+        ],
+        "result": "window_cut"
+      }
+    },
+    {
+      "group": "new_structure",
+      "name": "polygon inspection window",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "polygon inspection window",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "window_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "polygon",
+              "points": [
+                [
+                  -8,
+                  -6
+                ],
+                [
+                  8,
+                  -6
+                ],
+                [
+                  0,
+                  8
+                ]
+              ]
+            }
+          },
+          {
+            "id": "window_tool",
+            "op": "extrude",
+            "sketch": "window_profile",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "window_cut",
+            "op": "boolean",
+            "base": "mounting_plate",
+            "tool": "window_tool",
+            "mode": "cut"
+          }
+        ],
+        "result": "window_cut"
+      }
+    },
+    {
+      "group": "new_structure",
+      "name": "cable slot",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "cable slot",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "window_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              24,
+              -1
+            ],
+            "profile": {
+              "kind": "slot",
+              "length": 24,
+              "width": 8
+            }
+          },
+          {
+            "id": "window_tool",
+            "op": "extrude",
+            "sketch": "window_profile",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "window_cut",
+            "op": "boolean",
+            "base": "mounting_plate",
+            "tool": "window_tool",
+            "mode": "cut"
+          }
+        ],
+        "result": "window_cut"
+      }
+    },
+    {
+      "group": "new_structure",
+      "name": "octagonal sketch plate",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "octagonal sketch plate",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "polygon",
+              "points": [
+                [
+                  -45,
+                  -30
+                ],
+                [
+                  -40,
+                  -35
+                ],
+                [
+                  40,
+                  -35
+                ],
+                [
+                  45,
+                  -30
+                ],
+                [
+                  45,
+                  30
+                ],
+                [
+                  40,
+                  35
+                ],
+                [
+                  -40,
+                  35
+                ],
+                [
+                  -45,
+                  30
+                ]
+              ]
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          }
+        ],
+        "result": "mounting_plate"
+      }
+    },
+    {
+      "group": "edit",
+      "name": "width=94",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "width=94",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 94.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "edge_finish",
+            "op": "fillet",
+            "source": "mounting_plate",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": "Z",
+              "at": null
+            },
+            "radius": 3
+          },
+          {
+            "id": "rib_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              "thickness"
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "rib_width",
+              "height": "rib_length"
+            }
+          },
+          {
+            "id": "rib",
+            "op": "extrude",
+            "sketch": "rib_profile",
+            "amount": "rib_height"
+          },
+          {
+            "id": "rib_finish",
+            "op": "chamfer",
+            "source": "rib",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": null,
+              "at": {
+                "axis": "Z",
+                "value": "thickness+rib_height"
+              }
+            },
+            "length": 0.5
+          },
+          {
+            "id": "side_ribs",
+            "op": "pattern",
+            "source": "rib_finish",
+            "translations": [
+              [
+                "-width/2+3.5",
+                0,
+                0
+              ],
+              [
+                "width/2-3.5",
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "cradle",
+            "op": "boolean",
+            "base": "edge_finish",
+            "tool": "side_ribs",
+            "mode": "add"
+          }
+        ],
+        "result": "cradle"
+      }
+    },
+    {
+      "group": "edit",
+      "name": "length=72",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "length=72",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 72.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "edge_finish",
+            "op": "fillet",
+            "source": "mounting_plate",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": "Z",
+              "at": null
+            },
+            "radius": 3
+          },
+          {
+            "id": "rib_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              "thickness"
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "rib_width",
+              "height": "rib_length"
+            }
+          },
+          {
+            "id": "rib",
+            "op": "extrude",
+            "sketch": "rib_profile",
+            "amount": "rib_height"
+          },
+          {
+            "id": "rib_finish",
+            "op": "chamfer",
+            "source": "rib",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": null,
+              "at": {
+                "axis": "Z",
+                "value": "thickness+rib_height"
+              }
+            },
+            "length": 0.5
+          },
+          {
+            "id": "side_ribs",
+            "op": "pattern",
+            "source": "rib_finish",
+            "translations": [
+              [
+                "-width/2+3.5",
+                0,
+                0
+              ],
+              [
+                "width/2-3.5",
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "cradle",
+            "op": "boolean",
+            "base": "edge_finish",
+            "tool": "side_ribs",
+            "mode": "add"
+          }
+        ],
+        "result": "cradle"
+      }
+    },
+    {
+      "group": "edit",
+      "name": "sensor_shift_x=-12",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "sensor_shift_x=-12",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": -12.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "edge_finish",
+            "op": "fillet",
+            "source": "mounting_plate",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": "Z",
+              "at": null
+            },
+            "radius": 3
+          },
+          {
+            "id": "rib_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              "thickness"
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "rib_width",
+              "height": "rib_length"
+            }
+          },
+          {
+            "id": "rib",
+            "op": "extrude",
+            "sketch": "rib_profile",
+            "amount": "rib_height"
+          },
+          {
+            "id": "rib_finish",
+            "op": "chamfer",
+            "source": "rib",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": null,
+              "at": {
+                "axis": "Z",
+                "value": "thickness+rib_height"
+              }
+            },
+            "length": 0.5
+          },
+          {
+            "id": "side_ribs",
+            "op": "pattern",
+            "source": "rib_finish",
+            "translations": [
+              [
+                "-width/2+3.5",
+                0,
+                0
+              ],
+              [
+                "width/2-3.5",
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "cradle",
+            "op": "boolean",
+            "base": "edge_finish",
+            "tool": "side_ribs",
+            "mode": "add"
+          }
+        ],
+        "result": "cradle"
+      }
+    },
+    {
+      "group": "edit",
+      "name": "sensor_shift_x=12",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "sensor_shift_x=12",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 12.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "edge_finish",
+            "op": "fillet",
+            "source": "mounting_plate",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": "Z",
+              "at": null
+            },
+            "radius": 3
+          },
+          {
+            "id": "rib_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              "thickness"
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "rib_width",
+              "height": "rib_length"
+            }
+          },
+          {
+            "id": "rib",
+            "op": "extrude",
+            "sketch": "rib_profile",
+            "amount": "rib_height"
+          },
+          {
+            "id": "rib_finish",
+            "op": "chamfer",
+            "source": "rib",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": null,
+              "at": {
+                "axis": "Z",
+                "value": "thickness+rib_height"
+              }
+            },
+            "length": 0.5
+          },
+          {
+            "id": "side_ribs",
+            "op": "pattern",
+            "source": "rib_finish",
+            "translations": [
+              [
+                "-width/2+3.5",
+                0,
+                0
+              ],
+              [
+                "width/2-3.5",
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "cradle",
+            "op": "boolean",
+            "base": "edge_finish",
+            "tool": "side_ribs",
+            "mode": "add"
+          }
+        ],
+        "result": "cradle"
+      }
+    },
+    {
+      "group": "edit",
+      "name": "sensor_shift_y=5",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "sensor_shift_y=5",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 5.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "edge_finish",
+            "op": "fillet",
+            "source": "mounting_plate",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": "Z",
+              "at": null
+            },
+            "radius": 3
+          },
+          {
+            "id": "rib_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              "thickness"
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "rib_width",
+              "height": "rib_length"
+            }
+          },
+          {
+            "id": "rib",
+            "op": "extrude",
+            "sketch": "rib_profile",
+            "amount": "rib_height"
+          },
+          {
+            "id": "rib_finish",
+            "op": "chamfer",
+            "source": "rib",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": null,
+              "at": {
+                "axis": "Z",
+                "value": "thickness+rib_height"
+              }
+            },
+            "length": 0.5
+          },
+          {
+            "id": "side_ribs",
+            "op": "pattern",
+            "source": "rib_finish",
+            "translations": [
+              [
+                "-width/2+3.5",
+                0,
+                0
+              ],
+              [
+                "width/2-3.5",
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "cradle",
+            "op": "boolean",
+            "base": "edge_finish",
+            "tool": "side_ribs",
+            "mode": "add"
+          }
+        ],
+        "result": "cradle"
+      }
+    },
+    {
+      "group": "edit",
+      "name": "sensor_shift_y=-5",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "sensor_shift_y=-5",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": -5.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "edge_finish",
+            "op": "fillet",
+            "source": "mounting_plate",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": "Z",
+              "at": null
+            },
+            "radius": 3
+          },
+          {
+            "id": "rib_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              "thickness"
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "rib_width",
+              "height": "rib_length"
+            }
+          },
+          {
+            "id": "rib",
+            "op": "extrude",
+            "sketch": "rib_profile",
+            "amount": "rib_height"
+          },
+          {
+            "id": "rib_finish",
+            "op": "chamfer",
+            "source": "rib",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": null,
+              "at": {
+                "axis": "Z",
+                "value": "thickness+rib_height"
+              }
+            },
+            "length": 0.5
+          },
+          {
+            "id": "side_ribs",
+            "op": "pattern",
+            "source": "rib_finish",
+            "translations": [
+              [
+                "-width/2+3.5",
+                0,
+                0
+              ],
+              [
+                "width/2-3.5",
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "cradle",
+            "op": "boolean",
+            "base": "edge_finish",
+            "tool": "side_ribs",
+            "mode": "add"
+          }
+        ],
+        "result": "cradle"
+      }
+    },
+    {
+      "group": "edit",
+      "name": "rib_height=18",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "rib_height=18",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 18.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "edge_finish",
+            "op": "fillet",
+            "source": "mounting_plate",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": "Z",
+              "at": null
+            },
+            "radius": 3
+          },
+          {
+            "id": "rib_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              "thickness"
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "rib_width",
+              "height": "rib_length"
+            }
+          },
+          {
+            "id": "rib",
+            "op": "extrude",
+            "sketch": "rib_profile",
+            "amount": "rib_height"
+          },
+          {
+            "id": "rib_finish",
+            "op": "chamfer",
+            "source": "rib",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": null,
+              "at": {
+                "axis": "Z",
+                "value": "thickness+rib_height"
+              }
+            },
+            "length": 0.5
+          },
+          {
+            "id": "side_ribs",
+            "op": "pattern",
+            "source": "rib_finish",
+            "translations": [
+              [
+                "-width/2+3.5",
+                0,
+                0
+              ],
+              [
+                "width/2-3.5",
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "cradle",
+            "op": "boolean",
+            "base": "edge_finish",
+            "tool": "side_ribs",
+            "mode": "add"
+          }
+        ],
+        "result": "cradle"
+      }
+    },
+    {
+      "group": "edit",
+      "name": "rib_width=2.5",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "rib_width=2.5",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 2.5,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "edge_finish",
+            "op": "fillet",
+            "source": "mounting_plate",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": "Z",
+              "at": null
+            },
+            "radius": 3
+          },
+          {
+            "id": "rib_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              "thickness"
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "rib_width",
+              "height": "rib_length"
+            }
+          },
+          {
+            "id": "rib",
+            "op": "extrude",
+            "sketch": "rib_profile",
+            "amount": "rib_height"
+          },
+          {
+            "id": "rib_finish",
+            "op": "chamfer",
+            "source": "rib",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": null,
+              "at": {
+                "axis": "Z",
+                "value": "thickness+rib_height"
+              }
+            },
+            "length": 0.5
+          },
+          {
+            "id": "side_ribs",
+            "op": "pattern",
+            "source": "rib_finish",
+            "translations": [
+              [
+                "-width/2+3.5",
+                0,
+                0
+              ],
+              [
+                "width/2-3.5",
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "cradle",
+            "op": "boolean",
+            "base": "edge_finish",
+            "tool": "side_ribs",
+            "mode": "add"
+          }
+        ],
+        "result": "cradle"
+      }
+    },
+    {
+      "group": "edit",
+      "name": "rib_length=36",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "rib_length=36",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": 0.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 36.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "edge_finish",
+            "op": "fillet",
+            "source": "mounting_plate",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": "Z",
+              "at": null
+            },
+            "radius": 3
+          },
+          {
+            "id": "rib_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              "thickness"
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "rib_width",
+              "height": "rib_length"
+            }
+          },
+          {
+            "id": "rib",
+            "op": "extrude",
+            "sketch": "rib_profile",
+            "amount": "rib_height"
+          },
+          {
+            "id": "rib_finish",
+            "op": "chamfer",
+            "source": "rib",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": null,
+              "at": {
+                "axis": "Z",
+                "value": "thickness+rib_height"
+              }
+            },
+            "length": 0.5
+          },
+          {
+            "id": "side_ribs",
+            "op": "pattern",
+            "source": "rib_finish",
+            "translations": [
+              [
+                "-width/2+3.5",
+                0,
+                0
+              ],
+              [
+                "width/2-3.5",
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "cradle",
+            "op": "boolean",
+            "base": "edge_finish",
+            "tool": "side_ribs",
+            "mode": "add"
+          }
+        ],
+        "result": "cradle"
+      }
+    },
+    {
+      "group": "edit",
+      "name": "shift sensor and add dependent slot",
+      "program": {
+        "format": "forge-feature-design-v1",
+        "name": "shift sensor and add dependent slot",
+        "units": "mm",
+        "brief_sha256": "USE_CURRENT_CONTEXT_BRIEF_SHA256",
+        "parameters": {
+          "width": 90.0,
+          "length": 70.0,
+          "thickness": 4.0,
+          "sensor_shift_x": -12.0,
+          "sensor_shift_y": 0.0,
+          "sensor_hole_diameter": 4.2,
+          "rib_height": 12.0,
+          "rib_width": 3.0,
+          "rib_length": 32.0
+        },
+        "features": [
+          {
+            "id": "plate_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              0
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "width",
+              "height": "length"
+            }
+          },
+          {
+            "id": "plate",
+            "op": "extrude",
+            "sketch": "plate_profile",
+            "amount": "thickness"
+          },
+          {
+            "id": "sensor_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": "sensor_hole_diameter"
+            }
+          },
+          {
+            "id": "sensor_tool",
+            "op": "extrude",
+            "sketch": "sensor_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "sensor_pattern",
+            "op": "pattern",
+            "source": "sensor_tool",
+            "translations": [
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(-20)",
+                "sensor_shift_y+(10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(-10)",
+                0
+              ],
+              [
+                "sensor_shift_x+(20)",
+                "sensor_shift_y+(10)",
+                0
+              ]
+            ]
+          },
+          {
+            "id": "sensor_mount",
+            "op": "boolean",
+            "base": "plate",
+            "tool": "sensor_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "carrier_bore",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              -1
+            ],
+            "profile": {
+              "kind": "circle",
+              "diameter": 5.2
+            }
+          },
+          {
+            "id": "carrier_tool",
+            "op": "extrude",
+            "sketch": "carrier_bore",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "carrier_pattern",
+            "op": "pattern",
+            "source": "carrier_tool",
+            "translations": [
+              [
+                -35,
+                -25,
+                0
+              ],
+              [
+                -35,
+                25,
+                0
+              ],
+              [
+                35,
+                -25,
+                0
+              ],
+              [
+                35,
+                25,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "mounting_plate",
+            "op": "boolean",
+            "base": "sensor_mount",
+            "tool": "carrier_pattern",
+            "mode": "cut"
+          },
+          {
+            "id": "edge_finish",
+            "op": "fillet",
+            "source": "mounting_plate",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": "Z",
+              "at": null
+            },
+            "radius": 3
+          },
+          {
+            "id": "rib_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              0,
+              0,
+              "thickness"
+            ],
+            "profile": {
+              "kind": "rectangle",
+              "width": "rib_width",
+              "height": "rib_length"
+            }
+          },
+          {
+            "id": "rib",
+            "op": "extrude",
+            "sketch": "rib_profile",
+            "amount": "rib_height"
+          },
+          {
+            "id": "rib_finish",
+            "op": "chamfer",
+            "source": "rib",
+            "edges": {
+              "type": "LINE",
+              "parallel_axis": null,
+              "at": {
+                "axis": "Z",
+                "value": "thickness+rib_height"
+              }
+            },
+            "length": 0.5
+          },
+          {
+            "id": "side_ribs",
+            "op": "pattern",
+            "source": "rib_finish",
+            "translations": [
+              [
+                "-width/2+3.5",
+                0,
+                0
+              ],
+              [
+                "width/2-3.5",
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "id": "cradle",
+            "op": "boolean",
+            "base": "edge_finish",
+            "tool": "side_ribs",
+            "mode": "add"
+          },
+          {
+            "id": "window_profile",
+            "op": "sketch",
+            "plane": "XY",
+            "origin": [
+              "sensor_shift_x",
+              24,
+              -1
+            ],
+            "profile": {
+              "kind": "slot",
+              "length": 24,
+              "width": 8
+            }
+          },
+          {
+            "id": "window_tool",
+            "op": "extrude",
+            "sketch": "window_profile",
+            "amount": "thickness+2"
+          },
+          {
+            "id": "window_cut",
+            "op": "boolean",
+            "base": "cradle",
+            "tool": "window_tool",
+            "mode": "cut"
+          }
+        ],
+        "result": "window_cut"
+      }
+    }
+  ]
+}

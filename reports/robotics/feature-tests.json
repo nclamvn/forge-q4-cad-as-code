@@ -1,0 +1,221 @@
+{
+  "status": "passed",
+  "llm_quality_benchmarked": false,
+  "hardware_tested": false,
+  "checks": [
+    {
+      "check": "Independent transform and YZ global-origin/normal extrusion oracle",
+      "passed": true
+    },
+    {
+      "check": "Independent plate+bore+fillet+chamfer volume oracle; preview triangulation does not mutate authoritative BREP",
+      "passed": true,
+      "volume_mm3": 26894.465229813002
+    },
+    {
+      "check": "10 distinct feature structures + 10 revisions preserve independent sensor/receiving interfaces and geometry gates",
+      "passed": true,
+      "case_count": 20,
+      "provenance": "engineer_authored_reference_graphs"
+    },
+    {
+      "check": "Code injection, nonfinite values, stale brief, unknown fields, forward/unused features rejected; missing selectors fail loudly; wrong holes/shift/thickness/envelope detected from BREP",
+      "passed": true
+    },
+    {
+      "check": "Same-revision STEP part/3-solid assembly, four DXF, A3 PDF, hashed ZIP and isolated reproduction script validated",
+      "passed": true,
+      "revision": "f1157ebf85a26817",
+      "pdf_pages": 1
+    }
+  ],
+  "scenarios": [
+    {
+      "group": "new_structure",
+      "name": "flat plate",
+      "passed": true,
+      "seconds": 0.253536707998137,
+      "volume_mm3": 24638.534560950437,
+      "mass_kg": 0.06652404331456618,
+      "features": 10
+    },
+    {
+      "group": "new_structure",
+      "name": "rounded plate",
+      "passed": true,
+      "seconds": 0.6144259580032667,
+      "volume_mm3": 24607.63189647967,
+      "mass_kg": 0.06644060612049511,
+      "features": 11
+    },
+    {
+      "group": "new_structure",
+      "name": "side cradle",
+      "passed": true,
+      "seconds": 0.6418662919895723,
+      "volume_mm3": 26894.465229813002,
+      "mass_kg": 0.07261505612049511,
+      "features": 16
+    },
+    {
+      "group": "new_structure",
+      "name": "one back wall",
+      "passed": true,
+      "seconds": 0.4842531660106033,
+      "volume_mm3": 27878.53456095043,
+      "mass_kg": 0.07527204331456616,
+      "features": 13
+    },
+    {
+      "group": "new_structure",
+      "name": "XZ sketch extrusion",
+      "passed": true,
+      "seconds": 0.4666979579924373,
+      "volume_mm3": 28418.534560950437,
+      "mass_kg": 0.07673004331456618,
+      "features": 13
+    },
+    {
+      "group": "new_structure",
+      "name": "one side wall",
+      "passed": true,
+      "seconds": 0.49642991699511185,
+      "volume_mm3": 25646.534560950437,
+      "mass_kg": 0.06924564331456617,
+      "features": 13
+    },
+    {
+      "group": "new_structure",
+      "name": "circular inspection window",
+      "passed": true,
+      "seconds": 0.5598857500008307,
+      "volume_mm3": 24186.145218833506,
+      "mass_kg": 0.06530259209085046,
+      "features": 13
+    },
+    {
+      "group": "new_structure",
+      "name": "polygon inspection window",
+      "passed": true,
+      "seconds": 0.4635553330008406,
+      "volume_mm3": 24190.534560950433,
+      "mass_kg": 0.06531444331456616,
+      "features": 13
+    },
+    {
+      "group": "new_structure",
+      "name": "cable slot",
+      "passed": true,
+      "seconds": 0.5303935830015689,
+      "volume_mm3": 23925.472631120687,
+      "mass_kg": 0.06459877610402585,
+      "features": 13
+    },
+    {
+      "group": "new_structure",
+      "name": "octagonal sketch plate",
+      "passed": true,
+      "seconds": 0.440264874996501,
+      "volume_mm3": 24438.534560950437,
+      "mass_kg": 0.06598404331456618,
+      "features": 10
+    },
+    {
+      "group": "edit",
+      "name": "width=94",
+      "passed": true,
+      "seconds": 0.7064695839944761,
+      "volume_mm3": 28014.465229813,
+      "mass_kg": 0.0756390561204951,
+      "features": 16
+    },
+    {
+      "group": "edit",
+      "name": "length=72",
+      "passed": true,
+      "seconds": 0.6740974999993341,
+      "volume_mm3": 27614.465229813002,
+      "mass_kg": 0.07455905612049511,
+      "features": 16
+    },
+    {
+      "group": "edit",
+      "name": "sensor_shift_x=-12",
+      "passed": true,
+      "seconds": 0.7105464170017513,
+      "volume_mm3": 26894.465229813002,
+      "mass_kg": 0.07261505612049511,
+      "features": 16
+    },
+    {
+      "group": "edit",
+      "name": "sensor_shift_x=12",
+      "passed": true,
+      "seconds": 0.6296646660048282,
+      "volume_mm3": 26894.465229813,
+      "mass_kg": 0.0726150561204951,
+      "features": 16
+    },
+    {
+      "group": "edit",
+      "name": "sensor_shift_y=5",
+      "passed": true,
+      "seconds": 0.7068706249992829,
+      "volume_mm3": 26894.465229813002,
+      "mass_kg": 0.07261505612049511,
+      "features": 16
+    },
+    {
+      "group": "edit",
+      "name": "sensor_shift_y=-5",
+      "passed": true,
+      "seconds": 0.5919491250097053,
+      "volume_mm3": 26894.465229813002,
+      "mass_kg": 0.07261505612049511,
+      "features": 16
+    },
+    {
+      "group": "edit",
+      "name": "rib_height=18",
+      "passed": true,
+      "seconds": 0.7087714170047548,
+      "volume_mm3": 28046.465229813002,
+      "mass_kg": 0.07572545612049511,
+      "features": 16
+    },
+    {
+      "group": "edit",
+      "name": "rib_width=2.5",
+      "passed": true,
+      "seconds": 0.7124397910083644,
+      "volume_mm3": 26510.715229813,
+      "mass_kg": 0.0715789311204951,
+      "features": 16
+    },
+    {
+      "group": "edit",
+      "name": "rib_length=36",
+      "passed": true,
+      "seconds": 0.654931500001112,
+      "volume_mm3": 27180.465229812995,
+      "mass_kg": 0.07338725612049508,
+      "features": 16
+    },
+    {
+      "group": "edit",
+      "name": "shift sensor and add dependent slot",
+      "passed": true,
+      "seconds": 0.7275178330019116,
+      "volume_mm3": 26181.40329998326,
+      "mass_kg": 0.0706897889099548,
+      "features": 19
+    }
+  ],
+  "source_sha256": {
+    "design/compiler.py": "550aade091bd106460db06b29ec6cd7cb980d3eb9bc6baa2b9eac71a61d552f3",
+    "design/drawings.py": "781ab2b5b9f28f6d5583af6c2c4dec2ce4321af37349d8818b6657416c884e6c",
+    "design/worker.py": "eacd27458232f7cfc466d2fd02c33783eadf6a524bf51f354df5b3a07599230d",
+    "technical.py": "dc056fca434d3440ea50fdcc9d5610b389b1b8e86555e39c400bdba4d0c9da1b",
+    "tests/feature_test.py": "9cf0a7b47e4e7cf9ad19fdc4adf3f7f001e9ad9fd698d6344476c3bcd9024ae7"
+  }
+}

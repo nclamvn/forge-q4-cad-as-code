@@ -1,0 +1,111 @@
+{
+  "status": "passed",
+  "reviewed_at": "2026-10-08T06:50:36.889101+00:00",
+  "cad_revision": "dcbef445e4b5",
+  "integration_revision": "88b2de0745b9",
+  "llm_trial": "1015243d1fe54232890fc3d92283ba95",
+  "checks": [
+    {
+      "check": "CAD workspace: Q4-201 selection, actual A3 section/dimensions, 42-instance BOM and exports",
+      "passed": true
+    },
+    {
+      "check": "Feature workspace: current LLM candidate 17 nodes / 64.4 g / 24 gates, intermediate sketch and actual A3; latest shadow setting rendered",
+      "passed": true
+    },
+    {
+      "check": "Evaluation workspace: closed LLM trial current-source, 4 task gates plus 24 CAD gates, 0 human pairs, A3 toggle",
+      "passed": true
+    },
+    {
+      "check": "Actual feature UI integration link -> start -> immutable result 88b2de0745b9; mass budget failure shown",
+      "passed": true
+    },
+    {
+      "check": "Integrated Q4 WebGL2: visible top-deck hardware, 49 instances, 7.233 kg solver; pause/resume, 35 N push and motor cutoff observed",
+      "passed": true
+    },
+    {
+      "check": "Current Engineering cfc993f2 experiment: five baseline/five candidate scenarios, apply 6.838 kg and restore 6.902 kg through UI",
+      "passed": true
+    },
+    {
+      "check": "Pilot workspace: mission route, hardware gap labels, telemetry input schema and 0/8 hardware readiness conditions",
+      "passed": true
+    },
+    {
+      "check": "Customer and integration pages at 390x844: innerWidth=scrollWidth=390 after result loaded; viewport reset",
+      "passed": true
+    },
+    {
+      "check": "LLM PDF A3 independently rendered and visually inspected; evidence ZIP independently replayed",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "design/benchmark.py": "5f36f4338eff5137057e02c3d074308b779560571f03b96f4b82978fcef658d4",
+    "design/compiler.py": "550aade091bd106460db06b29ec6cd7cb980d3eb9bc6baa2b9eac71a61d552f3",
+    "design/integration.py": "05cb30daefd63fa3953d87823db6ee4e8f1cd7851daf4382103f6a6bd3911d5f",
+    "design/service.py": "5bdf1146788f99c65e90553723cde76be6397470611ed622959965e5be56e423",
+    "design/worker.py": "eacd27458232f7cfc466d2fd02c33783eadf6a524bf51f354df5b3a07599230d",
+    "robotics/engineering.py": "f7df1aca8b2ade4397f1d941e46f485e683fbb3f08b85b33f847df0e0006368b",
+    "robotics/model.py": "58b2f494f288aa43f9e704981a0742c002e24a96572abdc1dbd3d49d4ab72c48",
+    "robotics/service.py": "632162061bf4ff246c25c3e1f0167b242c6447fbeac94c30cc271c813e6d5e29",
+    "robotics/simulation.py": "8cd4a099796486c7e0614c06031f9d385b04558787d4d9d1f9b1e082ffb83550",
+    "server.py": "e2a2a42d3539830270ffe3beab172ea3391bac75b1acd7a743ce9bb9e8c8218d",
+    "tools/cad_worker.py": "f2da73ad5e2d6c026a3f83d92083afb4cfa290044b840a1e715ce74a618eb6ed",
+    "web/app.js": "3e8c6a22fcc0b717afd7ad779f86bb4aa7ef4d35098252829f6d080343f056f0",
+    "web/benchmark.css": "d7d5465b61518dde8402665e2d4aa84fd8035e68c5c12b8827a08c93253df94c",
+    "web/benchmark.html": "961e4e16e3da6d78021653c5eba96b43a304244222a68904441524be204617c2",
+    "web/benchmark.js": "9047d60e36a9e842984bf904a6d1e69710906b9386533a564b6169955d1968f6",
+    "web/cad-workbench.js": "fbe8425fea3cf5a2cae07a1de33ae7d40b5778dc7816a32efe8ee0bb7630e835",
+    "web/capture-ui.js": "7188612469f112487908dcf92d9084689b78b6796cf9a2ec86ec8dad78c76e38",
+    "web/customer.html": "d4111ff3b25e5d74680821741d1751bbacf6ce8b6c89ff8b56a0660e5e0f603e",
+    "web/customer.js": "fa79c553b68c18dc0efb34e56a06e9f752cf89373645f2853dd02d31a307dff6",
+    "web/default-model.json": "d786c8514460c4dfd1490f173983ec0b194da91a4e0153702b22a37bda7a22eb",
+    "web/deliverables.css": "83c48fa4feb78c5d0413800638d804cd8447e3a82165b0784b47883ab808d321",
+    "web/deliverables.html": "b67db27d9e502df93c16786a18a81349feb3bc61c135735de4e0f3a3b66c2400",
+    "web/deployment.css": "bd6e5509486a2bbd43c38ce53f7a9a87288e599b71678f5b7f62bbf75d73bb8b",
+    "web/deployment.html": "af0074f7977e6502dadcd1dd60be00da6f2230213b139456ea5c372ee350252b",
+    "web/deployment.js": "81d075270c140da0ae74e90b5fa5bafece4706831958efecbd22d0946712a30e",
+    "web/engineering-panel.js": "eb4ada1e7fa8db8a40a7b0256cadea01ed8f6cd3c283bd8dd5c01e36d49a9675",
+    "web/feature-cad.css": "07d6d9d44443788ac0313a229989a39c7599f84a0165cd174ef9c32ef61f6cc9",
+    "web/feature-cad.html": "8a70685e333ec1ddd3eff432c5216d67652e37d101705c1c178b9ef413c0cbd4",
+    "web/feature-cad.js": "8d94b719d0ec472adc3a3d12d72e09287559bceb3e161e573b0996c3d0028ba7",
+    "web/index.html": "92ce09d4f179e08e9a3fbf3b53965ab44dd81d3841dbecbd7d09ad06b11d3af3",
+    "web/integration.css": "894338db5e61899cb26aa7653bbf0c3fec414608090c750155c19060d3a7eb94",
+    "web/integration.html": "fde7fd6fb6dea67d029fec845cc508aa17aae39a0e50de1ce929f2df9d44f23b",
+    "web/integration.js": "9df23c2cac6de11bca7b2539edd4ae295b75603bc9921b28358b8159802990b6",
+    "web/motion-engine.js": "1c9dff8754e9bc334c592407892bdfcc3e4dedefe6a3388f55b0a2a5cf6c3349",
+    "web/motion-panel.js": "8e5377888c301e1e80c2cf527c44d38c40d2cf6c98f01cbab6f7b06760b8c2a7",
+    "web/motion-visuals.js": "8977dda294c44b1f04ebf37ae183f7f7bdc05f52691f696497b149e0657dc9e4",
+    "web/physics-panel.js": "99294f258255bc3079922d0cdf5e441dcb3093dc4077e342bf55346a6eae74b8",
+    "web/physics-visuals.js": "9edbd2c7e859dce8c155c1e78770abffe65aa23e60e689f7fead4f7031fea6d3",
+    "web/style.css": "69a5bee6a210d0dbb4c116867a210390cbd43eaa63d5dc206de8ba1f1f1b67e2",
+    "web/vendor/OrbitControls.js": "3d79d07ecb686b4e5d93232eedab255331c1beef711e13164eaa1f68655a5f2b",
+    "web/vendor/RoomEnvironment.js": "55f466192cc84298755a424c5e040345006b2ee1455589b3b54126c2ea4123f4",
+    "web/vendor/three.core.js": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6",
+    "web/vendor/three.tsl.js": "6e6b92d8ce467818944f73815a96abadc6392fb34de577d479a23810b6aeeed0",
+    "web/vendor/three.webgpu.js": "15cfce5c653541704fd9a3463c39d3e8b854bb6265ccd854d7cfe74090625cc6"
+  },
+  "screenshots": [
+    "docs/media/customer-evaluation.jpg",
+    "docs/media/customer-integrated-physics.jpg",
+    "docs/media/customer-cad.jpg",
+    "docs/media/customer-pilot.jpg",
+    "docs/media/customer-mobile.jpg",
+    "docs/media/customer-engineering-current.jpg",
+    "docs/media/customer-llm-drawing.jpg",
+    "docs/media/customer-integration.jpg",
+    "docs/media/customer-integration-mobile.jpg",
+    "docs/media/customer-engineering.jpg"
+  ],
+  "limitations": [
+    "Current customer review supersedes historical UI reports, which retain their original source hashes.",
+    "Representative guided workflows tested, not every browser/control combination. Renderer verified here is WebGL2; no fresh WebGPU certification.",
+    "One LLM-authored assisted public exercise; human trial prepared but not performed. Source is declared, not provider-authenticated.",
+    "No new native file-chooser automation; current HTTP import/schema boundaries checked separately.",
+    "Initial overloaded preview tabs stalled; final server isolates core CAD, measured health responsiveness and fresh tabs rendered.",
+    "No ROS 2 launch/RViz, FEA, GD&T, machining or hardware tests. Integration exceeds original mass budget."
+  ]
+}

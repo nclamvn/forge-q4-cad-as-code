@@ -9,7 +9,13 @@
     "test:physics-api": ".venv/bin/python tests/physics_api_test.py",
     "test:operations": ".venv/bin/python tests/operations_test.py",
     "test:engineering": ".venv/bin/python tests/engineering_test.py",
-    "test:engineering-api": ".venv/bin/python tests/engineering_api_test.py"
+    "test:engineering-api": ".venv/bin/python tests/engineering_api_test.py",
+    "test:deployment": ".venv/bin/python tests/deployment_test.py",
+    "test:features": ".venv/bin/python tests/feature_test.py",
+    "test:feature-api": ".venv/bin/python tests/feature_api_test.py",
+    "test:benchmark": ".venv/bin/python tests/benchmark_test.py",
+    "test:integration": ".venv/bin/python tests/integration_test.py",
+    "release:customer": ".venv/bin/python tools/customer_release.py"
   },
   "devDependencies": {
     "esbuild": "0.25.5"

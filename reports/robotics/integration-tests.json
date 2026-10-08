@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "cad_revision": "dcbef445e4b5",
+  "integration_revision": "88b2de0745b9",
+  "design_revision": "ea345ca303a25fdc",
+  "checks": [
+    {
+      "check": "Actual cover bores, bearing rings, assembled BREP overlap and 49-solid STEP reread",
+      "passed": true
+    },
+    {
+      "check": "Independent per-part mass sum and honest original 7 kg mass-budget gate",
+      "passed": true
+    },
+    {
+      "check": "URDF includes seven attached instances; SI inertia positive and robot package verified",
+      "passed": true
+    },
+    {
+      "check": "Actual MuJoCo stand/trot 3 s each: finite joint telemetry; endurance not certified",
+      "passed": true
+    },
+    {
+      "check": "Mutated STEP and unknown revision rejected",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "design/integration.py": "05cb30daefd63fa3953d87823db6ee4e8f1cd7851daf4382103f6a6bd3911d5f",
+    "robotics/model.py": "58b2f494f288aa43f9e704981a0742c002e24a96572abdc1dbd3d49d4ab72c48",
+    "robotics/simulation.py": "8cd4a099796486c7e0614c06031f9d385b04558787d4d9d1f9b1e082ffb83550",
+    "robotics/operations.py": "842b3a1fbe518a7a253eecf1cd498ac120e20fb789ca2a55dad8d82c4f52c650",
+    "robotics/profile.yaml": "4f135ddda355f87e6ceea14957e7122f8e0822075f8e5be87d834b9acd3b32ec",
+    "kernel.py": "54154b07dabe1992bbb6703a4e3b082f3dd75b4297fe1ecae32c61c5527b0125",
+    "robotics/service.py": "632162061bf4ff246c25c3e1f0167b242c6447fbeac94c30cc271c813e6d5e29",
+    "server.py": "e2a2a42d3539830270ffe3beab172ea3391bac75b1acd7a743ce9bb9e8c8218d",
+    "tests/integration_test.py": "fea6873396718c333acaae4fac97da074428707a269ebbb2860de6b2fa2d4a81"
+  },
+  "hardware_verified": false,
+  "ros2_launch_tested": false
+}

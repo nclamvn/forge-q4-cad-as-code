@@ -1,11 +1,11 @@
 {
   "format": "forge-engineering-experiment-v1",
-  "id": "ae205bf2b6ac480fb5d5cbf7c029db9d",
+  "id": "cfc993f22a5242a7b1ca2220892451dd",
   "status": "completed",
   "eligible": true,
-  "created_at": 1791367791.8711581,
+  "created_at": 1791442031.7594728,
   "base_revision": "dcbef445e4b5",
-  "base_input_sha256": "cc062a230fb3f7c6ef9d0097c97c5862710808fb54cd4aeae5dabd8a507701e5",
+  "base_input_sha256": "c61db26ad6c403f6db3af10973115e0ab722fd1003637ffc01e00a5b55c955d2",
   "proposal": {
     "format": "forge-design-proposal-v1",
     "base_revision": "dcbef445e4b5",
@@ -73,7 +73,7 @@
           "friction": 0.8,
           "seconds": 6
         },
-        "model_revision": "a56c1f9f251b8e06",
+        "model_revision": "4fc7b41904061cb2",
         "metrics": {
           "minimum_height_ratio": 0.9923692631103873,
           "max_tilt_deg": 0.08634105720611991,
@@ -149,7 +149,7 @@
           "time_s": 6.0,
           "status": "running",
           "estopped": false,
-          "model_revision": "a56c1f9f251b8e06",
+          "model_revision": "4fc7b41904061cb2",
           "cad_revision": "dcbef445e4b5",
           "motion": "stand",
           "phase": 0.7499999999999342,
@@ -1419,7 +1419,7 @@
           "friction": 0.8,
           "seconds": 8
         },
-        "model_revision": "a56c1f9f251b8e06",
+        "model_revision": "4fc7b41904061cb2",
         "metrics": {
           "minimum_height_ratio": 0.9807671930776465,
           "max_tilt_deg": 5.686415419100685,
@@ -1495,7 +1495,7 @@
           "time_s": 8.0,
           "status": "running",
           "estopped": false,
-          "model_revision": "a56c1f9f251b8e06",
+          "model_revision": "4fc7b41904061cb2",
           "cad_revision": "dcbef445e4b5",
           "motion": "trot",
           "phase": 0.6521739130431347,
@@ -3085,7 +3085,7 @@
           "friction": 0.8,
           "seconds": 6
         },
-        "model_revision": "a56c1f9f251b8e06",
+        "model_revision": "4fc7b41904061cb2",
         "metrics": {
           "minimum_height_ratio": 0.956390851638636,
           "max_tilt_deg": 7.875988616684156,
@@ -3161,7 +3161,7 @@
           "time_s": 6.0,
           "status": "running",
           "estopped": false,
-          "model_revision": "a56c1f9f251b8e06",
+          "model_revision": "4fc7b41904061cb2",
           "cad_revision": "dcbef445e4b5",
           "motion": "walk",
           "phase": 0.2499999999998903,
@@ -4431,7 +4431,7 @@
           "friction": 0.25,
           "seconds": 6
         },
-        "model_revision": "a56c1f9f251b8e06",
+        "model_revision": "4fc7b41904061cb2",
         "metrics": {
           "minimum_height_ratio": 0.9767509180236937,
           "max_tilt_deg": 4.657570202374937,
@@ -4507,7 +4507,7 @@
           "time_s": 6.0,
           "status": "running",
           "estopped": false,
-          "model_revision": "a56c1f9f251b8e06",
+          "model_revision": "4fc7b41904061cb2",
           "cad_revision": "dcbef445e4b5",
           "motion": "trot",
           "phase": 0.6086956521736844,
@@ -5778,7 +5778,7 @@
           "seconds": 6,
           "push_at_s": 3.0
         },
-        "model_revision": "a56c1f9f251b8e06",
+        "model_revision": "4fc7b41904061cb2",
         "metrics": {
           "minimum_height_ratio": 0.9933196537382609,
           "max_tilt_deg": 0.27838504652760554,
@@ -5854,7 +5854,7 @@
           "time_s": 6.0,
           "status": "running",
           "estopped": false,
-          "model_revision": "a56c1f9f251b8e06",
+          "model_revision": "4fc7b41904061cb2",
           "cad_revision": "dcbef445e4b5",
           "motion": "stand",
           "phase": 0.7499999999999342,
@@ -7126,7 +7126,7 @@
           "friction": 0.8,
           "seconds": 6
         },
-        "model_revision": "21be551707da79f5",
+        "model_revision": "7bd26c4ac7037181",
         "metrics": {
           "minimum_height_ratio": 0.9934125821243217,
           "max_tilt_deg": 0.12116418277547274,
@@ -7202,7 +7202,7 @@
           "time_s": 6.0,
           "status": "running",
           "estopped": false,
-          "model_revision": "21be551707da79f5",
+          "model_revision": "7bd26c4ac7037181",
           "cad_revision": "ce45351f06ae",
           "motion": "stand",
           "phase": 0.7499999999999342,
@@ -8472,7 +8472,7 @@
           "friction": 0.8,
           "seconds": 8
         },
-        "model_revision": "21be551707da79f5",
+        "model_revision": "7bd26c4ac7037181",
         "metrics": {
           "minimum_height_ratio": 0.9801322695963148,
           "max_tilt_deg": 5.491734817338439,
@@ -8548,7 +8548,7 @@
           "time_s": 8.0,
           "status": "running",
           "estopped": false,
-          "model_revision": "21be551707da79f5",
+          "model_revision": "7bd26c4ac7037181",
           "cad_revision": "ce45351f06ae",
           "motion": "trot",
           "phase": 0.6521739130431347,
@@ -10138,7 +10138,7 @@
           "friction": 0.8,
           "seconds": 6
         },
-        "model_revision": "21be551707da79f5",
+        "model_revision": "7bd26c4ac7037181",
         "metrics": {
           "minimum_height_ratio": 0.9539598121635715,
           "max_tilt_deg": 7.795891092810971,
@@ -10214,7 +10214,7 @@
           "time_s": 6.0,
           "status": "running",
           "estopped": false,
-          "model_revision": "21be551707da79f5",
+          "model_revision": "7bd26c4ac7037181",
           "cad_revision": "ce45351f06ae",
           "motion": "walk",
           "phase": 0.2499999999998903,
@@ -11484,7 +11484,7 @@
           "friction": 0.25,
           "seconds": 6
         },
-        "model_revision": "21be551707da79f5",
+        "model_revision": "7bd26c4ac7037181",
         "metrics": {
           "minimum_height_ratio": 0.9773916089676624,
           "max_tilt_deg": 4.801158548698327,
@@ -11560,7 +11560,7 @@
           "time_s": 6.0,
           "status": "running",
           "estopped": false,
-          "model_revision": "21be551707da79f5",
+          "model_revision": "7bd26c4ac7037181",
           "cad_revision": "ce45351f06ae",
           "motion": "trot",
           "phase": 0.6086956521736844,
@@ -12831,7 +12831,7 @@
           "seconds": 6,
           "push_at_s": 3.0
         },
-        "model_revision": "21be551707da79f5",
+        "model_revision": "7bd26c4ac7037181",
         "metrics": {
           "minimum_height_ratio": 0.9934125821243217,
           "max_tilt_deg": 0.2080837836904609,
@@ -12907,7 +12907,7 @@
           "time_s": 6.0,
           "status": "running",
           "estopped": false,
-          "model_revision": "21be551707da79f5",
+          "model_revision": "7bd26c4ac7037181",
           "cad_revision": "ce45351f06ae",
           "motion": "stand",
           "phase": 0.7499999999999342,
@@ -14175,12 +14175,12 @@
   "message": "Đạt bộ thử phần mềm đã khai báo.",
   "scope": "Screening of two designs in five bounded simulations; no hardware, FEM, fatigue, manufacturing or autonomy qualification.",
   "candidate_revision": "ce45351f06ae",
-  "candidate_sha256": "b40c6e85aec174a79a70c185a7d3f9be55e07c4b7d93aa91ee1feae4180e0b8f",
-  "candidate_input_sha256": "dad7e1cc2b8e7e43de3f0deba66770c3f344c2770cd6bc27c42b6182311e694c",
+  "candidate_sha256": "6f9af22496a0f2a0a6a90f6e427ebc102a7776882068ca054975fe949ad5ae92",
+  "candidate_input_sha256": "d49625b9d2362eb27af295e764374294c61769cf05c8921a4e00039f918a7428",
   "models": {
     "baseline": {
       "cad_revision": "dcbef445e4b5",
-      "model_revision": "a56c1f9f251b8e06",
+      "model_revision": "4fc7b41904061cb2",
       "loaded_mass_kg": 6.902491562844637,
       "height_m": 0.22846961416563347,
       "com_m": null,
@@ -14198,11 +14198,11 @@
         "armature_kg_m2": 0.0002,
         "joint_damping_nm_s_rad": 0.02
       },
-      "package_url": "/robotics-output/a56c1f9f251b8e06/FORGE-Q4-Robotics.zip"
+      "package_url": "/robotics-output/4fc7b41904061cb2/FORGE-Q4-Robotics.zip"
     },
     "candidate": {
       "cad_revision": "ce45351f06ae",
-      "model_revision": "21be551707da79f5",
+      "model_revision": "7bd26c4ac7037181",
       "loaded_mass_kg": 6.838007488436493,
       "height_m": 0.22846961416563347,
       "com_m": null,
@@ -14220,7 +14220,7 @@
         "armature_kg_m2": 0.0002,
         "joint_damping_nm_s_rad": 0.02
       },
-      "package_url": "/robotics-output/21be551707da79f5/FORGE-Q4-Robotics.zip"
+      "package_url": "/robotics-output/7bd26c4ac7037181/FORGE-Q4-Robotics.zip"
     }
   },
   "cad_checks": [
@@ -14311,5 +14311,5 @@
       "limit": 7.0
     }
   ],
-  "finished_at": 1791367859.6488361
+  "finished_at": 1791442106.206548
 }

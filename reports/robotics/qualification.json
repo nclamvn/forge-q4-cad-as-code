@@ -1,6 +1,6 @@
 {
   "cad_revision": "dcbef445e4b5",
-  "model_revision": "a56c1f9f251b8e06",
+  "model_revision": "4fc7b41904061cb2",
   "engine": "MuJoCo",
   "engine_version": "3.15.0",
   "hardware_verified": false,
@@ -379,7 +379,7 @@
     {
       "motion": "stand",
       "experiment": "Undersized 0.25 Nm motors",
-      "model_revision": "e950cd543cc648b6",
+      "model_revision": "4e4d43e5fd02200a",
       "seconds": 5,
       "fall_detected": false,
       "fall_time_s": null,

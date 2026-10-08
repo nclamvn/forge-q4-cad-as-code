@@ -2,6 +2,24 @@
 
 Workbench kỹ thuật chạy cục bộ: Python/build123d dựng BREP và hồ sơ CAD; tích phân STEP tạo khối lượng, tâm khối và tensor quán tính; MuJoCo giải thân tự do, servo giới hạn mô-men và tiếp xúc; Three.js hiển thị các transform đã giải. Có gói ROS 2/URDF + MJCF và telemetry để kiểm ngoài trình duyệt. Thiết kế Q4 và thông số motor vẫn là mô hình tham chiếu, chưa xác nhận bằng phần cứng.
 
+## AI CAD Workbench: đề xuất cả cấu trúc chi tiết
+
+**Mới: [CAD Evaluation Lab](http://127.0.0.1:8767/benchmark.html)** lưu phiên trên đĩa, sinh ba loại đề theo seed, nhận proposal JSON, kiểm yêu cầu riêng trên BREP và tái dựng họ kích thước 88/94/98 mm. Có thời gian phiên, lịch sử lỗi, đối chứng cùng task hash và ZIP với script tính lại kết quả. Mẫu tự kiểm phần mềm bị loại khỏi so sánh AI–kỹ sư; chưa có benchmark LLM thật hoặc phần cứng. [Hướng dẫn đánh giá và giới hạn đo lường](docs/CAD-EVALUATION.vi.md). Chạy `npm run test:benchmark`.
+
+Mở [AI CAD Workbench](http://127.0.0.1:8767/feature-cad.html). Import STEP cảm biến và khai báo giao diện lắp; xuất context/feedback cho LLM bên ngoài; nhập feature graph JSON rồi dựng BREP thật. Catalog có sketch, extrude, boolean, pattern, transform, fillet và chamfer. Có xem từng feature, diff cấu trúc/tham số, baseline và STEP/DXF/PDF kèm gói tái dựng. Không gọi API LLM và không thực thi mã từ đề xuất.
+
+![CAD bằng feature và yêu cầu độc lập](docs/media/feature-diff.jpg)
+
+[Hướng dẫn, hợp đồng JSON và phạm vi thay CAD](docs/AI-CAD-WORKBENCH.vi.md). Bộ hồi quy 10 cấu trúc + 10 chỉnh sửa do kỹ sư viết đã qua; đây chưa là benchmark chất lượng LLM. Fixture chưa xác nhận lắp Q4; geometry đạt chưa chứng minh chịu tải hoặc cho phép sản xuất. Chạy `npm run test:features` và `npm run test:feature-api`. Kết quả/job CAD cục bộ được loại khỏi Git.
+
+## Pilot và phát triển thương mại
+
+Mở [bàn triển khai](http://127.0.0.1:8767/deployment.html): lập tuyến inspection có người giám sát, tính ngân sách từ giả định, đối chiếu actuator có datasheet, nhập telemetry CSV gắn mission/CAD hash và xem các điều kiện còn thiếu. Có context JSON cho LLM bên ngoài; chưa gọi API AI. Bộ supervisor tham chiếu kiểm heartbeat, reserve, lỗi nhiệt và E-stop; chưa nối motor hoặc chứng nhận an toàn.
+
+![Bàn lập pilot inspection](docs/media/deployment-mission.jpg)
+
+[Phương án kỹ thuật, thị trường, nghiệm thu và đầu tư](docs/COMMERCIALIZATION.vi.md). Registry CubeMars là ứng viên khảo sát, chưa lựa chọn mua. Log gắn nhãn field vẫn là người nhập khai báo; một report đạt không cấp quyền triển khai phần cứng. `npm run test:deployment` kiểm logic, dữ liệu lỗi và HTTP. Runtime `deployment-output` được loại khỏi Git.
+
 ## AI Engineering và vận hành
 
 Mở `http://127.0.0.1:8767/?workspace=ai&backend=webgl`. Xuất context JSON cho LLM bên ngoài, nhập đề xuất, xem diff, dựng baseline/candidate và chạy 10 lượt trong 5 điều kiện. Kết quả và các lỗi được lưu theo revision. Chỉ áp dụng candidate qua mọi tiêu chí khai báo; có thể trở về baseline. Không gọi API LLM và không thực thi Python từ đề xuất.
@@ -91,7 +109,7 @@ YAML / tham số UI → validation → Python / build123d / Open Cascade
 
 Đặc tả và fingerprint compiler xác định revision hình học. Generator bản vẽ có fingerprint riêng. Các file của một lần dựng đi cùng revision; bản mẫu được giữ trong repo để clone xong có thể mở ngay. Git chỉ giữ snapshot mặc định `dcbef445e4b5`; các revision thử nghiệm không đưa vào Git. Snapshot cũ có thể xem lại từ lịch sử commit hoặc release v0.1.0.
 
-AI hỗ trợ viết mã trong quá trình phát triển. **Demo không gọi LLM lúc chạy**. Ô nhập ý đồ dùng parser cục bộ với phạm vi tham số định trước. PoC cho thấy khả năng tự động hóa họ chi tiết có quy luật và phát sinh hồ sơ; chưa có sketch tự do, constraint solver tương tác, chỉnh mặt tùy ý hoặc feature history native khi import STEP.
+AI hỗ trợ viết mã trong quá trình phát triển. **Sản phẩm chưa gọi LLM lúc chạy**. Ô ý đồ trong studio Q4 cũ dùng parser cục bộ cho tham số định trước. AI CAD Workbench mới trao đổi JSON với LLM bên ngoài và có compiler feature graph để tạo cấu trúc trong catalog, cùng brief độc lập để kiểm. Chưa có constraint solver tương tác, chỉnh mặt tùy ý hoặc feature history native khi import STEP.
 
 Đây là hồ sơ concept của một thiết kế PoC độc lập. Actuator, pin và camera dùng hình học đại diện; một số khối lượng được gán. Chưa có GD&T, dung sai lắp, CAM, FEA, thiết kế điện, kiểm va chạm BREP chính xác toàn bộ, bộ điều khiển cân bằng toàn thân hoặc thử robot thật. Workspace vật lý có tiếp xúc convex và servo PD, với phạm vi được ghi riêng. Quy tắc vành 6 mm và khoảng hở tay chân 3 mm tại 5 góc mẫu không chứng minh độ bền hay khả năng chế tạo.
 
@@ -110,6 +128,10 @@ npm run test:motion
 npm run test:operations
 npm run test:engineering
 npm run test:engineering-api
+npm run test:deployment
+npm run test:features
+npm run test:feature-api
+npm run test:benchmark
 ```
 
 Bộ kiểm dùng công thức thể tích capsule độc lập, 7 loại spec lỗi, 4 biến thể thiết kế, STEP round-trip, 42 nhãn lắp ráp, 48 DXF/mm, diện tích mặt cắt và 14 trang A3. Report JSON ở `reports/`; kiểm trình duyệt trước khi phát hành ghi riêng trong `reports/monochrome/dossier-browser.json`.
@@ -136,6 +158,9 @@ npm run package
 | `web/` | Studio, bàn CAD, snapshot model và Three.js vendored |
 | `artifacts/dcbef445e4b5/` | CAD mới: vỏ dưới tránh nền, đệm chân 32 mm, 14 tờ A3 |
 | `robotics/` | Compiler SI/URDF/MJCF, solver, profile và API phiên chạy |
+| `design/` | Compiler feature graph, BREP interface gates, bản vẽ và worker/API CAD |
+| `design-output/`, `design-jobs/` | Hồ sơ và lịch sử CAD cục bộ, không vào Git |
+| `benchmark-output/` | Task, phiên, đề xuất, kết quả và snapshot evaluator cục bộ, không vào Git |
 | `robotics-output/` | Gói phát sinh theo hash mô hình, không vào Git |
 | `engineering-output/` | Lịch sử và candidate thử nghiệm cục bộ, không vào Git |
 | `tests/`, `reports/` | Phép kiểm và kết quả |
@@ -145,3 +170,7 @@ npm run package
 Three.js 0.186.1 được giữ kèm [MIT license của thư viện](web/vendor/THREE-LICENSE.txt). Các dependency Python được cài từ PyPI theo requirements.
 
 Tài liệu nền tảng chính thức [build123d](https://build123d.readthedocs.io/en/latest/), [import/export và phép chiếu CAD](https://build123d.readthedocs.io/en/latest/import_export.html), [Three.js WebGPURenderer](https://threejs.org/docs/pages/WebGPURenderer.html).
+
+## Customer engineering release
+
+Mở `/customer.html` cho hành trình CAD → đề xuất LLM → kiểm → Q4 tích hợp → MuJoCo/URDF. Xem [phạm vi, dữ liệu và cách tái lập](docs/CUSTOMER-DEMO.vi.md). `npm run test:integration` kiểm mounting BREP, truyền mass/inertia, URDF và solver. `npm run release:customer` đóng gói chỉ khi kiểm số và browser review hiện tại khớp source. Lượt LLM có hỗ trợ trong phiên Codex; đối chứng kỹ sư đang chờ thao tác thật.

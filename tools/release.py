@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE_FILES = (
     '.gitignore', '.gitattributes', 'README.md', 'DESIGN.md', 'Start.command', 'kernel.py',
     'technical.py', 'server.py', 'launch.py', 'spec.yaml', 'requirements.txt',
-    'requirements-test.txt', 'requirements-simulation.txt', 'package.json', 'package-lock.json',
+    'requirements-test.txt', 'requirements-simulation.txt', 'requirements-lock.txt', 'package.json', 'package-lock.json',
 )
 REPORT_FILES = (
     'reports/kernel-tests.json', 'reports/api-tests.json',
@@ -23,6 +23,12 @@ REPORT_FILES = (
     'reports/robotics/operations-tests.json', 'reports/robotics/engineering-tests.json',
     'reports/robotics/engineering-api-tests.json', 'reports/robotics/engineering-example.json',
     'reports/robotics/engineering-browser.json',
+    'reports/robotics/deployment-tests.json', 'reports/robotics/deployment-browser.json',
+    'reports/robotics/feature-tests.json', 'reports/robotics/feature-api-tests.json',
+    'reports/robotics/feature-browser.json',
+    'reports/robotics/benchmark-tests.json', 'reports/robotics/benchmark-browser.json',
+    'reports/robotics/integration-tests.json', 'reports/robotics/customer-browser.json',
+    'reports/robotics/customer-api.json',
 )
 
 
@@ -84,6 +90,15 @@ def package():
                 raise ValueError('Engineering / operating source changed: '+path)
     if qualification['model_revision']!=robotics['model_revision']:
         raise ValueError('Qualification model does not match the tested model')
+    # Historical browser reports remain historical. The customer review exercises
+    # all workspaces against one frozen source set and supersedes their UI gates.
+    for name in ('deployment-tests', 'feature-tests', 'feature-api-tests', 'benchmark-tests', 'integration-tests', 'customer-api', 'customer-browser'):
+        report=json.loads((ROOT/f'reports/robotics/{name}.json').read_text())
+        if report.get('status')!='passed':
+            raise ValueError('Run current workbench checks before release: '+name)
+        for path,sha in report['source_sha256'].items():
+            if hashlib.sha256((ROOT/path).read_bytes()).hexdigest()!=sha:
+                raise ValueError('Workbench source changed: '+path)
     if physics_api['model_revision']!=robotics['model_revision']:
         raise ValueError('Physics API and numerical tests use different models')
     robot_zip=ROOT/'FORGE-Q4-Robotics.zip'
@@ -96,7 +111,7 @@ def package():
                 raise ValueError('Robotics download hash mismatch: '+name)
 
     paths = {ROOT / name for name in (*SOURCE_FILES, *REPORT_FILES, *downloads, 'FORGE-Q4.html', 'FORGE-Q4-Robotics.zip')}
-    for folder in ('web', 'tools', 'tests', 'docs', 'robotics', f'artifacts/{revision}'):
+    for folder in ('web', 'tools', 'tests', 'docs', 'robotics', 'design', f'artifacts/{revision}'):
         paths.update((ROOT / folder).rglob('*'))
     files = sorted(p for p in paths if p.is_file() and not p.is_symlink()
                    and '__pycache__' not in p.parts and p.suffix not in ('.pyc', '.pyo')

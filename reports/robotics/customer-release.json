@@ -1,0 +1,84 @@
+{
+  "release_id": "afcdc48192d7923b",
+  "clean_install_verified": true,
+  "platform": "darwin",
+  "python": "3.12.14",
+  "release_zip_sha256": "2818eae03de9ab70b2229930096ceff7fb92c09c3597be63bfe95df21aa713b0",
+  "checks": [
+    {
+      "check": "Entire source/data ZIP manifest verified and extracted into a new directory",
+      "passed": true
+    },
+    {
+      "check": "New isolated Python venv; 69 locked distributions installed; pip check passed",
+      "passed": true
+    },
+    {
+      "check": "Independent clean-root server at localhost:18767; all six public downloads HTTP 200 and ZIP CRC verified",
+      "passed": true
+    },
+    {
+      "check": "Current recorded LLM/evaluator and integrated CAD manifests load with matching engine/source fingerprints",
+      "passed": true
+    },
+    {
+      "check": "Prepared human trial remains untouched and timer paused; no fabricated pair",
+      "passed": true
+    },
+    {
+      "check": "Current Engineering sample adopts through baseline/evidence/CAD integrity gates",
+      "passed": true
+    },
+    {
+      "check": "Standalone LLM evidence rebuilt by fresh Python environment: passed, one accepted attempt",
+      "passed": true
+    },
+    {
+      "check": "Clean-root physical API: actual solver, independent package download, lifecycle and input rejection tests passed",
+      "passed": true
+    }
+  ],
+  "downloads": [
+    {
+      "label": "Source & dữ liệu tái lập",
+      "http_status": 200,
+      "bytes": 67184438
+    },
+    {
+      "label": "Bằng chứng lượt LLM",
+      "http_status": 200,
+      "bytes": 390358
+    },
+    {
+      "label": "CAD & robot tích hợp",
+      "http_status": 200,
+      "bytes": 4399269
+    },
+    {
+      "label": "STEP Q4",
+      "http_status": 200,
+      "bytes": 3782105
+    },
+    {
+      "label": "PDF 14 trang A3",
+      "http_status": 200,
+      "bytes": 1841019
+    },
+    {
+      "label": "Hồ sơ DXF & STEP",
+      "http_status": 200,
+      "bytes": 4953474
+    }
+  ],
+  "engine_versions": {
+    "build123d": "0.13.0",
+    "cadquery-ocp-novtk": "8.0.1.0.0",
+    "mujoco": "3.15.0",
+    "numpy": "2.3.5"
+  },
+  "status": "passed",
+  "verified_at": "2026-10-08T06:56:24.765167+00:00",
+  "human_comparison_complete": false,
+  "hardware_verified": false,
+  "physics_api_report_sha256": "d6638415e1b81bc8622c33b180230e6c20a8195d5a83e1df21250501d416cd16"
+}

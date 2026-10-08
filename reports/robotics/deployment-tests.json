@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "hardware_tested": false,
+  "checks": [
+    {
+      "check": "Independent 3-4-5 route / Wh / reserve oracle, 12-actuator mass replacement and finite bounded mission schema",
+      "passed": true
+    },
+    {
+      "check": "Complete declared mission logs, independent V\u00d7I integration, false-field cannot authorize, hot/low-SOC/E-stop failures, stale hash, nonfinite CSV and media traversal rejection",
+      "passed": true
+    },
+    {
+      "check": "Deterministic supervisor inhibits on watchdog, reserve, thermal, invalid telemetry and clock regression; E-stop latches; explicit reset and arm before restarting",
+      "passed": true
+    },
+    {
+      "check": "Atomic local report/raw-log manifest detects mutation; actual HTTP schema, origin, JSON-only LLM context and static workspace",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "robotics/deployment.py": "75c883f3b6b0a90aa7e197c96e220c3ffb9ab0d3282ad778b6b8e1af990d7448",
+    "robotics/supervisor.py": "813ea53ab81ffd2ac9b1152cc3c34579a0c6c8cb2c400fcd998f6aeaa3f42840",
+    "robotics/commercial-components.json": "da569dfa0c39ba782bbdc30e9b58db08dde63af021bb6c0a766b76520b53b7be",
+    "server.py": "e2a2a42d3539830270ffe3beab172ea3391bac75b1acd7a743ce9bb9e8c8218d",
+    "tests/deployment_test.py": "6152cae9b2ea5ae2e9628fa9c374336f2d32d17c84fb1b43c25321b1e2527f17"
+  }
+}

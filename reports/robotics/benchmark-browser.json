@@ -1,0 +1,66 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "check": "Browser creates software_fixture trial; starts timer, loads JSON fixture and runs actual BREP worker",
+      "passed": true
+    },
+    {
+      "check": "Current family trial shows task gates plus widths 88/94/98 and 24/24 common CAD gates; explicit acceptance persists",
+      "passed": true,
+      "trial": "213c1e251df04a9c914c9c0c6611008c"
+    },
+    {
+      "check": "Earlier in-turn UI fault/recovery loop: invalid JSON, generic valid CAD with wrong required sensor shift, corrected proposal; acceptance disabled on failure; three attempts survive reload",
+      "passed": true,
+      "trial": "06e3aedb5dd04ab6aceb095331dfbfb3",
+      "scope": "Preceding evaluator revision; latest HTTP regression repeats the failure categories and acceptance boundaries"
+    },
+    {
+      "check": "Context export UI acknowledgement; JSON context/feedback verified by HTTP test, no model API called",
+      "passed": true,
+      "browser_download_bytes_verified": false
+    },
+    {
+      "check": "3D BREP preview, actual A3 SVG toggle and Workbench/Lab navigation",
+      "passed": true
+    },
+    {
+      "check": "390x844 responsive document has scrollWidth 390; temporary viewport reset",
+      "passed": true
+    },
+    {
+      "check": "No console errors observed on final Lab view",
+      "passed": true
+    },
+    {
+      "check": "Latest handed-off family evidence ZIP downloaded by localhost HTTP; every manifest hash and independent verify.py replay passed",
+      "passed": true,
+      "trial": "213c1e251df04a9c914c9c0c6611008c"
+    }
+  ],
+  "llm_quality_benchmarked": false,
+  "hardware_verified": false,
+  "screenshots": [
+    "docs/media/benchmark-rejected.jpg",
+    "docs/media/benchmark-drawing.jpg",
+    "docs/media/benchmark-family.jpg",
+    "docs/media/benchmark-mobile.jpg"
+  ],
+  "limitations": [
+    "All scored demonstration trials are software fixtures; no actual LLM/engineer productivity benchmark.",
+    "Public seeded exercises, self-declared actors and recorded session wall time; not a blind or authenticated benchmark.",
+    "Runtime evidence remains local and ignored by Git. Existing three CAD aggregate deletions preserved; release packaging not run."
+  ],
+  "source_sha256": {
+    "web/benchmark.html": "961e4e16e3da6d78021653c5eba96b43a304244222a68904441524be204617c2",
+    "web/benchmark.css": "d7d5465b61518dde8402665e2d4aa84fd8035e68c5c12b8827a08c93253df94c",
+    "web/benchmark.js": "9047d60e36a9e842984bf904a6d1e69710906b9386533a564b6169955d1968f6",
+    "web/feature-cad.html": "03a922c68e58c8265b957fd47d6579ceb61a4bb2d303076fd5943ce87bfc0957",
+    "server.py": "c2a1734c734bdadbb18493706b2e9f0b8610788a51a018ffbc5b409ff100fbd7",
+    "design/benchmark.py": "5f36f4338eff5137057e02c3d074308b779560571f03b96f4b82978fcef658d4",
+    "design/bench_rules.py": "dc566bedacd9cc01b0c9078799f3749c041058b1116726e3935d3dfcc85ab1c9",
+    "design/bench_worker.py": "735001429f7dd63372b2614707eacbc271942b49fe03ab9e3226013fb6eb05d7",
+    "design/bench_verify.py": "bdcd8f7ea2c121e4b5f2579f152eb3aca8f4e89b4fa11a7162d1ba54768b23d9"
+  }
+}

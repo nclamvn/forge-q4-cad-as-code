@@ -1,0 +1,31 @@
+{
+  "format": "forge-feature-design-v1",
+  "name": "LLM / lightweight optical bracket with raised side rails",
+  "units": "mm",
+  "brief_sha256": "cb306c5b00c4ec81154c75fd7c6a6335f7866ed4d04df7a4840816519b385e47",
+  "parameters": {
+    "width": 88, "length": 68, "thickness": 4,
+    "sensor_shift_x": 0, "sensor_shift_y": 0,
+    "window_diameter": 20, "rail_width": 3, "rail_length": 24, "rail_height": 12
+  },
+  "features": [
+    {"id":"deck_outline","op":"sketch","plane":"XY","origin":[0,0,0],"profile":{"kind":"rectangle","width":"width","height":"length"}},
+    {"id":"deck","op":"extrude","sketch":"deck_outline","amount":"thickness"},
+    {"id":"optical_bore","op":"sketch","plane":"XY","origin":[0,0,-1],"profile":{"kind":"circle","diameter":4.2}},
+    {"id":"optical_drill","op":"extrude","sketch":"optical_bore","amount":"thickness+2"},
+    {"id":"optical_pattern","op":"pattern","source":"optical_drill","translations":[["sensor_shift_x-20","sensor_shift_y-10",0],["sensor_shift_x-20","sensor_shift_y+10",0],["sensor_shift_x+20","sensor_shift_y-10",0],["sensor_shift_x+20","sensor_shift_y+10",0]]},
+    {"id":"optical_holes","op":"boolean","base":"deck","tool":"optical_pattern","mode":"cut"},
+    {"id":"mount_bore","op":"sketch","plane":"XY","origin":[0,0,-1],"profile":{"kind":"circle","diameter":5.2}},
+    {"id":"mount_drill","op":"extrude","sketch":"mount_bore","amount":"thickness+2"},
+    {"id":"mount_pattern","op":"pattern","source":"mount_drill","translations":[[-35,-25,0],[-35,25,0],[35,-25,0],[35,25,0]]},
+    {"id":"mount_holes","op":"boolean","base":"optical_holes","tool":"mount_pattern","mode":"cut"},
+    {"id":"window_outline","op":"sketch","plane":"XY","origin":[0,0,-1],"profile":{"kind":"circle","diameter":"window_diameter"}},
+    {"id":"window_tool","op":"extrude","sketch":"window_outline","amount":"thickness+2"},
+    {"id":"weight_window","op":"boolean","base":"mount_holes","tool":"window_tool","mode":"cut"},
+    {"id":"rail_outline","op":"sketch","plane":"XY","origin":[0,0,"thickness"],"profile":{"kind":"rectangle","width":"rail_width","height":"rail_length"}},
+    {"id":"rail","op":"extrude","sketch":"rail_outline","amount":"rail_height"},
+    {"id":"rail_pair","op":"pattern","source":"rail","translations":[["-width/2+3.5",0,0],["width/2-3.5",0,0]]},
+    {"id":"finished_bracket","op":"boolean","base":"weight_window","tool":"rail_pair","mode":"add"}
+  ],
+  "result": "finished_bracket"
+}

@@ -36,7 +36,10 @@ function makeCanvasTexture(draw,w=1024,h=256){const c=document.createElement('ca
 
 async function boot(){
   try{
-    model=window.__FORGE_MODEL__||await (await fetch('./default-model.json')).json();spec={...model.spec};
+    const integrated=params.get('integrated');
+    const modelResponse=window.__FORGE_MODEL__?null:await fetch(integrated?'/api/integration/model?revision='+encodeURIComponent(integrated):'./default-model.json');
+    if(modelResponse&&!modelResponse.ok)throw new Error('Không đọc được cấu hình robot. Dựng lại cấu hình tích hợp.');
+    model=window.__FORGE_MODEL__||await modelResponse.json();spec={...model.spec};
     if(!window.__FORGE_MODEL__)try{const health=await fetch('/api/health',{signal:AbortSignal.timeout(2000)});state.online=health.ok&&(await health.json()).status==='ready';}catch{}
     $('connection').textContent=state.online?'Kernel CAD đang chạy':'Snapshot CAD đã kiểm chứng';
     $('boot-text').textContent='Khởi tạo ánh sáng và hình học…';
@@ -80,7 +83,8 @@ async function boot(){
       motion:{programs:MOTIONS,select:selectMotion,seek:phase=>{state.phase=phase;state.playing=false;state.motion.transition=null;motionPanel.sync();},sample:(id,phase,amplitude=1)=>sampleMotion(model.spec,id,phase,amplitude),export:type=>motionPanel.export(type),get frame(){return motionFrame;}},
       inspect:()=>({ready:state.ready,backend:renderer.backend.isWebGPUBackend?'webgpu':'webgl2',revision:model.revision,metrics:model.metrics,checks:model.proof.checks,frames,mode:state.mode,explosion:state.explosion,meshCount:meshes.length,
         motion:motionFrame?{program:state.motion.id,phase:motionFrame.phase,contacts:motionFrame.contactCount,maxErrorMm:motionFrame.maxErrorMm,minPadBottomMm:Math.min(...motionFrame.legs.map(l=>l.padBottomMm)),clamped:motionFrame.clamped}:null})};
-    $('cad-open').disabled=false;if(params.get('workspace')==='cad')openCAD();
+    $('cad-open').disabled=!!model.integration;if(params.get('workspace')==='cad'&&!model.integration)openCAD();
+    if(model.integration){$('engineering-open').disabled=true;document.querySelector('[data-mode="cad"]')?.setAttribute('disabled','');}
     if(params.get('workspace')==='motion'){setMode('motion');if(params.has('motion'))selectMotion(params.get('motion'));}
     if(params.get('workspace')==='physics'){state.motion.id=params.get('motion')||'stand';setMode('motion');physicsPanel.activate(true);setTimeout(()=>physicsPanel.start(),400);}
     if(params.get('workspace')==='ai'){await engineeringPanel.open();if(params.has('experiment'))await engineeringPanel.load(params.get('experiment'));}
@@ -320,7 +324,8 @@ function updateUI(){
   state.dirty=false;$('build-state').classList.remove('dirty');$('build-state').textContent=state.online?'Thông số và mô hình đồng bộ.':'Snapshot: chạy Start.command để dựng lại CAD.';
   $('build').disabled=!state.online;
   if(cadWorkbench?.current)cadWorkbench.render(spec,state.dirty);
-  if(!state.online)document.querySelectorAll('#spec-form input,#spec-form [data-material],[data-preset],#command,#apply-command').forEach(el=>el.disabled=true);
+  if(!state.online||model.integration)document.querySelectorAll('#spec-form input,#spec-form [data-material],[data-preset],#command,#apply-command').forEach(el=>el.disabled=true);
+  if(model.integration){$('build').disabled=true;$('reset').disabled=true;$('build-state').textContent='Cấu hình lắp đã kiểm. Đổi gá trong AI CAD rồi dựng lại cấu hình tích hợp.';}
 }
 function setRangeFill(el){const pct=100*(el.value-el.min)/(el.max-el.min);el.style.background=`linear-gradient(to right,#222222 ${pct}%,#d9d9d7 ${pct}%)`;}
 function markDirty(){state.dirty=true;$('build-state').classList.add('dirty');$('build-state').textContent='Thông số đã đổi. Dựng lại để cập nhật mô hình CAD.';document.querySelectorAll('[data-preset]').forEach(b=>b.classList.remove('active'));if(cadWorkbench?.current)cadWorkbench.dirty(spec);}

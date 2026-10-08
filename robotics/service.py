@@ -28,6 +28,10 @@ def get_model(revision, cache, overrides):
     snapshot=json.loads((ROOT/'web/default-model.json').read_text())
     model=next((m for m in cache.values() if m['revision']==revision),None)
     if snapshot['revision']==revision:model=snapshot
+    if model is None and isinstance(revision,str) and re.fullmatch('[a-f0-9]{12}',revision):
+        if (ROOT/'artifacts'/revision/'integration-manifest.json').is_file():
+            from design.integration import load
+            _,model=load(revision)
     if model is None:raise ValueError('CAD revision is unavailable; build CAD first')
     config=profile()
     if set(overrides)-{'torque_limit_nm','kp_nm_rad','kd_nm_s_rad'}:raise ValueError('Unknown actuator profile field')

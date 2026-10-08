@@ -1,0 +1,31 @@
+{
+  "format": "forge-component-registry-v1",
+  "checked_on": "2026-10-08",
+  "actuators": [
+    {
+      "id": "cubemars-ak60-6-v3-kv80",
+      "manufacturer": "CubeMars",
+      "sku": "AK60-6 V3.0 KV80",
+      "provenance": "vendor_datasheet",
+      "source": "https://www.cubemars.com/product/ak60-6-v3-0-kv80-robotic-actuator.html",
+      "mass_kg": 0.38,
+      "diameter_mm": 79,
+      "length_mm": 43,
+      "rated_torque_nm": 3,
+      "peak_torque_nm": 9,
+      "voltage_options_v": [24, 48],
+      "list_price_usd": 229.90,
+      "quote_status": "web_list_price_not_binding_quote",
+      "hardware_tested": false,
+      "notes": "Candidate only. Peak duration and installed thermal envelope require vendor confirmation and bench measurement. Price excludes integration, tax, landed cost and spares. Geometry does not fit the reference motor."
+    }
+  ],
+  "unpriced_subsystems": [
+    "Gá actuator, trục, ổ đỡ, dây và connector",
+    "Pin có BMS, cầu chì, contactor, sạc và E-stop phần cứng",
+    "Máy tính, IMU, cảm biến chân, LiDAR và driver",
+    "Camera RGB, camera nhiệt radiometric và hiệu chuẩn",
+    "Khung, gia công, lắp ráp, kiểm thử và phụ tùng",
+    "Tích hợp, bảo hành, dịch vụ tại hiện trường và vận chuyển"
+  ]
+}

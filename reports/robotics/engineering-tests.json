@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "cad_revision": "dcbef445e4b5",
-  "experiment_id": "ae205bf2b6ac480fb5d5cbf7c029db9d",
+  "experiment_id": "cfc993f22a5242a7b1ca2220892451dd",
   "checks": [
     {
       "check": "Apply actual passed CAD; reject stale baseline, failed gate, changed candidate bytes and changed solver source",
@@ -38,7 +38,7 @@
     {
       "check": "Two different CAD revisions, same five scenarios, real timestamped traces, explicit estimates, all acceptance gates evaluated",
       "passed": true,
-      "experiment_id": "ae205bf2b6ac480fb5d5cbf7c029db9d",
+      "experiment_id": "cfc993f22a5242a7b1ca2220892451dd",
       "baseline_mass_kg": 6.902491562844637,
       "candidate_mass_kg": 6.838007488436493
     },
@@ -89,7 +89,7 @@
     "robotics/profile.yaml": "4f135ddda355f87e6ceea14957e7122f8e0822075f8e5be87d834b9acd3b32ec",
     "web/motion-engine.js": "1c9dff8754e9bc334c592407892bdfcc3e4dedefe6a3388f55b0a2a5cf6c3349",
     "tools/motion-reference.mjs": "7983444fb5a19601d1a79a1b04f2a5874f8a89f3e463e89857bcf689d28853e2",
-    "tests/engineering_test.py": "1c9b4d422b075259d656fabecdf36f3828c6da9bc33f6fab79620308c43a01d4"
+    "tests/engineering_test.py": "e2ef0ba1db9756bc87d32e092771953e658ce785566d3e839538aa3d621e93f1"
   },
   "llm_runtime": false,
   "hardware_verified": false

@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "check": "Legacy download / step",
+      "passed": true,
+      "bytes": 3782105
+    },
+    {
+      "check": "Legacy download / pdf",
+      "passed": true,
+      "bytes": 1841019
+    },
+    {
+      "check": "Legacy download / dossier",
+      "passed": true,
+      "bytes": 4953474
+    },
+    {
+      "check": "Integration HTTP lifecycle, origin/schema rejection, attached physics and export manifests",
+      "passed": true
+    },
+    {
+      "check": "Heavy CAD isolated in subprocess: health remains responsive while BREP/drawings build",
+      "passed": true,
+      "health_requests": 517,
+      "max_health_latency_s": 0.3430744159995811,
+      "built_revision": "9b3e6ef5a34f"
+    }
+  ],
+  "source_sha256": {
+    "server.py": "e2a2a42d3539830270ffe3beab172ea3391bac75b1acd7a743ce9bb9e8c8218d",
+    "tools/cad_worker.py": "f2da73ad5e2d6c026a3f83d92083afb4cfa290044b840a1e715ce74a618eb6ed",
+    "design/integration.py": "05cb30daefd63fa3953d87823db6ee4e8f1cd7851daf4382103f6a6bd3911d5f",
+    "robotics/service.py": "632162061bf4ff246c25c3e1f0167b242c6447fbeac94c30cc271c813e6d5e29",
+    "tests/customer_api_test.py": "e71be57fb1f826eaef37df90e44635c02457b03bd51c88a846ec1337c5c8fd0f"
+  }
+}

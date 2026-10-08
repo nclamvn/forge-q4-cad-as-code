@@ -1,0 +1,58 @@
+{
+  "status": "passed_with_limits",
+  "cad_revision": "dcbef445e4b5",
+  "hardware_tested": false,
+  "llm_runtime": false,
+  "checks": [
+    {
+      "check": "Desktop mission, hardware, evidence and readiness pages; six targets and labelled estimated budget",
+      "passed": true
+    },
+    {
+      "check": "UI rejects speed 99 m/s, accepts bounded JSON, and rejects old log mission hash after rename",
+      "passed": true
+    },
+    {
+      "check": "Synthetic fault fixture produces failed coverage/dwell/speed/SOC/temperature/E-stop gates; no deployment authorization",
+      "passed": true
+    },
+    {
+      "check": "Final backend responds with continuous stationary dwell criterion after server restart",
+      "passed": true
+    },
+    {
+      "check": "Mobile 390x844 mission and evidence; document width 390; main studio header width 390; Pilot link opens workspace",
+      "passed": true
+    },
+    {
+      "check": "LLM context endpoint and UI export acknowledgement; no live AI call",
+      "passed": true,
+      "download_file_bytes_verified": false
+    },
+    {
+      "check": "No browser console errors on pilot workspace",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "docs/media/deployment-mission.jpg",
+    "docs/media/deployment-evidence.jpg",
+    "docs/media/deployment-readiness.jpg",
+    "docs/media/deployment-mobile.jpg"
+  ],
+  "limitations": [
+    "Browser download event timed out; UI acknowledged export and HTTP JSON endpoint verified separately.",
+    "No hardware, navigation, radiometric-image byte validation, calibration or industrial deployment qualification.",
+    "Existing CAD assembly STEP, dossier PDF and dossier ZIP are absent in this checkout; packaging not rerun."
+  ],
+  "source_sha256": {
+    "web/deployment.html": "5233f7932aadbc6aa8027ba0870e0d590c781fc5866e8edcee83ff8b8bcb8877",
+    "web/deployment.js": "81d075270c140da0ae74e90b5fa5bafece4706831958efecbd22d0946712a30e",
+    "web/deployment.css": "bd6e5509486a2bbd43c38ce53f7a9a87288e599b71678f5b7f62bbf75d73bb8b",
+    "web/index.html": "024790a53d432f9778bffb907f0df58709648cd655f99a082f21de273ee9b1d8",
+    "web/style.css": "67820583a707d568379cfeccd9a8a4f24ba546cc172254e2178276822b6ca645",
+    "robotics/deployment.py": "75c883f3b6b0a90aa7e197c96e220c3ffb9ab0d3282ad778b6b8e1af990d7448",
+    "robotics/supervisor.py": "813ea53ab81ffd2ac9b1152cc3c34579a0c6c8cb2c400fcd998f6aeaa3f42840",
+    "robotics/commercial-components.json": "da569dfa0c39ba782bbdc30e9b58db08dde63af021bb6c0a766b76520b53b7be"
+  }
+}

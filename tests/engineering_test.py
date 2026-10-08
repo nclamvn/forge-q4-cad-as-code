@@ -3,7 +3,7 @@ import copy,hashlib,json,shutil,sys,tempfile,time,unittest,threading
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from robotics import engineering as e
-from robotics.model import compile_robot,profile
+from robotics.model import compile_robot,profile,input_fingerprint
 
 RESULTS=[]
 class EngineeringTests(unittest.TestCase):
@@ -12,7 +12,9 @@ class EngineeringTests(unittest.TestCase):
         cls.cad=json.loads((ROOT/'web/default-model.json').read_text())
         cls.proposal=e.example(cls.cad)
         jobs=[e.read_job(p.parent.name) for p in e.OUTPUT.glob('*/report.json')]
-        cls.job=next((j for j in reversed(jobs) if j['status']=='completed' and j['source_sha256']==e.sources() and j['proposal']['changes']=={'link_thickness':6}),None)
+        cls.job=next((j for j in reversed(jobs) if j['status']=='completed' and j['source_sha256']==e.sources()
+                      and j.get('base_input_sha256')==input_fingerprint(cls.cad)
+                      and j['proposal']['changes']=={'link_thickness':6}),None)
         if cls.job is None:
             cache={json.dumps(cls.cad['spec'],sort_keys=True):cls.cad}
             started=e.start({'base_revision':cls.cad['revision'],'proposal':cls.proposal},cache,threading.Lock())

@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "check": "Independent cylindrical void-volume and accumulated timer oracle; clock regression rejected",
+      "passed": true
+    },
+    {
+      "check": "Synthetic in-memory pairing oracle: equal task, closed pass, current source and intact artifacts required; software fixtures excluded",
+      "passed": true
+    },
+    {
+      "check": "Actual HTTP, bounded workers, invalid JSON/catalog classification; generic CAD passing cannot bypass independent task; failed candidate cannot be accepted; fixtures excluded from comparisons",
+      "passed": true,
+      "trial": "5a8a022e79a04811956d7fcded3aa623",
+      "attempts": 4
+    },
+    {
+      "check": "lightweight actual BREP task and standalone evidence replay; no ignored width parameter passes family checks",
+      "passed": true,
+      "trial": "a3dea6693f07402795a956cd5b32f754",
+      "evidence_bytes": 445799
+    },
+    {
+      "check": "family actual BREP task and standalone evidence replay; no ignored width parameter passes family checks",
+      "passed": true,
+      "trial": "3854e0009bf441329d3aac94066ed3ff",
+      "evidence_bytes": 453577
+    },
+    {
+      "check": "Durable trial/events/proposal/outcome fingerprints, corruption rejection and changed evaluator detection; all data remains user-declared, not authenticated",
+      "passed": true
+    }
+  ],
+  "llm_quality_benchmarked": false,
+  "hardware_verified": false,
+  "source_sha256": {
+    "design/compiler.py": "550aade091bd106460db06b29ec6cd7cb980d3eb9bc6baa2b9eac71a61d552f3",
+    "design/drawings.py": "781ab2b5b9f28f6d5583af6c2c4dec2ce4321af37349d8818b6657416c884e6c",
+    "design/worker.py": "eacd27458232f7cfc466d2fd02c33783eadf6a524bf51f354df5b3a07599230d",
+    "technical.py": "dc056fca434d3440ea50fdcc9d5610b389b1b8e86555e39c400bdba4d0c9da1b",
+    "design/benchmark.py": "5f36f4338eff5137057e02c3d074308b779560571f03b96f4b82978fcef658d4",
+    "design/bench_rules.py": "dc566bedacd9cc01b0c9078799f3749c041058b1116726e3935d3dfcc85ab1c9",
+    "design/bench_worker.py": "735001429f7dd63372b2614707eacbc271942b49fe03ab9e3226013fb6eb05d7",
+    "design/bench_verify.py": "bdcd8f7ea2c121e4b5f2579f152eb3aca8f4e89b4fa11a7162d1ba54768b23d9",
+    "server.py": "e2a2a42d3539830270ffe3beab172ea3391bac75b1acd7a743ce9bb9e8c8218d",
+    "tests/benchmark_test.py": "cb58f1d040bf24ac6c936cc8504e613df5698a7df689ac6728ffdd0b86c1f5e4"
+  }
+}

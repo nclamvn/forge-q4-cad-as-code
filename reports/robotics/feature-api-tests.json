@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "hardware_tested": false,
+  "llm_runtime": false,
+  "checks": [
+    {
+      "check": "JSON context, schema/origin/host gates, real bounded worker, one active job, STEP/PDF/DXF archive hashes and explicit geometry-only adoption",
+      "passed": true,
+      "revision": "58c23532f520d923"
+    },
+    {
+      "check": "BREP-detected misaligned receiving bore cannot become baseline; artifact mutation and invalid IDs rejected",
+      "passed": true
+    },
+    {
+      "check": "Actual STEP upload parsed in worker; source bytes hashed, declared voids checked, old brief adoption blocked and false mounting declaration rejected",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "server.py": "e2a2a42d3539830270ffe3beab172ea3391bac75b1acd7a743ce9bb9e8c8218d",
+    "design/service.py": "5bdf1146788f99c65e90553723cde76be6397470611ed622959965e5be56e423",
+    "design/compiler.py": "550aade091bd106460db06b29ec6cd7cb980d3eb9bc6baa2b9eac71a61d552f3",
+    "design/worker.py": "eacd27458232f7cfc466d2fd02c33783eadf6a524bf51f354df5b3a07599230d",
+    "design/drawings.py": "781ab2b5b9f28f6d5583af6c2c4dec2ce4321af37349d8818b6657416c884e6c",
+    "tests/feature_api_test.py": "0492a4727b6fea10073a3d28fc162f7ec9bc1cb0daa78aa278a1592299952666"
+  }
+}

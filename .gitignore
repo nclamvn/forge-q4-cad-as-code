@@ -3,6 +3,12 @@
 node_modules/
 /robotics-output/
 /engineering-output/
+/deployment-output/
+/design-output/
+/design-jobs/
+/benchmark-output/
+/integration-jobs/
+/customer-release/
 __pycache__/
 *.py[cod]
 .DS_Store
@@ -39,6 +45,17 @@ __pycache__/
 !/reports/robotics/engineering-api-tests.json
 !/reports/robotics/engineering-example.json
 !/reports/robotics/engineering-browser.json
+!/reports/robotics/deployment-tests.json
+!/reports/robotics/deployment-browser.json
+!/reports/robotics/feature-tests.json
+!/reports/robotics/feature-api-tests.json
+!/reports/robotics/feature-browser.json
+!/reports/robotics/benchmark-tests.json
+!/reports/robotics/benchmark-browser.json
+!/reports/robotics/integration-tests.json
+!/reports/robotics/customer-browser.json
+!/reports/robotics/customer-release.json
+!/reports/robotics/customer-api.json
 
 # Reproducible downloads belong in GitHub Releases, not Git history.
 /FORGE-Q4.html

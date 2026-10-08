@@ -1,0 +1,80 @@
+{
+  "status": "passed",
+  "llm_quality_benchmarked": false,
+  "hardware_tested": false,
+  "checks": [
+    {
+      "check": "Build engineer example in actual browser: one solid, 16 features, 72.6 g; explicit baseline adoption",
+      "passed": true,
+      "revision": "8fcf4cad8436cdc8"
+    },
+    {
+      "check": "Move sensor -12 mm and add three feature nodes; 19 features, 70.7 g, 24/24 geometry gates; diff, assembly and baseline wire toggles",
+      "passed": true,
+      "revision": "5ea5c3762c09f22d"
+    },
+    {
+      "check": "Select native intermediate sketch; view actual CAD drawing SVG in modal; render and inspect A3 PDF independently",
+      "passed": true
+    },
+    {
+      "check": "Misaligned receiving bore yields 22/24 gates; no baseline adoption; failure remains in history",
+      "passed": true,
+      "revision": "aaf74c4a8e846fdd"
+    },
+    {
+      "check": "History selection updates revision URL; adopt and undo restore original 72.6 g / 16 features",
+      "passed": true
+    },
+    {
+      "check": "Actual browser STEP upload, independent declared holes, new brief; old drawing/download/baseline invalidated; explicit reference survives reload",
+      "passed": true,
+      "reference": "da763fc649d74804a5f000f08ccaf1ea"
+    },
+    {
+      "check": "JSON proposal upload, source label correction to engineer, direct width parameter 90 to 94 and successful worker rebuild; exports locked while dirty",
+      "passed": true,
+      "revision": "078014851f562d79"
+    },
+    {
+      "check": "LLM context export UI acknowledges JSON; endpoint feedback verified separately by feature-api test",
+      "passed": true,
+      "browser_download_bytes_verified": false
+    },
+    {
+      "check": "Workbench 390x844 and main studio header: scrollWidth 390; desktop studio AI CAD link opens workbench; temporary viewport reset",
+      "passed": true
+    },
+    {
+      "check": "No console errors observed on CAD Workbench across builds, import, history and responsive views",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "docs/media/feature-baseline.jpg",
+    "docs/media/feature-diff.jpg",
+    "docs/media/feature-sketch.jpg",
+    "docs/media/feature-rejected.jpg",
+    "docs/media/feature-drawing.jpg",
+    "docs/media/feature-mobile.jpg"
+  ],
+  "limitations": [
+    "All proposal fixtures are engineer authored; no model API or authenticated provider provenance.",
+    "STEP upload used the synthetic sensor fixture, not a vendor part; no Q4 cover integration, FEA, tolerance qualification or hardware trial.",
+    "Browser context-download bytes not inspected; HTTP context and CAD ZIP bytes checked by API test.",
+    "Three previously deleted legacy CAD aggregate files remain absent; full release packaging was not run."
+  ],
+  "source_sha256": {
+    "web/feature-cad.html": "e2acc7c14ea427befc18f34c6c9cacc97c10e2650279b03b8cbe491d0df1190e",
+    "web/feature-cad.css": "93b3b257be76be3cdf13b64b24781936efd9d13212921d356c51bac165a1e8e9",
+    "web/feature-cad.js": "c6a7e5d87eaea30df20380186b0ee4810ca8caadde991b48882792934d05a2fb",
+    "web/index.html": "c4e502346a40ac8e9441c5183bc1b9bb63d9b0b8d501d3e6a5fe4ba57b2c387d",
+    "web/style.css": "69a5bee6a210d0dbb4c116867a210390cbd43eaa63d5dc206de8ba1f1f1b67e2",
+    "web/deployment.html": "af0074f7977e6502dadcd1dd60be00da6f2230213b139456ea5c372ee350252b",
+    "design/compiler.py": "550aade091bd106460db06b29ec6cd7cb980d3eb9bc6baa2b9eac71a61d552f3",
+    "design/drawings.py": "781ab2b5b9f28f6d5583af6c2c4dec2ce4321af37349d8818b6657416c884e6c",
+    "design/service.py": "5bdf1146788f99c65e90553723cde76be6397470611ed622959965e5be56e423",
+    "design/worker.py": "eacd27458232f7cfc466d2fd02c33783eadf6a524bf51f354df5b3a07599230d",
+    "server.py": "bff4662911731e05c6a1ea5de286c6553a64e181da9f24a1cc6203f55106f904"
+  }
+}

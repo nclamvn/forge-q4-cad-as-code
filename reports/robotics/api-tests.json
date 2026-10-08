@@ -1,12 +1,12 @@
 {
   "status": "passed",
   "cad_revision": "dcbef445e4b5",
-  "model_revision": "a56c1f9f251b8e06",
+  "model_revision": "4fc7b41904061cb2",
   "checks": [
     {
       "check": "Create/resume/step/pause/report and hashed ROS package download",
       "passed": true,
-      "package_bytes": 699365,
+      "package_bytes": 699360,
       "record_samples": 150
     },
     {
@@ -65,8 +65,8 @@
     }
   ],
   "source_sha256": {
-    "server.py": "9859629ea6cba378c1b5e0936edcda046b85586caca8f5d51b4e3278a16a9057",
-    "robotics/service.py": "6327219f5fff58c7328d9d469d764e700d792791b54dd6635290b0e39cc11a20",
+    "server.py": "e2a2a42d3539830270ffe3beab172ea3391bac75b1acd7a743ce9bb9e8c8218d",
+    "robotics/service.py": "632162061bf4ff246c25c3e1f0167b242c6447fbeac94c30cc271c813e6d5e29",
     "tests/physics_api_test.py": "bbb3ebc445b8191a63780200e08ef00a5d5906c11302b3046c84237c7c32a5ae"
   },
   "hardware_verified": false
